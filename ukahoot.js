@@ -21,6 +21,7 @@
 		var showAlert = msg => {
 			$(alertBox).fadeIn(200);
 			$(overlay).fadeIn(300);
+			msg = msg.replace('\n', '<br>');
 			alertMsg.textContent = msg;
 		}
 		var showLoading = () => {
@@ -44,8 +45,10 @@
 							showLoading();
 							break;
 						case 4: // DONE
-							switch (xhr.status) {
-								// TODO: check status code
+							if (xhr.status === 200) {
+								resolve(xhr);
+							} else {
+								reject(xhr);
 							}
 							break;
 					}
@@ -74,6 +77,8 @@
 				requestToken().then((xhr) => {
 					hideLoading();
 					// TODO: Finish the rest of the request handling
+				}).catch((xhr) => {
+					showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
 				});
 			}
 		});
