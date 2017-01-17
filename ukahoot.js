@@ -74,7 +74,7 @@
 				return;
 			} else {
 				// Request for token
-				requestToken().then((xhr) => {
+				requestToken(pid).then((xhr) => {
 					hideLoading();
 					// TODO: Finish the rest of the request handling
 				}).catch((xhr) => {

@@ -35,6 +35,7 @@ input {
 	transition: opacity 750ms;
 	color: white;
 	padding: 3px;
+	text-align: center;
 }
 input:hover {
 	opacity: 1;
