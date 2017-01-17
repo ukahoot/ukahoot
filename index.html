@@ -1,11 +1,36 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>_kahoot</title>
+	<title>ukahoot</title>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Overpass+Mono" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="a.css">
-	<script type="text/javascript" src="_kahoot.js"></script>
+	<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="ukahoot.js"></script>
 </head>
 <body>
-
+	<div id="alert-box">
+		<center>
+			<span id="alert-msg"></span>
+			<br>
+			<br>
+			<button id="alert-ok">Ok</button>
+		</center>
+	</div>
+	<div id="loading">Loading...</div>
+	<div id="overlay"></div>
+	<div id="start">
+		<center>
+			<h1 id="title">ukahoot</h1>
+			<span class="description">An open source Kahoot client</span>
+			<div class="start-body">
+				<br>
+				<br>
+				<input type="text" id="pid" placeholder="Game PIN">
+				<br>
+				<br>
+				<button id="join">Join Game</button>
+			</div>
+		</center>
+	</div>
 </body>
 </html>
