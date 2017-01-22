@@ -14,11 +14,13 @@ namespace UKahoot {
 				if (ctx.Request.HttpMethod == "POST") {
 					//
 				} else {
+					// Reject all HTTP methods that aren't POST
 					ctx.Response.StatusCode = 403;
 					await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidMethod, 0, Util.Responses.InvalidMethod.Length);
 					ctx.Response.Close();
 				}
 			} catch (Exception Error) {
+				// Reject responses that raise an Exception
 				Console.WriteLine("WARNING: Request handler exception:\n" + Error.ToString());
 				ctx.Response.StatusCode = 503;
 				await ctx.Response.OutputStream.WriteAsync(Util.Responses.RequestError, 0, Util.Responses.RequestError.Length);
@@ -26,7 +28,9 @@ namespace UKahoot {
 			}
 		}
 		private async void ThreadInit() {
+			// Threading callback
 			while (true) {
+				// Asynchronously handle new requests
 				var ctx = await Listener.GetContextAsync();
 				await Task.Factory.StartNew(() => {
 					HandleRequest(ctx);
