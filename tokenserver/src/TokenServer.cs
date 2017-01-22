@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -8,11 +9,15 @@ namespace UKahoot {
 	public class TokenServer {
 		private HttpListener Listener;
 		private Thread ServerThread;
-
+		private async Task ReadInputStream(StreamReader Stream) {
+			char[] PostMessage = new char[512];
+		}
 		private async void HandleRequest(HttpListenerContext ctx) {
 			try {
 				if (ctx.Request.HttpMethod == "POST") {
-					//
+					StreamReader InputStream = new StreamReader(ctx.Request.InputStream, ctx.Request.ContentEncoding);
+					// Begin reading the input stream from the client
+					await ReadInputStream(InputStream);
 				} else {
 					// Reject all HTTP methods that aren't POST
 					ctx.Response.StatusCode = 403;

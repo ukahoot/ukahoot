@@ -37,8 +37,8 @@
 				window.pid = pid;
 				var xhr = new XMLHttpRequest;
 				// https://kahoot.it/reserve/session/354127/?1484635649624
-				xhr.open('GET', 'https://kahoot.it/reserve/session/' + pid + '/?' + getKahootDate(), true);
-				xhr.send(null);
+				xhr.open('POST', 'http://127.0.0.1:5556', true);
+				xhr.send(pid);
 				xhr.onreadystatechange = () => {
 					switch (this.readyState) {
 						case 2: // HEADERS_RECEIVED
