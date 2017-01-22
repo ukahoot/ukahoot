@@ -36,8 +36,7 @@
 			return new Promise((resolve, reject) => {
 				window.pid = pid;
 				var xhr = new XMLHttpRequest;
-				// https://kahoot.it/reserve/session/354127/?1484635649624
-				xhr.open('POST', 'http://127.0.0.1:5556', true);
+				xhr.open('GET', 'http://127.0.0.1:5556/?pid=' + pid, true);
 				xhr.send(pid);
 				xhr.onreadystatechange = () => {
 					switch (this.readyState) {

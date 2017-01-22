@@ -9,17 +9,28 @@ namespace UKahoot {
 	public class TokenServer {
 		private HttpListener Listener;
 		private Thread ServerThread;
-		private async Task ReadInputStream(StreamReader Stream) {
-			char[] PostMessage = new char[512];
-		}
 		private async void HandleRequest(HttpListenerContext ctx) {
 			try {
-				if (ctx.Request.HttpMethod == "POST") {
-					StreamReader InputStream = new StreamReader(ctx.Request.InputStream, ctx.Request.ContentEncoding);
-					// Begin reading the input stream from the client
-					await ReadInputStream(InputStream);
+				if (ctx.Request.HttpMethod == "GET") {
+					// Check for a valid QueryString
+					if (ctx.Request.QueryString["pid"] != null) {
+						int ClientPID;
+						bool IsValidInt = int.TryParse(ctx.Request.QueryString["pid"], out ClientPID);
+						if (IsValidInt && ClientPID != null) {
+							// TODO: Make a request to Kahoot to retrieve the token.
+							Console.WriteLine(ClientPID);
+						} else {
+							ctx.Response.StatusCode = 403;
+							await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidRequest, 0, Util.Responses.InvalidRequest.Length);
+							ctx.Response.Close();
+						}
+					} else {
+						ctx.Response.StatusCode = 403;
+						await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidQueryString, 0, Util.Responses.InvalidQueryString.Length);
+						ctx.Response.Close();
+					}
 				} else {
-					// Reject all HTTP methods that aren't POST
+					// Reject all HTTP methods that aren't GET
 					ctx.Response.StatusCode = 403;
 					await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidMethod, 0, Util.Responses.InvalidMethod.Length);
 					ctx.Response.Close();

@@ -9,6 +9,8 @@ namespace UKahoot {
 		public static class Responses {
 			public static byte[] InvalidMethod = GetBytes("<html><body><h1>Invalid HTTP Method</h1></body></html>");
 			public static byte[] RequestError = GetBytes("<html><body><h1>Request Processing Error</h1></body></html>");
+			public static byte[] InvalidQueryString = GetBytes("<html><body><h1>Invalid Query String</h1></body></html>");
+			public static byte[] InvalidRequest = GetBytes("<html><body><h1>Invalid Request</h1></body></html>");
 		}
 	}
 }
