@@ -8,12 +8,20 @@ namespace UKahoot {
 	public class TokenServer {
 		private HttpListener Listener;
 		private Thread ServerThread;
-		private void HandleRequest(HttpListenerContext ctx) {
+
+		private async void HandleRequest(HttpListenerContext ctx) {
 			try {
-				//
+				if (ctx.Request.HttpMethod == "POST") {
+					//
+				} else {
+					ctx.Response.StatusCode = 403;
+					await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidMethod, 0, Util.Responses.InvalidMethod.Length);
+					ctx.Response.Close();
+				}
 			} catch (Exception Error) {
 				Console.WriteLine("WARNING: Request handler exception:\n" + Error.ToString());
-				ctx.Response.StatusCode = 403;
+				ctx.Response.StatusCode = 503;
+				await ctx.Response.OutputStream.WriteAsync(Util.Responses.RequestError, 0, Util.Responses.RequestError.Length);
 				ctx.Response.Close();
 			}
 		}

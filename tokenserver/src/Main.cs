@@ -6,7 +6,7 @@ namespace UKahoot {
 			"127.0.0.1",
 			"localhost"
 		};
-		public static int Port = 8080;
+		public static int Port = 5556;
 		public static TokenServer ts;
 		public static void Main(string[] args) {
 			ts = new TokenServer(Hosts, Port);
