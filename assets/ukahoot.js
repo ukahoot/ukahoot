@@ -27,8 +27,8 @@
 		var showAlert = msg => {
 			$(alertBox).fadeIn(200);
 			$(overlay).fadeIn(300);
-			msg = msg.replace('\n', '<br>');
 			alertMsg.textContent = msg;
+			alertMsg.innerHTML = alertMsg.innerHTML.replace('\n', '<br>');
 		}
 		var showLoading = () => {
 			$(overlay).fadeIn(200);
@@ -60,12 +60,16 @@
 				showAlert('You entered an invalid PID! Please retry.');
 				return;
 			} else {
+				showLoading();
 				// Request for token
 				requestToken(pid).then((xhr) => {
 					hideLoading();
 					// TODO: Finish the rest of the request handling
 				}).catch((xhr) => {
-					showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
+					hideLoading();
+					setTimeout(() => {
+						showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
+					}, 500);
 				});
 			}
 		});

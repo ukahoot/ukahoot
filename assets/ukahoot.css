@@ -18,6 +18,8 @@ h1 {
 	font-size: 200%;
 }
 #loading {
+	color: white;
+	opacity: 1;
 	margin: 0;
 	position: absolute;
 	top: 50%;
