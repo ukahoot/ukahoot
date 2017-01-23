@@ -21,7 +21,6 @@
 				   "var s = arguments[0];" + 
 				   "return s.replace(args[1], args[2]);" +
 				   "}};"; +
-				   "var CONSOLE_LOG = function(){}" +
 				   "return ";
 		var solved = "";
 		(() => {
@@ -33,7 +32,16 @@
 		return solved;
 	}
 	var getKahootToken = (headerToken, challengeToken) => {
-		headerToken = atoi(headerToken);
+		headerToken = btoa(headerToken);
+		challengeToken = solveChallenge(challengeToken);
+		var token = "";
+		for (var i = 0; i < headerToken.length; i++) {
+		    var character = headerToken.charCodeAt(i);
+		    var mod = challengeToken.charCodeAt(i % challengeToken.length);
+		    var dc = character ^ mod;
+		    token += String.fromCharCode(dc);
+		}
+		return token;
 	}
 	window.addEventListener('load', () => {
 		var join     = document.getElementById('join');
@@ -86,7 +94,23 @@
 					hideLoading();
 					response.json().then(resObject => {
 						console.debug('Got response object:', resObject);
-						// TODO: Further process the response object
+						var challengeObject = null;
+						resObject.responseBody = resObject.responseBody.replace('console.log("Offset derived as:", offset);', "");
+						try {
+							challengeObject = JSON.parse(resObject.responseBody);
+						} catch (e) {
+							console.debug('There was an error parsing the challenge JSON:');
+							console.error(e);
+							setTimeout(() => {
+								showAlert("There was an error processing the server's response.");
+							}, 200);
+							return;
+						}
+						if (challengeObject !== null) {
+							var token = getKahootToken(challengeObject.challenge, resObject.tokenHeader);
+							console.debug('Resolved token', token);
+						}
+						var token = getKahootToken(resObject.headerToken);
 					}).catch(err => {
 						console.debug('There was an error parsing the response JSON:');
 						console.error(err);

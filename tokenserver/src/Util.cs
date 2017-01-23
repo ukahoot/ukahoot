@@ -23,7 +23,7 @@ namespace UKahoot {
 			return TOKEN_ENDPOINT + "/" + PID + "/?" + GetKahootTime();
 		}
 		public static string GetTokenResponse(string TokenHeader, string ResponseBody) {
-			// Replace and escape quotes to make valid JSON
+			// Replace and escape quotes to make valid JSONd
 			ResponseBody = ResponseBody.Replace("\\\"", "%ESCAPED_QUOT%");
 			ResponseBody = ResponseBody.Replace("\"", "\\\"");
 			ResponseBody = ResponseBody.Replace("%ESCAPED_QUOT%", "\\\"");
