@@ -2,7 +2,7 @@ CC=mcs
 SRC_DIR=src
 OUT_FILE=tokenserver
 OUT_DIR=out
-ARGS=-target:exe -sdk:4.6
+ARGS=-target:exe -sdk:4.5 -reference:./out/System.Net.Http.dll
 main:
 	rm -f $(OUT_DIR)/$(OUT_FILE)
 	$(CC) -out:$(OUT_DIR)/$(OUT_FILE) $(ARGS) $(SRC_DIR)/*.cs

@@ -9,10 +9,6 @@ namespace UKahoot {
 		public static int Port = 5556;
 		public static TokenServer ts;
 		public static void Main(string[] args) {
-			var k = new KahootTokenRequest();
-			k.GetToken(12345);
-			Console.WriteLine(k.Result);
-			/*
 			ts = new TokenServer(Hosts, Port);
 			ts.Init();
 
@@ -22,7 +18,6 @@ namespace UKahoot {
 			Console.WriteLine("Press any key to terminate the server.");
 			Console.ReadKey();
 			return;
-			*/
 		}
 	}
 }
