@@ -1,2 +1,3 @@
-# ukahoot.github.io
-Custom Kahoot web client
+# Ukahoot
+
+An open source, custom Kahoot client
