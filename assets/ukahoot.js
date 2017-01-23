@@ -6,7 +6,7 @@
 		return;
 	}
 	window.pid = null;
-	window.tokenServer = "http://127.0.0.1:5556";
+	window.tokenServer = "http://127.0.0.1:5556/";
 	var getKahootDate = () => {
 		return (new Date).getTime();
 	}
@@ -34,9 +34,7 @@
 			$(loading).fadeOut(300);
 		}
 		var requestToken = pid => {
-			return new Promise((resolve, reject) => {
-				//
-			});
+			return fetch(window.tokenServer + "?pid=" + pid);
 		}
 		$("#title").toggle();
 		$(".start-body").toggle();
