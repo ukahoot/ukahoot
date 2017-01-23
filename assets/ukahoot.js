@@ -62,13 +62,24 @@
 			} else {
 				showLoading();
 				// Request for token
-				requestToken(pid).then((xhr) => {
+				requestToken(pid).then(response => {
 					hideLoading();
-					// TODO: Finish the rest of the request handling
-				}).catch((xhr) => {
+					response.json().then(resObject => {
+						console.debug('Got response object:', resObject);
+						// TODO: Further process the response object
+					}).catch(err => {
+						console.debug('There was an error parsing the response JSON:');
+						console.error(err);
+						setTimeout(() => {
+							showAlert("There was an error processing the server's response.");
+						}, 200);	
+						return;
+					});
+				}).catch(error => {
 					hideLoading();
 					setTimeout(() => {
 						showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
+						console.error(error);
 					}, 500);
 				});
 			}
