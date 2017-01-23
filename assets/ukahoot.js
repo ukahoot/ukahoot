@@ -15,6 +15,26 @@
 	var getKahootDate = () => {
 		return (new Date).getTime();
 	}
+	var solveChallenge = challenge => {
+		var eval = "var _ = {" +
+				   "var args = arguments;" +
+				   "var s = arguments[0];" + 
+				   "return s.replace(args[1], args[2]);" +
+				   "}};"; +
+				   "var CONSOLE_LOG = function(){}" +
+				   "return ";
+		var solved = "";
+		(() => {
+			// Execute (eval) the string
+			var solver = Function(eval + challenge);
+			solved = solver().toString();
+		});
+		// return the solved token
+		return solved;
+	}
+	var getKahootToken = (headerToken, challengeToken) => {
+		headerToken = atoi(headerToken);
+	}
 	window.addEventListener('load', () => {
 		var join     = document.getElementById('join');
 		var pidBox   = document.getElementById('pid');
@@ -72,7 +92,7 @@
 						console.error(err);
 						setTimeout(() => {
 							showAlert("There was an error processing the server's response.");
-						}, 200);	
+						}, 200);
 						return;
 					});
 				}).catch(error => {
