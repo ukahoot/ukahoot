@@ -23,13 +23,19 @@ namespace UKahoot {
 			return TOKEN_ENDPOINT + "/" + PID + "/?" + GetKahootTime();
 		}
 		public static string GetTokenResponse(string TokenHeader, string ResponseBody) {
+			// Replace and escape quotes to make valid JSON
+			ResponseBody = ResponseBody.Replace("\\\"", "%ESCAPED_QUOT%");
+			ResponseBody = ResponseBody.Replace("\"", "\\\"");
+			ResponseBody = ResponseBody.Replace("%ESCAPED_QUOT%", "\\\"");
+			// Build the JSON string
 			StringBuilder TokenBuilder = new StringBuilder("");
-			TokenBuilder.Append("{'tokenHeader':");
+			TokenBuilder.Append("{\"tokenHeader\":\"");
 			TokenBuilder.Append(TokenHeader);
-			TokenBuilder.Append(",'responseBody:'");
-			TokenBuilder.Append("'");
+			TokenBuilder.Append("\"");
+			TokenBuilder.Append(",\"responseBody\":");
+			TokenBuilder.Append("\"");
 			TokenBuilder.Append(ResponseBody);
-			TokenBuilder.Append("'}");
+			TokenBuilder.Append("\"}");
 			return TokenBuilder.ToString();
 		}
 		public static string GetErrorResponse(string ResponseCode) {
