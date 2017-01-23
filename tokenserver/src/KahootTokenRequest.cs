@@ -10,7 +10,6 @@ namespace UKahoot {
 		public HttpResponseMessage Response;
 		public HttpContent Content;
 		public string Result;
-
 		public string RequestUri;
 		private HttpClient Client;
 		public KahootTokenRequest() {
