@@ -2,10 +2,11 @@
 	try {
 		class Test {}
 	} catch (e) {
-		alert('Your browser does not support ukahoot!\nMake sure you are using the latest version of Chrome.');
+		alert('Your browser does not support Ukahoot!\nMake sure you are using the latest version of Chrome.');
 		return;
 	}
 	window.pid = null;
+	window.tokenServer = "http://127.0.0.1:5556";
 	var getKahootDate = () => {
 		return (new Date).getTime();
 	}
@@ -34,24 +35,7 @@
 		}
 		var requestToken = pid => {
 			return new Promise((resolve, reject) => {
-				window.pid = pid;
-				var xhr = new XMLHttpRequest;
-				xhr.open('GET', 'http://127.0.0.1:5556/?pid=' + pid, true);
-				xhr.send(pid);
-				xhr.onreadystatechange = () => {
-					switch (this.readyState) {
-						case 2: // HEADERS_RECEIVED
-							showLoading();
-							break;
-						case 4: // DONE
-							if (xhr.status === 200) {
-								resolve(xhr);
-							} else {
-								reject(xhr);
-							}
-							break;
-					}
-				}
+				//
 			});
 		}
 		$("#title").toggle();
