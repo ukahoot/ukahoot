@@ -14,11 +14,10 @@ namespace UKahoot {
 			public static byte[] RequestError = GetBytes("<html><body><h1>Request Processing Error</h1></body></html>");
 			public static byte[] InvalidQueryString = GetBytes("<html><body><h1>Invalid Query String</h1></body></html>");
 			public static byte[] InvalidRequest = GetBytes("<html><body><h1>Invalid Request</h1></body></html>");
-			public static string TokenError = "{'error': true}";
 		}
 		public static int GetKahootTime() {
-			var timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
-    		return (int)timeSpan.TotalSeconds;
+			var TimeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
+    		return (int)TimeSpan.TotalSeconds;
 		}
 		public static string GetTokenRequestUri(int PID) {
 			return TOKEN_ENDPOINT + "/" + PID + "/?" + GetKahootTime();
@@ -32,6 +31,15 @@ namespace UKahoot {
 			TokenBuilder.Append(ResponseBody);
 			TokenBuilder.Append("'}");
 			return TokenBuilder.ToString();
+		}
+		public static string GetErrorResponse(string ResponseCode) {
+			StringBuilder ErrorBuilder = new StringBuilder("");
+			ErrorBuilder.Append("{'error':true,");
+			ErrorBuilder.Append("'responseCode':");
+			ErrorBuilder.Append("'");
+			ErrorBuilder.Append(ResponseCode);
+			ErrorBuilder.Append("'}");
+			return ErrorBuilder.ToString();
 		}
 	}
 }
