@@ -16,23 +16,19 @@
 		return (new Date).getTime();
 	}
 	var solveChallenge = challenge => {
-		var eval = "var _ = {" +
+		var eval = "var _ = {replace: function(){" +
 				   "var args = arguments;" +
 				   "var s = arguments[0];" + 
 				   "return s.replace(args[1], args[2]);" +
-				   "}};"; +
+				   "}};" +
 				   "return ";
-		var solved = "";
-		(() => {
-			// Execute (eval) the string
-			var solver = new Function(eval + challenge);
-			solved = solver().toString();
-		});
+		console.log(eval + challenge);
+		var solver = new Function(eval + challenge);
 		// return the solved token
-		return solved;
+		return solver().toString();
 	}
 	var getKahootToken = (headerToken, challengeToken) => {
-		headerToken = Base64.decode(headerToken);
+		headerToken = atob(headerToken);
 		challengeToken = solveChallenge(challengeToken);
 		var token = "";
 		for (var i = 0; i < headerToken.length; i++) {
