@@ -25,7 +25,7 @@
 		var solved = "";
 		(() => {
 			// Execute (eval) the string
-			var solver = Function(eval + challenge);
+			var solver = new Function(eval + challenge);
 			solved = solver().toString();
 		});
 		// return the solved token
@@ -107,8 +107,15 @@
 							return;
 						}
 						if (challengeObject !== null) {
-							var token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
-							console.debug('Resolved token', token);
+							if (resObject.error) {
+								setTimeout(() => {
+									showAlert("Your PIN is invalid!\nPlease make sure it is correct.");
+								}, 200);
+								return;
+							} else {
+								var token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
+								console.debug('Resolved token', token);
+							}
 						}
 					}).catch(err => {
 						console.debug('There was an error parsing the response JSON:');
