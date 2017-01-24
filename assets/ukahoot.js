@@ -24,6 +24,40 @@
 		cache: 'default'
 	}
 	window.clientsConnected = 0;
+	class Packet {
+		constructor(rawString) {
+			this.outgoing = true;
+			this.raw = null;
+			this.obj = {};
+			if (rawString) {
+				this.outgoing = false;
+				this.raw = rawString;
+				this.obj = JSON.parse(rawString);
+			}
+		}
+	}
+	Packet.HANDSHAKE = [{
+			advice: {
+				interval: 0,
+				timeout: 60000
+			},
+			channel: '/meta/handshake',
+			ext: {
+				ack: true,
+				timesync: {
+					l: 0,
+					o: 0,
+					tc: (new Date).getTime()
+				},
+				id: "1",
+				minimumVersion: "1.0",
+				supportedConnectionTypes: [
+					"websocket",
+					"long-polling"
+				],
+				version: "1.0"
+			}
+		}];
 	class KahootSocket {
 		static getReady() {
 			return new Promise((resolve, reject) => {
@@ -42,8 +76,9 @@
 		onclose() {
 			// TODO: handle onclose events from sockets
 		}
-		onmessage() {
+		onmessage(msg) {
 			// TODO: handle socket messages
+			var packet = new Packet(msg.data);
 		}
 		constructor(ip) {
 			console.debug('Constructed client ' + clients.length);
