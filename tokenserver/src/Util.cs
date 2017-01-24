@@ -40,11 +40,11 @@ namespace UKahoot {
 		}
 		public static string GetErrorResponse(string ResponseCode) {
 			StringBuilder ErrorBuilder = new StringBuilder("");
-			ErrorBuilder.Append("{'error':true,");
-			ErrorBuilder.Append("'responseCode':");
-			ErrorBuilder.Append("'");
+			ErrorBuilder.Append("{\"error\":true,");
+			ErrorBuilder.Append("\"responseCode\":");
+			ErrorBuilder.Append("\"");
 			ErrorBuilder.Append(ResponseCode);
-			ErrorBuilder.Append("'}");
+			ErrorBuilder.Append("\"}");
 			return ErrorBuilder.ToString();
 		}
 	}
