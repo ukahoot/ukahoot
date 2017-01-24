@@ -93,26 +93,26 @@
 				requestToken(pid).then(response => {
 					hideLoading();
 					response.json().then(resObject => {
-						console.debug('Got response object:', resObject);
-						var challengeObject = null;
-						resObject.responseBody = resObject.responseBody.replace('console.log("Offset derived as:", offset);', "");
-						try {
-							challengeObject = JSON.parse(resObject.responseBody);
-						} catch (e) {
-							console.debug('There was an error parsing the challenge JSON:');
-							console.error(e);
+						if (resObject.error) {
 							setTimeout(() => {
-								showAlert("There was an error processing the server's response.");
+								showAlert("Your PIN is invalid! The Kahoot server responded with:\n" + resObject.responseCode);
 							}, 200);
 							return;
-						}
-						if (challengeObject !== null) {
-							if (resObject.error) {
+						} else {
+							console.debug('Got response object:', resObject);
+							var challengeObject = null;
+							resObject.responseBody = resObject.responseBody.replace('console.log("Offset derived as:", offset);', "");
+							try {
+								challengeObject = JSON.parse(resObject.responseBody);
+							} catch (e) {
+								console.debug('There was an error parsing the challenge JSON:');
+								console.error(e);
 								setTimeout(() => {
-									showAlert("Your PIN is invalid!\nPlease make sure it is correct.");
+									showAlert("There was an error processing the server's response.");
 								}, 200);
 								return;
-							} else {
+							}
+							if (challengeObject !== null) {
 								var token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
 								console.debug('Resolved token', token);
 							}
