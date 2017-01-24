@@ -14,6 +14,7 @@
 	}
 	window.pid = null;
 	window.tokenServer = "http://127.0.0.1:5556/";
+	window.token = null;
 	window.requestConfig = {
 		method: 'GET',
 		headers: new Headers(),
@@ -121,7 +122,7 @@
 								return;
 							}
 							if (challengeObject !== null) {
-								var token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
+								window.token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
 								if (token) {
 									console.debug('Resolved token', token);
 									$(start).fadeOut(300);
