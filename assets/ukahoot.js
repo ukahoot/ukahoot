@@ -29,7 +29,6 @@
 				   "return s.replace(args[1], args[2]);" +
 				   "}};" +
 				   "return ";
-		console.log(eval + challenge);
 		var solver = new Function(eval + challenge);
 		// return the solved token
 		return solver().toString();
