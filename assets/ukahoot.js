@@ -55,6 +55,8 @@
 		var loading  = document.getElementById('loading');
 		var joinArea = document.getElementById('join-area');
 		var start    = document.getElementById('start');
+		var tooltip  = document.getElementById('help-tooltip');
+		var tooltipArea = document.getElementById('tooltip-area');
 
 		var showAlert = msg => {
 			$(alertBox).fadeIn(200);
@@ -78,6 +80,7 @@
 		$(".start-body").toggle();
 		$(".description").toggle();
 		$(joinArea).toggle();
+		$(tooltipArea).toggle();
 		// Load animations
 		$("#title").slideDown({duration: 500});
 		setTimeout(() => {
@@ -153,6 +156,12 @@
 		alertOk.addEventListener('click', () => {
 			$(alertBox).fadeOut(300);
 			$(overlay).fadeOut(200);
+		});
+		tooltip.addEventListener('mouseenter', () => {
+			$(tooltipArea).fadeIn	(200);
+		});
+		tooltip.addEventListener('mouseleave', () => {
+			$(tooltipArea).fadeOut(200);
 		});
 	});
 })();
