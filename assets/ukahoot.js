@@ -70,8 +70,12 @@
 			});
 		}
 		onopen() {
-			console.debug('socket opened');
+			console.debug('socket opened, sending handshake');
 			clientsConnected += 1;
+			// Sync the packet time
+			Packet.HANDSHAKE[0].ext.timesync.tc = (new Date()).getTime();
+			// send the handshake
+			this.ws.send(JSON.stringify(Packet.HANDSHAKE));
 		}
 		onclose() {
 			// TODO: handle onclose events from sockets
@@ -79,6 +83,8 @@
 		onmessage(msg) {
 			// TODO: handle socket messages
 			var packet = new Packet(msg.data);
+			// Log the incoming packets (this is temporary)
+			console.debug(msg);
 		}
 		constructor(ip) {
 			console.debug('Constructed client ' + clients.length);
