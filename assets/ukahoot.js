@@ -15,11 +15,45 @@
 	window.pid = null;
 	window.tokenServer = "http://127.0.0.1:5556/";
 	window.token = null;
+	window.name = "ukahoot";
+	window.clients = 1;
+	window.wsURI = "wss://kahoot.it/cometd/";
 	window.requestConfig = {
 		method: 'GET',
 		headers: new Headers(),
 		cache: 'default'
 	}
+	window.clientsConnected = 0;
+	class KahootSocket {
+		static getReady() {
+			return new Promise((resolve, reject) => {
+				var check = setInterval(() => {
+					if (clientsConnected >= window.clients) {
+						clearInterval(check);
+						resolve();
+					}
+				}, 100);
+			});
+		}
+		onopen() {
+			console.debug('socket' + clients.length + ": i opened");
+			clientsConnected += 1;
+		}
+		onclose() {
+			// TODO: handle onclose events from sockets
+		}
+		onmessage() {
+			// TODO: handle socket messages
+		}
+		constructor(ip) {
+			console.debug('Constructed client ' + clients.length);
+			this.ws = new window.WebSocket(ip);
+			this.ws.onopen = this.onopen;
+			this.ws.onclose = this.onclose;
+			this.ws.onmessage = this.onmessage;
+		}
+	}
+	var clients = [];
 	var getKahootDate = () => {
 		return (new Date).getTime();
 	}
@@ -58,6 +92,10 @@
 		var start    = document.getElementById('start');
 		var tooltip  = document.getElementById('help-tooltip');
 		var tooltipArea = document.getElementById('tooltip-area');
+		var joinButton = document.getElementById('join-game');
+		var nameArea = document.getElementById('name-area');
+		var clientCount = document.getElementById('client-count-area');
+		var playArea = document.getElementById('play-area');
 
 		var showAlert = msg => {
 			$(alertBox).fadeIn(200);
@@ -82,6 +120,7 @@
 		$(".description").toggle();
 		$(joinArea).toggle();
 		$(tooltipArea).toggle();
+		$(playArea).toggle();
 		// Load animations
 		$("#title").slideDown({duration: 500});
 		setTimeout(() => {
@@ -91,7 +130,7 @@
 			}, 300);
 		}, 300);
 		join.addEventListener('click', () => {
-			var pid = pidBox.value;
+			window.pid = pidBox.value;
 			// Do sanity checks before requesting for a token
 			if (!pid || pid === "" || (isNaN(parseInt(pid)))) {
 				showAlert('You entered an invalid PID! Please retry.');
@@ -163,6 +202,22 @@
 		});
 		tooltip.addEventListener('mouseleave', () => {
 			$(tooltipArea).fadeOut(200);
+		});
+		joinButton.addEventListener('click', () => {
+			if (nameArea.value) window.name = nameArea.value;
+			if (clientCount.value) window.clients = clientCount.value;
+			showLoading();
+			window.wsURI += window.pid;
+			window.wsURI += "/";
+			window.wsURI += window.token;
+			for (var i = 0; i < window.clients; ++i) {
+				clients.push(new KahootSocket(wsURI));
+			}
+			KahootSocket.getReady().then(() => {
+				hideLoading();
+				$(joinArea).fadeOut(250);
+				$(playArea).fadeIn(250);
+			});
 		});
 	});
 })();
