@@ -110,3 +110,14 @@ button:hover {
 #join-game, #name-area, #client-count-area {
 	font-size: 250%;
 }
+#wait {
+	font-size: 250%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Ubuntu';
+	color: lime;
+	opacity: 0.6;
+	transition: opacity 750ms;
+}

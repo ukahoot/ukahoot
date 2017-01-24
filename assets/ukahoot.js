@@ -70,7 +70,7 @@
 			});
 		}
 		onopen() {
-			console.debug('socket' + clients.length + ": i opened");
+			console.debug('socket opened');
 			clientsConnected += 1;
 		}
 		onclose() {
@@ -130,7 +130,9 @@
 		var joinButton = document.getElementById('join-game');
 		var nameArea = document.getElementById('name-area');
 		var clientCount = document.getElementById('client-count-area');
-		var playArea = document.getElementById('play-area');
+		var waitingArea = document.getElementById('waiting-area');
+		var waitText = document.getElementById('wait');
+		var isWaiting = false;
 
 		var showAlert = msg => {
 			$(alertBox).fadeIn(200);
@@ -155,7 +157,7 @@
 		$(".description").toggle();
 		$(joinArea).toggle();
 		$(tooltipArea).toggle();
-		$(playArea).toggle();
+		$(waitingArea).toggle();
 		// Load animations
 		$("#title").slideDown({duration: 500});
 		setTimeout(() => {
@@ -251,7 +253,22 @@
 			KahootSocket.getReady().then(() => {
 				hideLoading();
 				$(joinArea).fadeOut(250);
-				$(playArea).fadeIn(250);
+				$(waitingArea).fadeIn(250);
+				isWaiting = true;
+				var pulse = false;
+				var waitInterval = setInterval(() => {
+					if (isWaiting) {
+						if (pulse) {
+							waitText.style.opacity = 1;
+						} else {
+							waitText.style.opacity = 0.6;
+						}
+						pulse = !pulse;
+					} else {
+						clearInterval(waitInterval);
+						return;
+					}
+				}, 750);
 			});
 		});
 	});
