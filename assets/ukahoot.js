@@ -53,6 +53,8 @@
 		var alertMsg = document.getElementById('alert-msg');
 		var overlay  = document.getElementById('overlay');
 		var loading  = document.getElementById('loading');
+		var joinArea = document.getElementById('join-area');
+		var start    = document.getElementById('start');
 
 		var showAlert = msg => {
 			$(alertBox).fadeIn(200);
@@ -75,6 +77,7 @@
 		$("#title").toggle();
 		$(".start-body").toggle();
 		$(".description").toggle();
+		$(joinArea).toggle();
 		// Load animations
 		$("#title").slideDown({duration: 500});
 		setTimeout(() => {
@@ -116,7 +119,18 @@
 							}
 							if (challengeObject !== null) {
 								var token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
-								console.debug('Resolved token', token);
+								if (token) {
+									console.debug('Resolved token', token);
+									$(start).fadeOut(300);
+									setTimeout(() => {
+										$(joinArea).fadeIn(300);
+									}, 300);
+								} else {
+									setTimeout(() => {
+										showAlert("There was an error resloving the join token.\nPlease use another PIN.");
+									});
+									return;
+								}
 							}
 						}
 					}).catch(err => {
