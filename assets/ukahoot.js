@@ -75,7 +75,7 @@
 			// Sync the packet time
 			Packet.HANDSHAKE[0].ext.timesync.tc = (new Date()).getTime();
 			// send the handshake
-			this.ws.send(JSON.stringify(Packet.HANDSHAKE));
+			this.send(JSON.stringify(Packet.HANDSHAKE));
 		}
 		onclose() {
 			// TODO: handle onclose events from sockets
