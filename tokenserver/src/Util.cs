@@ -1,11 +1,14 @@
 using System;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace UKahoot {
 	public static class Util {
 		public const string TOKEN_ENDPOINT = "https://kahoot.it/reserve/session/";
 		public const string ENDPOINT_URI = "https://kahoot.it/";
 		public const string ENDPOINT_HOST = "kahoot.it";
+		public static int UsageLog = 0;
 		public static byte[] GetBytes(string txt) {
 			return Encoding.ASCII.GetBytes(txt);
 		}
@@ -46,6 +49,12 @@ namespace UKahoot {
 			ErrorBuilder.Append(ResponseCode);
 			ErrorBuilder.Append("\"}");
 			return ErrorBuilder.ToString();
+		}
+		public static void LogMemUsage() {
+			// For tests and debugging
+			double Memory = (double)GC.GetTotalMemory(false) * 0.000001;
+			Console.WriteLine("MemLog" + UsageLog + ": Current Memory Usage: " + Memory + "MB");
+			UsageLog++;
 		}
 	}
 }

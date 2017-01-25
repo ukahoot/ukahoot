@@ -7,12 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace UKahoot {
 	public class TokenServer {
 		private HttpListener Listener;
 		private Thread ServerThread;
-		private async void HandleRequest(HttpListenerContext ctx) {
+		private async Task HandleRequest(HttpListenerContext ctx) {
 			try {
 				if (ctx.Request.HttpMethod == "GET") {
 					// Check for a valid QueryString
@@ -28,29 +29,37 @@ namespace UKahoot {
 							}
 							ctx.Response.StatusCode = 200;
 							ctx.Response.Headers["Content-Type"] = "application/json";
-
 							// Send a request to Kahoot to get the tokens
-							KahootTokenRequest TokenRequest = new KahootTokenRequest();
-							await TokenRequest.GetToken(ClientPID);
-
-							if (TokenRequest.Response.StatusCode == HttpStatusCode.OK) {
-								IEnumerable<string> Headers = TokenRequest.Response.Headers.GetValues("x-kahoot-session-token");
-								string TokenHeader = Headers.FirstOrDefault();
-								string TokenResponse = Util.GetTokenResponse(TokenHeader, TokenRequest.Result);
-								byte[] ResponseBytes = Encoding.UTF8.GetBytes(TokenResponse);
-								int ResponseLength = ResponseBytes.Length;
-								// Request was OK
-								// Update the content length and write the response
-								ctx.Response.ContentLength64 = ResponseLength;
-								await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseLength);
-								ctx.Response.OutputStream.Close();
-							} else {
-								string ErrorResponse = Util.GetErrorResponse(TokenRequest.Response.StatusCode.ToString());
-								byte[] ResponseBytes = Encoding.UTF8.GetBytes(ErrorResponse);
-								int ResponseLength = ResponseBytes.Length;
-								await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseLength);
-								ctx.Response.OutputStream.Close();
+							Util.LogMemUsage();
+							using (var TokenRequest = new HttpClient())
+							using (var Response = await TokenRequest.GetAsync(Util.GetTokenRequestUri(ClientPID)))
+							{
+								string Result = await Response.Content.ReadAsStringAsync();
+								if (Response.StatusCode == HttpStatusCode.OK) {
+									string TokenHeader = "";
+									foreach (var h in Response.Headers) {
+										if (h.Key == "x-kahoot-session-token") {
+											TokenHeader = h.Value.FirstOrDefault();
+											break;
+										}
+									}
+									string TokenResponse = Util.GetTokenResponse(TokenHeader, Result);
+									byte[] ResponseBytes = Encoding.UTF8.GetBytes(TokenResponse);
+									// Update the content length and write the response
+									ctx.Response.ContentLength64 = ResponseBytes.Length;
+									await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseBytes.Length);
+									ctx.Response.OutputStream.Close();
+									Array.Clear(ResponseBytes, 0, ResponseBytes.Length);
+									TokenResponse = "";
+								} else {
+									string ErrorResponse = Util.GetErrorResponse(Response.StatusCode.ToString());
+									byte[] ResponseBytes = Encoding.UTF8.GetBytes(ErrorResponse);
+									int ResponseLength = ResponseBytes.Length;
+									await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseLength);
+									ctx.Response.OutputStream.Close();
+								}
 							}
+							Util.LogMemUsage();
 						} else {
 							ctx.Response.StatusCode = 403;
 							await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidRequest, 0, Util.Responses.InvalidRequest.Length);
@@ -74,16 +83,12 @@ namespace UKahoot {
 				await ctx.Response.OutputStream.WriteAsync(Util.Responses.RequestError, 0, Util.Responses.RequestError.Length);
 				ctx.Response.Close();
 			}
+			await HandleRequest(await Listener.GetContextAsync());
 		}
 		private async void ThreadInit() {
-			// Threading callback
-			while (true) {
-				// Asynchronously handle new requests
-				var ctx = await Listener.GetContextAsync();
-				await Task.Factory.StartNew(() => {
-					HandleRequest(ctx);
-				});
-			}
+			Listener.Start();
+			// Asynchronously handle new requests
+			await HandleRequest(await Listener.GetContextAsync());
 		}
 		public TokenServer(string[] hosts, int port_) {
 			Listener = new HttpListener();
@@ -93,7 +98,7 @@ namespace UKahoot {
 		}
 		public void Init() {
 			ServerThread = new Thread(this.ThreadInit);
-			Listener.Start();
+			Util.LogMemUsage();
 			ServerThread.Start();
 		}
 	}
