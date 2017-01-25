@@ -28,12 +28,30 @@
 		constructor(rawString) {
 			this.outgoing = true;
 			this.raw = null;
-			this.obj = {};
+			this.obj = [{}];
 			if (rawString) {
 				this.outgoing = false;
 				this.raw = rawString;
 				this.obj = JSON.parse(rawString);
 			}
+		}
+		timesync(packet2) {
+			if (typeof packet2 == "string") packet2 = JSON.parse(packet2);
+			var that = this;
+			this.obj[0].channel = packet2.channel;
+			this.obj[0].ext = {
+				ack: packet2.ext.ack,
+				timesync: {
+					l: ((new Date).getTime() - packet2.ext.timesync.tc - packet2.ext.timesync.p) / 2,
+					o: (packet2.ext.timesync.ts - packet2.ext.timesync.tc - 1),
+					tc: (new Date()).getTime()
+				}
+			}
+			this.raw = JSON.stringify(that.obj);
+		}
+		str() {
+			var that = this;
+			this.raw = JSON.stringify(that.obj);
 		}
 	}
 	Packet.HANDSHAKE = [{

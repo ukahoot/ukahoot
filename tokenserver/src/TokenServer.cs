@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Web;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace UKahoot {
 							using (var TokenRequest = new HttpClient())
 							using (var Response = await TokenRequest.GetAsync(Util.GetTokenRequestUri(ClientPID)))
 							{
+								Util.LogMemUsage();
 								string Result = await Response.Content.ReadAsStringAsync();
 								if (Response.StatusCode == HttpStatusCode.OK) {
 									string TokenHeader = "";
@@ -47,16 +49,22 @@ namespace UKahoot {
 									byte[] ResponseBytes = Encoding.UTF8.GetBytes(TokenResponse);
 									// Update the content length and write the response
 									ctx.Response.ContentLength64 = ResponseBytes.Length;
-									await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseBytes.Length);
+									using (var stream = ctx.Response.OutputStream)
+										await stream.WriteAsync(ResponseBytes, 0, ResponseBytes.Length);
 									ctx.Response.OutputStream.Close();
 									Array.Clear(ResponseBytes, 0, ResponseBytes.Length);
 									TokenResponse = "";
+									ctx.Response.Close();
 								} else {
 									string ErrorResponse = Util.GetErrorResponse(Response.StatusCode.ToString());
 									byte[] ResponseBytes = Encoding.UTF8.GetBytes(ErrorResponse);
 									int ResponseLength = ResponseBytes.Length;
-									await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseLength);
+									using (var stream = ctx.Response.OutputStream)
+										await stream.WriteAsync(ResponseBytes, 0, ResponseLength);
+									ctx.Response.OutputStream.Flush();
 									ctx.Response.OutputStream.Close();
+									ctx.Response.OutputStream.Dispose();
+									ctx.Response.Close();
 								}
 							}
 							Util.LogMemUsage();
@@ -80,7 +88,8 @@ namespace UKahoot {
 				// Reject responses that raise an Exception
 				Console.WriteLine("WARNING: Request handler exception:\n" + Error.ToString());
 				ctx.Response.StatusCode = 503;
-				await ctx.Response.OutputStream.WriteAsync(Util.Responses.RequestError, 0, Util.Responses.RequestError.Length);
+				using (Stream stream = ctx.Response.OutputStream)
+					await stream.WriteAsync(Util.Responses.RequestError, 0, Util.Responses.RequestError.Length);
 				ctx.Response.Close();
 			}
 			await HandleRequest(await Listener.GetContextAsync());
