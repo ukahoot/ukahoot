@@ -14,6 +14,8 @@ namespace UKahoot {
 	public class TokenServer {
 		private HttpListener Listener;
 		private Thread ServerThread;
+		private HttpClient TokenRequest;
+		private HttpResponseMessage Response;
 		private async Task HandleRequest(HttpListenerContext ctx) {
 			try {
 				if (ctx.Request.HttpMethod == "GET") {
@@ -32,8 +34,7 @@ namespace UKahoot {
 							ctx.Response.Headers["Content-Type"] = "application/json";
 							// Send a request to Kahoot to get the tokens
 							Util.LogMemUsage();
-							using (var TokenRequest = new HttpClient())
-							using (var Response = await TokenRequest.GetAsync(Util.GetTokenRequestUri(ClientPID)))
+							using (Response = await TokenRequest.GetAsync(Util.GetTokenRequestUri(ClientPID)))
 							{
 								Util.LogMemUsage();
 								string Result = await Response.Content.ReadAsStringAsync();
@@ -59,8 +60,7 @@ namespace UKahoot {
 									string ErrorResponse = Util.GetErrorResponse(Response.StatusCode.ToString());
 									byte[] ResponseBytes = Encoding.UTF8.GetBytes(ErrorResponse);
 									int ResponseLength = ResponseBytes.Length;
-									using (var stream = ctx.Response.OutputStream)
-										await stream.WriteAsync(ResponseBytes, 0, ResponseLength);
+									await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseLength);
 									ctx.Response.OutputStream.Flush();
 									ctx.Response.OutputStream.Close();
 									ctx.Response.OutputStream.Dispose();
@@ -106,6 +106,7 @@ namespace UKahoot {
 			}
 		}
 		public void Init() {
+			TokenRequest = new HttpClient();
 			ServerThread = new Thread(this.ThreadInit);
 			Util.LogMemUsage();
 			ServerThread.Start();
