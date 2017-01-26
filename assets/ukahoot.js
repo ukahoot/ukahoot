@@ -25,10 +25,12 @@
 	}
 	window.clientsConnected = 0;
 	class Packet {
-		constructor(rawString) {
+		constructor(rawString, client) {
 			this.outgoing = true;
 			this.raw = null;
 			this.obj = [{}];
+			if (client) this.client = client;
+			else this.client = null;
 			if (rawString) {
 				this.outgoing = false;
 				this.raw = rawString;
@@ -99,10 +101,9 @@
 			// TODO: handle onclose events from sockets
 		}
 		onmessage(msg) {
-			// TODO: handle socket messages
-			var packet = new Packet(msg.data);
+			var packet = new Packet(msg.data, this);
 			// Log the incoming packets (this is temporary)
-			console.debug(msg);
+			console.debug(packet.obj);
 		}
 		constructor(ip) {
 			console.debug('Constructed client ' + clients.length);
@@ -285,7 +286,7 @@
 						if (pulse) {
 							waitText.style.opacity = 1;
 						} else {
-							waitText.style.opacity = 0.6;
+							waitText.style.opacity = 0.5;
 						}
 						pulse = !pulse;
 					} else {
