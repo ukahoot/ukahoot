@@ -34,40 +34,36 @@ namespace UKahoot {
 							ctx.Response.Headers["Content-Type"] = "application/json";
 							// Send a request to Kahoot to get the tokens
 							Util.LogMemUsage();
-							using (Response = await TokenRequest.GetAsync(Util.GetTokenRequestUri(ClientPID)))
-							{
-								Util.LogMemUsage();
-								string Result = await Response.Content.ReadAsStringAsync();
-								if (Response.StatusCode == HttpStatusCode.OK) {
-									string TokenHeader = "";
-									foreach (var h in Response.Headers) {
-										if (h.Key == "x-kahoot-session-token") {
-											TokenHeader = h.Value.FirstOrDefault();
-											break;
-										}
-									}
-									string TokenResponse = Util.GetTokenResponse(TokenHeader, Result);
-									byte[] ResponseBytes = Encoding.UTF8.GetBytes(TokenResponse);
-									// Update the content length and write the response
-									ctx.Response.ContentLength64 = ResponseBytes.Length;
-									using (var stream = ctx.Response.OutputStream)
-										await stream.WriteAsync(ResponseBytes, 0, ResponseBytes.Length);
-									ctx.Response.OutputStream.Close();
-									Array.Clear(ResponseBytes, 0, ResponseBytes.Length);
-									TokenResponse = "";
-									ctx.Response.Close();
-								} else {
-									string ErrorResponse = Util.GetErrorResponse(Response.StatusCode.ToString());
-									byte[] ResponseBytes = Encoding.UTF8.GetBytes(ErrorResponse);
-									int ResponseLength = ResponseBytes.Length;
-									await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseLength);
-									ctx.Response.OutputStream.Flush();
-									ctx.Response.OutputStream.Close();
-									ctx.Response.OutputStream.Dispose();
-									ctx.Response.Close();
-								}
-							}
+							Response = await TokenRequest.GetAsync(Util.GetTokenRequestUri(ClientPID));
 							Util.LogMemUsage();
+							string Result = await Response.Content.ReadAsStringAsync();
+							string TokenHeader = "";
+							if (Response.StatusCode == HttpStatusCode.OK) {
+								foreach (var h in Response.Headers) {
+									if (h.Key == "x-kahoot-session-token") {
+										TokenHeader = h.Value.FirstOrDefault();
+										break;
+									}
+								}
+								byte[] ResponseBytes = Encoding.UTF8.GetBytes(Util.GetTokenResponse(TokenHeader, Result));
+								// Update the content length and write the response
+								ctx.Response.ContentLength64 = ResponseBytes.Length;
+								using (var stream = ctx.Response.OutputStream) {
+									await stream.WriteAsync(ResponseBytes, 0, ResponseBytes.Length);
+									stream.Close();
+								}
+								ctx.Response.Close();
+							} else {
+								byte[] ResponseBytes = Encoding.UTF8.GetBytes(Util.GetErrorResponse(Response.StatusCode.ToString()));
+								await ctx.Response.OutputStream.WriteAsync(ResponseBytes, 0, ResponseBytes.Length);
+								ctx.Response.OutputStream.Flush();
+								ctx.Response.OutputStream.Close();
+								ctx.Response.OutputStream.Dispose();
+								ctx.Response.Close();
+							}
+							Response.RequestMessage.Dispose();
+							Response.Content.Dispose();
+							Response.Dispose();
 						} else {
 							ctx.Response.StatusCode = 403;
 							await ctx.Response.OutputStream.WriteAsync(Util.Responses.InvalidRequest, 0, Util.Responses.InvalidRequest.Length);
