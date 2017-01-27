@@ -149,7 +149,7 @@
 			// Log the incoming packets (this is temporary)
 			console.debug(packet.obj);
 			// Handle packets
-			if (packet.obj[0].channel == "/meta/handshake" && packet.obj[0].clientId) {
+			if (packet.obj.channel == "/meta/handshake" && packet.obj.clientId) {
 				console.debug('recieved handshake packet');
 				Packet.Handler["handshake"].handle(packet);
 			} else {
