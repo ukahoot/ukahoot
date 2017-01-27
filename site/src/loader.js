@@ -35,8 +35,10 @@
     }
     window.modules = {
         core: new UKahootModule("site/src/ukahoot.js"),
+        packet: new UKahootModule("site/src/Packet.js"),
         jquery: new UKahootModule("site/jquery-3.1.1.min.js")
     };
     modules.jquery.load()
+        .then(() => modules.packet.load())
         .then(() => modules.core.load());
 })();
