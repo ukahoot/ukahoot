@@ -13,4 +13,19 @@
 			return;
 		}
 	}
+    // Small module system to load JS source files
+    class UKahootModule {
+        constructor(filename) {
+            this.file = filename;
+            this.loaded = false;
+        }
+        load() {
+            return new Promise((resolve, reject) => {
+                var moduleScript = document.createElement('script');
+                moduleScript.src = this.file;
+                moduleScript.type = "text/javascript";
+                document.head.appendChild(moduleScript);
+            });
+        }
+    }
 })();
