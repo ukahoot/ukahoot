@@ -64,7 +64,8 @@
 		}
 		str() {
 			var that = this;
-			this.raw = JSON.stringify(that.obj);
+			this.raw = JSON.stringify(that.obj[0]);
+			return this.raw;
 		}
 	}
 	Packet.HANDSHAKE = [{
@@ -92,7 +93,7 @@
 	Packet.Handler = {
 		"handshake": new PacketHandler("handshake", packet => {
 			// Store the client ID the server gave 
-			packet.client.cid = packet.obj[0].clientId;
+			packet.client.cid = packet.obj.clientId;
 			// Handshake accepted, send back a subscription packet
 			var handsh = new Packet(null, packet.client);
 			handsh.timesync(packet.obj);
@@ -102,6 +103,7 @@
 			handsh.obj[0].clientId = packet.client.cid;
 			// subscribe to the controller channel
 			handsh.obj[0].subscription = "/service/controller";
+			handsh.obj[0].id = packet.client.msgCount + "";
 			packet.client.send(handsh);
 		}),
 		9: new PacketHandler(9, packet => {
@@ -144,8 +146,8 @@
 		onclose() {
 			// TODO: handle onclose events from sockets
 		}
-		onmessage(msg) {
-			var packet = new Packet(msg.data, this);
+		onmessage(msg, me) {
+			var packet = new Packet(msg.data, me);
 			// Log the incoming packets (this is temporary)
 			console.debug(packet.obj);
 			// Handle packets
@@ -157,6 +159,7 @@
 			}
 		}
 		constructor(ip, isMaster) {
+			var me = this;
 			console.debug('Constructed client ' + clients.length);
 			this.ws = new window.WebSocket(ip);
 			// The client ID given by the server
@@ -166,10 +169,14 @@
 			else this.isMaster = false;
 			this.ws.onopen = this.onopen;
 			this.ws.onclose = this.onclose;
-			this.ws.onmessage = this.onmessage;
+			this.ws.onmessage = msg => {
+				me.onmessage(msg, me);
+			}
+			this.msgCount = 0;
 		}
 		send(packet) {
 			var msg = packet.str();
+			this.msgCount++;
 			try {
 				this.ws.send(msg);
 			} catch (e) {
