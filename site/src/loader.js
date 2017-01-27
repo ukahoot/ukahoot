@@ -15,8 +15,9 @@
 	}
     // Small module system to load JS source files
     class UKahootModule {
-        constructor(filename) {
+        constructor(filename, name) {
             this.file = filename;
+            this.name = name;
         }
         load() {
             var me = this;
@@ -27,16 +28,16 @@
                 document.head.appendChild(moduleScript);
                 moduleScript.addEventListener('load', function postLoad() {
                     moduleScript.removeEventListener('load', postLoad, false);
-                    console.log('loaded module', me.file);
+                    console.log("Loaded module '" + me.name + "'");
                     resolve();
                 });
             });
         }
     }
     window.modules = {
-        core: new UKahootModule("site/src/ukahoot.js"),
-        packet: new UKahootModule("site/src/Packet.js"),
-        jquery: new UKahootModule("site/jquery-3.1.1.min.js")
+        core: new UKahootModule("site/src/ukahoot.js", "Core"),
+        packet: new UKahootModule("site/src/Packet.js", "Packet"),
+        jquery: new UKahootModule("site/jquery-3.1.1.min.js", "jquery")
     };
     modules.jquery.load()
         .then(() => modules.packet.load())
