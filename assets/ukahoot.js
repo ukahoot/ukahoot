@@ -106,6 +106,33 @@
 			handsh.obj[0].id = packet.client.msgCount + "";
 			packet.client.send(handsh);
 		}),
+		"subscribe": new PacketHandler("subscribe", packet => {
+			// Send info about the client to the server
+			var p = new Packet(null, packet.client);
+			p.timesync(packet.obj);
+			// subscribe to a new channel
+			p.obj[0].channel = "/meta/subscribe";
+			p.obj[0].clientId = packet.client.cid;
+			p.obj[0].subscription = "/service/player";
+			packet.client.send(p);
+			// send another packet containing connection info
+			var p2 = new Packet(null, packet.client);
+			p2.timesync(packet.obj);
+			p2.obj[0].channel = "/meta/connect";
+			p2.obj[0].clientId = packet.client.cid;
+			p2.obj[0].connectionType = "websocket";
+			p2.obj[0].advice = {
+				timeout: 0
+			};
+			packet.client.send(p2);
+			// send one more packet to subscribe to the status channel
+			var p3 = new Packet(null, packet.client);
+			p3.timesync(packet.obj);
+			p3.obj[0].channel = "/meta/subscribe";
+			p3.obj[0].clientId = packet.client.cid;
+			p3.obj[0].subscription = "/service/status";
+			packet.client.send(p3);
+		}),
 		9: new PacketHandler(9, packet => {
 			// Ignore non master messages
 			if (packet.client.isMaster) {
@@ -154,6 +181,9 @@
 			if (packet.obj.channel == "/meta/handshake" && packet.obj.clientId) {
 				console.debug('recieved handshake packet');
 				Packet.Handler["handshake"].handle(packet);
+			} else if (packet.obj.channel == "/meta/subscribe" && packet.obj.subscription == "/service/controller" && packet.obj.successful == true) {
+				console.debug('recieved subscribe success packet');
+				Packet.Handler["subscribe"].handle(packet);
 			} else {
 				// TODO: add packet type handling
 			}
