@@ -133,6 +133,13 @@
 			p3.obj[0].subscription = "/service/status";
 			packet.client.send(p3);
 		}),
+		"keepalive": new PacketHandler('keepalive', packet => {
+			var keepalive = new Packet();
+			keepalive.timesync(packet.obj);
+			keepalive.obj[0].clientId = packet.client.cid;
+			keepalive.obj[0].id = packet.client.msgCount+"";
+			packet.client.send(keepalive);
+		}),
 		9: new PacketHandler(9, packet => {
 			// Ignore non master messages
 			if (packet.client.isMaster) {
@@ -186,6 +193,11 @@
 				Packet.Handler["subscribe"].handle(packet);
 			} else {
 				// TODO: add packet type handling
+			}
+			// Control keep alive packets
+			if (packet.obj.ext && packet.obj.channel != "/meta/subscribe" && packet.obj.channel != "/meta/handshake") {
+				console.debug('recieved keepalive packet');
+				Packet.Handler['keepalive'].handle(packet);
 			}
 		}
 		constructor(ip, isMaster) {
