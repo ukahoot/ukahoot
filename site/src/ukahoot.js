@@ -1,4 +1,5 @@
 (() => {
+	"use strict";
 	{
 		var supported = true;
 		try {
@@ -232,13 +233,13 @@
 		return (new Date).getTime();
 	}
 	var solveChallenge = challenge => {
-		var eval = "var _ = {replace: function(){" +
+		var lib = "var _ = {replace: function(){" +
 				   "var args = arguments;" +
 				   "var s = arguments[0];" + 
 				   "return s.replace(args[1], args[2]);" +
 				   "}};" +
 				   "return ";
-		var solver = new Function(eval + challenge);
+		var solver = new Function(lib + challenge);
 		// return the solved token
 		return solver().toString();
 	}
