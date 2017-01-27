@@ -17,15 +17,26 @@
     class UKahootModule {
         constructor(filename) {
             this.file = filename;
-            this.loaded = false;
         }
         load() {
+            var me = this;
             return new Promise((resolve, reject) => {
                 var moduleScript = document.createElement('script');
-                moduleScript.src = this.file;
+                moduleScript.src = me.file;
                 moduleScript.type = "text/javascript";
                 document.head.appendChild(moduleScript);
+                moduleScript.addEventListener('load', function postLoad() {
+                    moduleScript.removeEventListener('load', postLoad, false);
+                    console.log('loaded module', me.file);
+                    resolve();
+                });
             });
         }
     }
+    window.modules = {
+        core: new UKahootModule("site/src/ukahoot.js"),
+        jquery: new UKahootModule("site/jquery-3.1.1.min.js")
+    };
+    modules.jquery.load()
+        .then(() => modules.core.load());
 })();
