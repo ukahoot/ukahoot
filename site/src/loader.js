@@ -37,9 +37,11 @@
     window.modules = {
         core: new UKahootModule("site/src/ukahoot.js", "Core"),
         packet: new UKahootModule("site/src/Packet.js", "Packet"),
+        packetHandler: new UKahootModule("site/src/PacketHandler.js", "PacketHandler"),
         jquery: new UKahootModule("site/jquery-3.1.1.min.js", "jquery")
     };
     modules.jquery.load()
         .then(() => modules.packet.load())
+        .then(() => modules.packetHandler.load())
         .then(() => modules.core.load());
 })();
