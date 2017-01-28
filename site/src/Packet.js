@@ -1,14 +1,17 @@
 class Packet {
-    constructor(rawString, client) {
+    constructor(incoming, client) {
         this.outgoing = true;
         this.raw = null;
         this.obj = [{}];
         if (client) this.client = client;
         else this.client = null;
-        if (rawString) {
+        if (typeof incoming === "string") {
             this.outgoing = false;
-            this.raw = rawString;
-            this.obj = JSON.parse(rawString)[0];
+            this.raw = incoming;
+            this.obj = JSON.parse(incoming)[0];
+        } else if (typeof incoming === "object" && incoming !== null) {
+            this.outgoing = false;
+            this.obj = incoming;
         }
     }
     timesync(packet2) {

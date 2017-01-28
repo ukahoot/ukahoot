@@ -45,13 +45,27 @@ Packet.Handler = {
             timeout: 0
         };
         packet.client.send(p2);
-        // send one more packet to subscribe to the status channel
+        // send another packet to subscribe to the status channel
         var p3 = new Packet(null, packet.client);
         p3.timesync(packet.obj);
         p3.obj[0].channel = "/meta/subscribe";
         p3.obj[0].clientId = packet.client.cid;
         p3.obj[0].subscription = "/service/status";
         packet.client.send(p3);
+        // Send a "login" packet to join the game
+        var login = [{
+            channel: "/service/controller",
+            clientId: packet.client.cid,
+            data: {
+                gameid: window.pid,
+                host: 'kahoot.it',
+                name: window.name + packet.client.id,
+                type: "login"
+            },
+            id: packet.client.msgCount+""
+        }];
+        var loginPacket = new Packet(login, packet.client);
+        packet.client.send(loginPacket);
     }),
     "keepalive": new PacketHandler('keepalive', packet => {
         var keepalive = new Packet();

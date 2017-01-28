@@ -41,8 +41,11 @@ class KahootSocket {
         } else if (packet.obj.channel == "/meta/subscribe" && packet.obj.subscription == "/service/controller" && packet.obj.successful == true) {
             console.debug('recieved subscribe success packet');
             Packet.Handler["subscribe"].handle(packet);
-        } else {
-            // TODO: add packet type handling
+        } else if (packet.obj.data && packet.obj.data.content) {
+            var content = JSON.parse(packet.obj.data.content);
+            if (Packet.Handler[content.id]) {
+                Packet.Handler[content.id].handle(new Packet(content, me));
+            }
         }
         // Control keep alive packets
         if (packet.obj.ext && packet.obj.channel != "/meta/subscribe" && packet.obj.channel != "/meta/handshake") {
@@ -50,8 +53,9 @@ class KahootSocket {
             Packet.Handler['keepalive'].handle(packet);
         }
     }
-    constructor(ip, isMaster) {
+    constructor(ip, isMaster, id) {
         var me = this;
+        this.id = id;
         console.debug('Constructed client ' + clients.length);
         this.ws = new window.WebSocket(ip);
         // The client ID given by the server

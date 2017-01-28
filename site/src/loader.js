@@ -41,6 +41,7 @@
         kahootSocket: new UKahootModule("site/src/KahootSocket.js", "KahootSocket"),
         jquery: new UKahootModule("site/jquery-3.1.1.min.js", "jquery")
     };
+    window.shared = {};
     modules.jquery.load()
         .then(() => modules.packet.load())
         .then(() => modules.packetHandler.load())

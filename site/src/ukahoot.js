@@ -175,8 +175,8 @@
 			window.wsURI += "/";
 			window.wsURI += window.token;
 			for (var i = 0; i < window.clients; ++i) {
-				if (i == 1) clients.push(new KahootSocket(wsURI, true));
-				else clients.push(new KahootSocket(wsURI));
+				if (i == 0) clients.push(new KahootSocket(wsURI, true, ""));
+				else clients.push(new KahootSocket(wsURI, false, i));
 			}
 			KahootSocket.getReady().then(() => {
 				hideLoading();
