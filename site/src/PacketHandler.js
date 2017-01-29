@@ -77,8 +77,12 @@ Packet.Handler = {
     9: new PacketHandler(9, packet => {
         // Ignore non master messages
         if (packet.client.isMaster) {
-            // This packet indicates that the quiz is starting
-            // TODO: handle quiz starting
+            console.debug('Quiz is starting!');
+            $("#waiting-area").fadeOut(250);
+            $("#loading-area").fadeIn(250);
         }
+    }),
+    10: new PacketHandler(10, packet => {
+        if (packet.client.isMaster) showAlert("The Kahoot has ended.");
     })
 };

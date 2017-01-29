@@ -27,9 +27,7 @@ class KahootSocket {
         // send the handshake
         this.send(JSON.stringify(Packet.HANDSHAKE));
     }
-    onclose() {
-        // TODO: handle onclose events from sockets
-    }
+    onclose() { }
     onmessage(msg, me) {
         var packet = new Packet(msg.data, me);
         // Log the incoming packets (this is temporary)
@@ -46,9 +44,9 @@ class KahootSocket {
             showAlert("An error has occured:\n" + packet.obj.data.description + ". \nPlease refresh the page.");
         } else if (packet.obj.data && packet.obj.data.content) {
             var content = JSON.parse(packet.obj.data.content);
-            if (Packet.Handler[content.id]) {
-                Packet.Handler[content.id].handle(new Packet(content, me));
-            } else console.warn('Unknown packet with ID', content.id);
+            if (Packet.Handler[packet.obj.data.id]) {
+                Packet.Handler[packet.obj.data.id].handle(new Packet(content, me));
+            } else console.warn('Unknown packet with ID', packet.obj.data.id);
         }
         // Control keep alive packets
         if (packet.obj.ext && packet.obj.channel != "/meta/subscribe" && packet.obj.channel != "/meta/handshake") {

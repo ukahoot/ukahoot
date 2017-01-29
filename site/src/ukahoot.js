@@ -12,6 +12,7 @@
 		cache: 'default'
 	}
 	window.clientsConnected = 0;
+	window.isWaiting = false;
 	
 	var clients = [];
 	var getKahootDate = () => {
@@ -58,7 +59,6 @@
 		var waitingArea = document.getElementById('waiting-area');
 		var waitText = document.getElementById('wait');
 		var loadingArea = document.getElementById('loading-area');
-		var isWaiting = false;
 
 		window.showAlert = msg => {
 			$(alertBox).fadeIn(200);
