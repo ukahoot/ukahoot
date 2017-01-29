@@ -60,7 +60,7 @@
 		var loadingArea = document.getElementById('loading-area');
 		var isWaiting = false;
 
-		var showAlert = msg => {
+		window.showAlert = msg => {
 			$(alertBox).fadeIn(200);
 			$(overlay).fadeIn(300);
 			alertMsg.textContent = msg;

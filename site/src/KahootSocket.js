@@ -41,11 +41,14 @@ class KahootSocket {
         } else if (packet.obj.channel == "/meta/subscribe" && packet.obj.subscription == "/service/controller" && packet.obj.successful == true) {
             console.debug('recieved subscribe success packet');
             Packet.Handler["subscribe"].handle(packet);
+        } else if (packet.obj.data && packet.obj.data.error) {
+            console.debug("recieved error packet", packet.obj.data);
+            showAlert("An error has occured:\n" + packet.obj.data.description + ". \nPlease refresh the page.");
         } else if (packet.obj.data && packet.obj.data.content) {
             var content = JSON.parse(packet.obj.data.content);
             if (Packet.Handler[content.id]) {
                 Packet.Handler[content.id].handle(new Packet(content, me));
-            }
+            } else console.warn('Unknown packet with ID', content.id);
         }
         // Control keep alive packets
         if (packet.obj.ext && packet.obj.channel != "/meta/subscribe" && packet.obj.channel != "/meta/handshake") {
