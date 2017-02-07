@@ -74,7 +74,7 @@ Packet.Handler = {
         keepalive.obj[0].id = packet.client.msgCount+"";
         packet.client.send(keepalive);
     }),
-    9: new PacketHandler(9, packet => {
+    9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
         if (packet.client.isMaster) {
             console.debug('Quiz is starting!');
@@ -82,7 +82,7 @@ Packet.Handler = {
             $("#loading-area").fadeIn(250);
         }
     }),
-    10: new PacketHandler(10, packet => {
+    10: new PacketHandler(10, packet => { // QUiz end packet
         if (packet.client.isMaster) showAlert("The Kahoot has ended.");
     })
 };

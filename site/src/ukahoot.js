@@ -175,16 +175,17 @@
 			window.wsURI += "/";
 			window.wsURI += window.token;
 			for (var i = 0; i < window.clients; ++i) {
+				// Connect each KahootSocket to the server.
 				if (i == 0) clients.push(new KahootSocket(wsURI, true, ""));
 				else clients.push(new KahootSocket(wsURI, false, i));
 			}
-			KahootSocket.getReady().then(() => {
+			KahootSocket.getReady().then(() => { // Wait until all of them have opened
 				hideLoading();
 				$(joinArea).fadeOut(250);
 				$(waitingArea).fadeIn(250);
 				isWaiting = true;
 				var pulse = false;
-				var waitInterval = setInterval(() => {
+				var waitInterval = setInterval(() => { // Make the waiting text 'glow'
 					if (isWaiting) {
 						if (pulse) {
 							waitText.style.opacity = 1;
