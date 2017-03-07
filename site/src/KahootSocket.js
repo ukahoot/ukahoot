@@ -30,14 +30,12 @@ class KahootSocket {
     onclose() { }
     onmessage(msg, me) {
         var packet = new Packet(msg.data, me);
-        // Log the incoming packets (this is temporary)
-        console.debug(packet.obj);
         // Handle packets
         if (packet.obj.channel == "/meta/handshake" && packet.obj.clientId) {
-            console.debug('recieved handshake packet');
+            console.debug('recieved handshake');
             Packet.Handler["handshake"].handle(packet);
         } else if (packet.obj.channel == "/meta/subscribe" && packet.obj.subscription == "/service/controller" && packet.obj.successful == true) {
-            console.debug('recieved subscribe success packet');
+            // console.debug('recieved subscribe success packet');
             Packet.Handler["subscribe"].handle(packet);
         } else if (packet.obj.data && packet.obj.data.error) {
             console.debug("recieved error packet", packet.obj.data);
@@ -46,11 +44,11 @@ class KahootSocket {
             var content = JSON.parse(packet.obj.data.content);
             if (Packet.Handler[packet.obj.data.id]) {
                 Packet.Handler[packet.obj.data.id].handle(new Packet(content, me));
-            } else console.warn('Unknown packet with ID', packet.obj.data.id);
+            } else console.warn('Recieved packet with unknown ID:', packet.obj);
         }
         // Control keep alive packets
         if (packet.obj.ext && packet.obj.channel != "/meta/subscribe" && packet.obj.channel != "/meta/handshake") {
-            console.debug('recieved keepalive packet');
+            // console.debug('recieved keepalive packet');
             Packet.Handler['keepalive'].handle(packet);
         }
     }
