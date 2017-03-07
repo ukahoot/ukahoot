@@ -1,4 +1,30 @@
 class Packet {
+    static getAnswer(choice, gameID) {
+        return [{
+			channel: '/service/controller',
+			clientId: me.clientID,
+			data: {
+				content: JSON.stringify({
+					choice: questionChoice,
+					meta: {
+						lag: 25,
+						device: {
+							userAgent: navigator.userAgent,
+							screen: {
+								width: window.innerWidth,
+								height: window.height
+							}
+						}
+					}
+				}),
+				gameid: gameID,
+				host: 'kahoot.it',
+				id: 6,
+				type: "message"
+			},
+			id: me.msgID + ""
+		}];
+    }
     constructor(incoming, client) {
         this.outgoing = true;
         this.raw = null;

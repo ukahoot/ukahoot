@@ -204,5 +204,8 @@
 				}, 750);
 			});
 		});
+		$(".ans").click(e => {
+			// TODO: handle answer submitting
+		});
 	});
 })();
