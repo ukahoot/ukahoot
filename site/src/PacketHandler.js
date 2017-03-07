@@ -74,6 +74,13 @@ Packet.Handler = {
         keepalive.obj[0].id = packet.client.msgCount+"";
         packet.client.send(keepalive);
     }),
+    2: new PacketHandler(1, packet => { // Question start packet
+        if (packet.client.isMaster) {
+            console.debug('Question started');
+            $("#loading-area").fadeOut(250);
+            $("#playing-area").fadeIn(250);
+        }
+    }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
         if (packet.client.isMaster) {

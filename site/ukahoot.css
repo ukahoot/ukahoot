@@ -130,3 +130,53 @@ button:hover {
 	font-family: 'Ubuntu';
 	color: lime;
 }
+#playing-area {
+	display: none;
+}
+.ans {
+	position: absolute;
+	font-size: 150%;
+	font-family: 'Ubuntu';
+	color: lime;
+	width: 47%;
+	height: 47%;
+	opacity: 0.7;
+	background-color: black;
+	cursor: pointer;
+	border: 5px solid lime;
+	transition: opacity 250ms;
+}
+.ans:hover {
+	opacity: 1;
+}
+#ans0 {
+	top: 3%;
+	left: 3%;
+	transform: translate(-3%, -3%);
+}
+#ans1 {
+	top: 3%;
+	left: 97%;
+	transform: translate(-97%, -3%);
+}
+#ans2 {
+	top: 97%;
+	left: 3%;
+	transform: translate(-3%, -97%);
+}
+#ans3 {
+	top: 97%;
+	left: 97%;
+	transform: translate(-97%, -97%);
+}
+.shape {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	color: lime;
+	transform: translate(-50%, -50%);
+	-webkit-box-align:center;
+    -webkit-box-pack:center;
+    display:-webkit-box;
+	font-size: 600%;
+}

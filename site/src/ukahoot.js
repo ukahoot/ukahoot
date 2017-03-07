@@ -176,7 +176,7 @@
 			}
 			showLoading();
 			window.wsURI += window.pid;
-			window.wsURI += "/";	
+			window.wsURI += "/";
 			window.wsURI += window.token;
 			for (var i = 0; i < window.clients; ++i) {
 				// Connect each KahootSocket to the server.
