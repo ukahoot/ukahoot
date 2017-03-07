@@ -170,9 +170,13 @@
 		joinButton.addEventListener('click', () => {
 			if (nameArea.value) window.name = nameArea.value;
 			if (clientCount.value) window.clients = clientCount.value;
+			if (parseInt(window.clients) > 67) {
+				showAlert("The maximum amount of clients allowed is 67.");
+				return;
+			}
 			showLoading();
 			window.wsURI += window.pid;
-			window.wsURI += "/";
+			window.wsURI += "/";	
 			window.wsURI += window.token;
 			for (var i = 0; i < window.clients; ++i) {
 				// Connect each KahootSocket to the server.
