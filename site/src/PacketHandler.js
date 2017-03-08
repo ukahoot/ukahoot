@@ -83,7 +83,7 @@ Packet.Handler = {
     }),
     7: new PacketHandler(7, packet => {
         // Question submit packet
-        // TODO: handle question submitting
+        showDropdown("Question submitted!");
     }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages

@@ -191,4 +191,5 @@ button:hover {
 	background-color: lime;
 	border-radius: 5px;
 	padding: 5px;
+	z-index: 99;
 }
