@@ -1,8 +1,8 @@
 class Packet {
-    static getAnswer(choice, gameID) {
+    static getAnswer(choice, gameID, clientID) {
         return [{
 			channel: '/service/controller',
-			clientId: me.clientID,
+			clientId: clientID,
 			data: {
 				content: JSON.stringify({
 					choice: questionChoice,

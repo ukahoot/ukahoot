@@ -19,6 +19,18 @@ class KahootSocket {
             }
         }
     }
+    static sendAns(key) {
+        for (var i = 0; i < window.clients; ++i) {
+            try {
+                var msg = Packet.getAnswer(key, window.pid);
+                msg.clientId = clients[i].cid;
+                clients[i].send(msg);
+            } catch (e) {
+                console.debug("socket" + i + " encountered send exception:");
+                console.error(e);
+            }
+        }
+    }
     onopen() {
         console.debug('socket opened, sending handshake');
         clientsConnected += 1;

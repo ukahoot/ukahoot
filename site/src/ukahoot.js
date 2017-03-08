@@ -205,7 +205,21 @@
 			});
 		});
 		$(".ans").click(e => {
-			// TODO: handle answer submitting
+			var submitPacket = null;
+			switch (e.target.id) {
+				case "ans0":
+					KahootSocket.sendAns(0);
+					break;
+				case "ans1":
+					KahootSocket.sendAns(1);
+					break;
+				case "ans2":
+					KahootSocket.sendAns(2);
+					break;
+				case "ans3":
+					KahootSocket.sendAns(3);
+					break;
+			}
 		});
 	});
 })();
