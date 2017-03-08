@@ -10,23 +10,23 @@ class KahootSocket {
         });
     }
     static send(msg) {
-        for (var i = 0; i < window.clients; ++i) {
+        for (var i = 0; i < window.sockets.length; ++i) {
             try {
-                clients[i].send(msg);
+                sockets[i].send(msg);
             } catch (e) {
                 console.debug("socket" + i + " encountered send exception:");
-                console.error(e);
+                console.error(e);  
             }
         }
     }
     static sendAns(key) {
-        for (var i = 0; i < window.clients; ++i) {
+        for (var i = 0; i < window.sockets.length; ++i) {
             try {
-                var msg = Packet.getAnswer(key, window.pid);
-                msg.clientId = clients[i].cid;
-                clients[i].send(msg);
+                var msg = Packet.getAnswer(key, window.pid, window.sockets[i].cid, window.sockets[i].msgCount);
+                msg[0].clientId = window.sockets[i].cid;
+                window.sockets[i].ws.send(JSON.stringify(msg));
             } catch (e) {
-                console.debug("socket" + i + " encountered send exception:");
+                console.debug("socket" + i + " encountered a send exception:");
                 console.error(e);
             }
         }
@@ -67,7 +67,7 @@ class KahootSocket {
     constructor(ip, isMaster, id) {
         var me = this;
         this.id = id;
-        console.debug('Constructed client ' + clients.length);
+        console.debug('Constructed client ' + sockets.length);
         this.ws = new window.WebSocket(ip);
         // The client ID given by the server
         this.cid = null;

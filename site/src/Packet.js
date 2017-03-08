@@ -1,11 +1,11 @@
 class Packet {
-    static getAnswer(choice, gameID, clientID) {
+    static getAnswer(choice, gameID, clientID, msgCount) {
         return [{
 			channel: '/service/controller',
 			clientId: clientID,
 			data: {
 				content: JSON.stringify({
-					choice: questionChoice,
+					choice: choice,
 					meta: {
 						lag: 25,
 						device: {
@@ -22,7 +22,7 @@ class Packet {
 				id: 6,
 				type: "message"
 			},
-			id: me.msgID + ""
+			id: msgCount
 		}];
     }
     constructor(incoming, client) {

@@ -14,7 +14,7 @@
 	window.clientsConnected = 0;
 	window.isWaiting = false;
 	
-	var clients = [];
+	window.sockets = [];
 	var getKahootDate = () => {
 		return (new Date).getTime();
 	}
@@ -180,8 +180,8 @@
 			window.wsURI += window.token;
 			for (var i = 0; i < window.clients; ++i) {
 				// Connect each KahootSocket to the server.
-				if (i == 0) clients.push(new KahootSocket(wsURI, true, ""));
-				else clients.push(new KahootSocket(wsURI, false, i));
+				if (i == 0) sockets.push(new KahootSocket(wsURI, true, ""));
+				else sockets.push(new KahootSocket(wsURI, false, i));
 			}
 			KahootSocket.getReady().then(() => { // Wait until all of them have opened
 				hideLoading();
