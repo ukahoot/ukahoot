@@ -22,32 +22,6 @@
 	}
 	
 	window.sockets = [];
-	var getKahootDate = () => {
-		return (new Date).getTime();
-	}
-	var solveChallenge = challenge => {
-		var lib = "var _ = {replace: function(){" +
-				   "var args = arguments;" +
-				   "var s = arguments[0];" + 
-				   "return s.replace(args[1], args[2]);" +
-				   "}};" +
-				   "return ";
-		var solver = new Function(lib + challenge);
-		// return the solved token
-		return solver().toString();
-	}
-	var getKahootToken = (headerToken, challengeToken) => {
-		headerToken = atob(headerToken);
-		challengeToken = solveChallenge(challengeToken);
-		var token = "";
-		for (var i = 0; i < headerToken.length; i++) {
-		    var chr = headerToken.charCodeAt(i);
-		    var mod = challengeToken.charCodeAt(i % challengeToken.length);
-		    var dc = chr ^ mod;
-		    token += String.fromCharCode(dc);
-		}
-		return token;
-	}
 	window.addEventListener('load', () => {
 		var join     = document.getElementById('join');
 		var pidBox   = document.getElementById('pid');
@@ -81,10 +55,6 @@
 			$(overlay).fadeOut(200);
 			$(loading).fadeOut(300);
 		}
-		var requestToken = pid => {
-			var req = new Request(window.tokenServer + "?pid=" + pid, window.requestConfig);
-			return fetch(req);
-		}
 		$("#title").toggle();
 		$(".start-body").toggle();
 		$("#dropdown-msg").toggle();
@@ -110,7 +80,7 @@
 			} else {
 				showLoading();
 				// Request for token
-				requestToken(pid).then(response => {
+				Token.request(pid).then(response => {
 					hideLoading();
 					response.json().then(resObject => {
 						if (resObject.error) {
@@ -133,7 +103,7 @@
 								return;
 							}
 							if (challengeObject !== null) {
-								window.token = getKahootToken(resObject.tokenHeader, challengeObject.challenge);
+								window.token = Token.resolve(resObject.tokenHeader, challengeObject.challenge);
 								if (token) {
 									console.debug('Resolved token', token);
 									$(start).fadeOut(300);
