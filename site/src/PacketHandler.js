@@ -81,6 +81,10 @@ Packet.Handler = {
             $("#playing-area").fadeIn(250);
         }
     }),
+    7: new PacketHandler(7, packet => {
+        // Question submit packet
+        // TODO: handle question submitting
+    }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
         if (packet.client.isMaster) {

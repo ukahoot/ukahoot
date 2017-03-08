@@ -13,6 +13,13 @@
 	}
 	window.clientsConnected = 0;
 	window.isWaiting = false;
+	window.showDropdown = (msg) => {
+		$("#dropdown-msg").slideDown({duration: 500});
+		$("#dropdown-msg").text(msg);
+		setTimeout(() => {
+			$("#dropdown-msg").slideUp({duration: 500});
+		}, 4000);
+	}
 	
 	window.sockets = [];
 	var getKahootDate = () => {
@@ -80,6 +87,7 @@
 		}
 		$("#title").toggle();
 		$(".start-body").toggle();
+		$("#dropdown-msg").toggle();
 		$(".description").toggle();
 		$(joinArea).toggle();
 		$(tooltipArea).toggle();
@@ -162,7 +170,7 @@
 			$(overlay).fadeOut(200);
 		});
 		tooltip.addEventListener('mouseenter', () => {
-			$(tooltipArea).fadeIn	(200);
+			$(tooltipArea).fadeIn(200);
 		});
 		tooltip.addEventListener('mouseleave', () => {
 			$(tooltipArea).fadeOut(200);
