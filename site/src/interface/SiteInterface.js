@@ -54,24 +54,11 @@ class SiteInterface extends Interface {
         }
         me.onAnswer.call(me, ans);
     }
-    onJoinGame(pid) {
-        var me = this;
-        super.onJoinGame(pid).then(token => {
-            $(start).fadeOut(300);
-            setTimeout(() => {
-                $(me.joinArea).fadeIn(300);
-            }, 300);
-        }).catch(() => {
-            me.hideLoading();
-            setTimeout(() => {
-                me.showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
-                console.error(err);
-            }, 500);
-        });
-    }
     onJoin() {
         var me = this;
-        super.onJoin().then(() => {
+        // Call the original onJoin
+        InterfaceEvents.onJoin
+        .call(me.events).then(() => {
             $(me.joinArea).fadeOut(250);
             $(me.waitingArea).fadeIn(250);
             ukahoot.isWaiting = true;
@@ -99,19 +86,37 @@ class SiteInterface extends Interface {
             }
         });
     }
+    onJoinGame(pid) {
+        var me = this;
+        InterfaceEvents.onJoinGame
+        .call(me.events, pid).then(token => {
+            $(start).fadeOut(300);
+            setTimeout(() => {
+                $(me.joinArea).fadeIn(300);
+            }, 300);
+        }).catch(() => {
+            me.hideLoading();
+            setTimeout(() => {
+                me.showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
+                console.error(err);
+            }, 500);
+        });
+    }
     init() {
         var me = this;
         me.joinGameButton = document.getElementById('join');
         me.joinButton = document.getElementById('join-game');
         me.pidBox = document.getElementById("pid");
+        me.events.onJoinGame = me.onJoinGame;
+        me.events.onJoin = me.onJoin;
         $(".ans").click(e => {
             me.handleAnswer.call(this, me, e);
         });
         me.joinGameButton.addEventListener('click', () => {
-            me.onJoinGame.call(me, me.pidBox.value);
+            me.events.onJoinGame.call(me, me.pidBox.value);
         });
         me.joinButton.addEventListener('click', () => {
-            me.onJoin.call(me);
+            me.events.onJoin.call(me);
         });
 
         var join     = document.getElementById('join');
