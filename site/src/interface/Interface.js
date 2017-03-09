@@ -52,6 +52,7 @@ class Interface {
     hideLoading() { }
     init() { }
     constructor() {
+        this.events = new InterfaceEvents(this);
         // Properties that all interfaces should implement
         this.joinGameButton = null;
         this.joinButton = null;
