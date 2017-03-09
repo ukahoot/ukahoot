@@ -10,7 +10,8 @@
 		clients: 1,
 		name: "ukahoot",
 		token: null,
-		pid: null
+		pid: null,
+		interface: null
 	}
-	Interface.init();
+	ukahoot.interface = new SiteInterface;
 })();
