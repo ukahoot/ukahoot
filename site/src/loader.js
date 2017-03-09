@@ -39,10 +39,10 @@
         interfaceEvents: new UKahootModule("site/src/interface/InterfaceEvents.js", "Interface Events"),
         interface: new UKahootModule("site/src/interface/Interface.js", "Interface"),
         siteInterface: new UKahootModule('site/src/interface/SiteInterface.js', "Site Interface"),
-        token: new UKahootModule("site/src/Token.js", "Token Util"),
-        packet: new UKahootModule("site/src/Packet.js", "Packet"),
-        packetHandler: new UKahootModule("site/src/PacketHandler.js", "PacketHandler"),
-        kahootSocket: new UKahootModule("site/src/KahootSocket.js", "KahootSocket"),
+        token: new UKahootModule("site/src/protocol/Token.js", "Token Util"),
+        packet: new UKahootModule("site/src/protocol/Packet.js", "Packet"),
+        packetHandler: new UKahootModule("site/src/protocol/PacketHandler.js", "PacketHandler"),
+        kahootSocket: new UKahootModule("site/src/protocol/KahootSocket.js", "KahootSocket"),
         jquery: new UKahootModule("site/jquery-3.1.1.min.js", "jquery")
     };
     window.shared = {};
