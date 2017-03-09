@@ -94,7 +94,7 @@ class SiteInterface extends Interface {
         me.joinButton = document.getElementById('join-game');
         me.pidBox = document.getElementById("pid");
         $(".ans").click(e => {
-            handleAnswer.call(me, e);
+            me.handleAnswer.call(me, e);
         });
         me.joinGameButton.addEventListener('click', () => {
             me.onJoinGame.call(me, me.pidBox.value);
