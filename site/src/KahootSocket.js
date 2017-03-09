@@ -23,6 +23,7 @@ class KahootSocket {
         for (var i = 0; i < window.sockets.length; ++i) {
             try {
                 var msg = Packet.getAnswer(key, window.pid, window.sockets[i].cid, window.sockets[i].msgCount);
+                window.sockets[i].msgCount++;
                 msg[0].clientId = window.sockets[i].cid;
                 window.sockets[i].ws.send(JSON.stringify(msg));
             } catch (e) {

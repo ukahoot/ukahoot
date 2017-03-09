@@ -12,12 +12,18 @@
 		cache: 'default'
 	}
 	window.clientsConnected = 0;
+	window.dropDowns = [];
 	window.isWaiting = false;
 	window.showDropdown = (msg) => {
-		$("#dropdown-msg").slideDown({duration: 500});
-		$("#dropdown-msg").text(msg);
+		dropDowns.push($("<div class='dropdown'></div>"));
+		var currentBox = dropDowns[dropDowns.length - 1];
+		currentBox.toggle();
+		$("#dropdowns").prepend(currentBox);
+		$("#dropdowns").prepend("<br>");
+		currentBox.text(msg);
+		currentBox.slideDown({duration: 500});
 		setTimeout(() => {
-			$("#dropdown-msg").slideUp({duration: 500});
+			currentBox.slideUp({duration: 500});
 		}, 4000);
 	}
 	

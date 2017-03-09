@@ -85,6 +85,9 @@ Packet.Handler = {
         // Question submit packet
         showDropdown("Question submitted!");
     }),
+    8: new PacketHandler(8, packet => {
+        //
+    }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
         if (packet.client.isMaster) {
