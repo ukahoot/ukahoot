@@ -23,12 +23,12 @@ class Token {
 		return token;
     }
     static request(pid) {
-        var req = new Request(window.tokenServer + "?pid=" + pid, window.requestConfig);
+        var req = new Request(window.tokenServer + "?pid=" + pid, Token.requestConfig);
 		return fetch(req);
     }
 	static get() {
 		return new Promise((resolve, reject) => {
-			Token.request(pid).then(response => {
+			Token.request(ukahoot.pid).then(response => {
 				response.json().then(resObject => {
 					if (resObject.error) {
 						setTimeout(() => {
@@ -46,9 +46,12 @@ class Token {
 						} else reject("JSON parse error");
 					}
 				})
-				}).catch(error => {
-					reject(error);
-				});
+				}).catch(reject);
 		});
 	}
+}
+Token.requestConfig = {
+	method: 'GET',
+	headers: new Headers(),
+	cache: 'default'
 }

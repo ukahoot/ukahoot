@@ -12,10 +12,10 @@ class Interface {
 		}, 4000);
 	}
     static showAlert(msg) {
-        $(alertBox).fadeIn(200);
-        $(overlay).fadeIn(300);
-        alertMsg.textContent = msg;
-        alertMsg.innerHTML = alertMsg.innerHTML.replace('\n', '<br>');
+        $("#alert-box").fadeIn(200);
+        $("#overlay").fadeIn(300);
+        $("#alert-msg").text(msg);
+         $("#alert-msg")[0].innerHTML =  $("#alert-msg")[0].innerHTML.replace('\n', '<br>');
     }
     static showLoading() {
         $("#overlay").fadeIn(200);
@@ -62,9 +62,9 @@ class Interface {
                 }, 300);
             }, 300);
             join.addEventListener('click', () => {
-                window.pid = pidBox.value;
+                ukahoot.pid = pidBox.value;
                 // Do sanity checks before requesting for a token
-                if (!pid || pid === "" || (isNaN(parseInt(pid)))) {
+                if (!ukahoot.pid || ukahoot.pid === "" || (isNaN(parseInt(ukahoot.pid)))) {
                     Interface.showAlert('You entered an invalid PID! Please retry.');
                     return;
                 } else {
@@ -72,7 +72,7 @@ class Interface {
                     // Request for token
                     Token.get().then(token => {
                         Interface.hideLoading();
-                        window.token = token;
+                        ukahoot.token = token;
                         console.debug('Resolved token', token);
                         $(start).fadeOut(300);
                         setTimeout(() => {
@@ -98,29 +98,25 @@ class Interface {
                 $(tooltipArea).fadeOut(200);
             });
             joinButton.addEventListener('click', () => {
-                if (nameArea.value) window.name = nameArea.value;
-                if (clientCount.value) window.clients = clientCount.value;
-                if (parseInt(window.clients) > 67) {
+                if (nameArea.value) ukahoot.name = nameArea.value;
+                if (clientCount.value) ukahoot.clients = clientCount.value;
+                if (parseInt(ukahoot.clients) > 67) {
                     Interface.showAlert("The maximum amount of clients allowed is 67.");
                     return;
                 }
                 Interface.showLoading();
-                window.wsURI += window.pid;
-                window.wsURI += "/";
-                window.wsURI += window.token;
-                for (var i = 0; i < window.clients; ++i) {
-                    // Connect each KahootSocket to the server.
-                    if (i == 0) sockets.push(new KahootSocket(wsURI, true, ""));
-                    else sockets.push(new KahootSocket(wsURI, false, i));
-                }
+                ukahoot.wsURI += ukahoot.pid;
+                ukahoot.wsURI += "/";
+                ukahoot.wsURI += ukahoot.token;
+                KahootSocket.setupSockets();
                 KahootSocket.getReady().then(() => { // Wait until all of them have opened
                     Interface.hideLoading();
                     $(joinArea).fadeOut(250);
                     $(waitingArea).fadeIn(250);
-                    isWaiting = true;
+                    ukahoot.isWaiting = true;
                     var pulse = false;
                     var waitInterval = setInterval(() => { // Make the waiting text 'glow'
-                        if (isWaiting) {
+                        if (ukahoot.isWaiting) {
                             if (pulse) {
                                 waitText.style.opacity = 1;
                             } else {

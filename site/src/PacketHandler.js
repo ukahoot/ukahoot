@@ -57,9 +57,9 @@ Packet.Handler = {
             channel: "/service/controller",
             clientId: packet.client.cid,
             data: {
-                gameid: window.pid,
+                gameid: ukahoot.pid,
                 host: 'kahoot.it',
-                name: window.name + packet.client.id,
+                name: ukahoot.name + packet.client.id,
                 type: "login"
             },
             id: packet.client.msgCount+""
