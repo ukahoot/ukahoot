@@ -26,8 +26,8 @@ class Interface {
     onJoin() {
         return new Promise((resolve, reject) => {
             var me = this;
-            if (me.nameArea.value) ukahoot.name = nameArea.value;
-            if (me.clientCount.value) ukahoot.clients = clientCount.value;
+            if (me.nameArea.value) ukahoot.name = me.nameArea.value;
+            if (me.clientCountArea.value) ukahoot.clients = me.clientCountArea.value;
             if (parseInt(ukahoot.clients) > 67) {
                 return reject("The maximum amount of clients allowed is 67.");
             }
