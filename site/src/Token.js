@@ -26,4 +26,29 @@ class Token {
         var req = new Request(window.tokenServer + "?pid=" + pid, window.requestConfig);
 		return fetch(req);
     }
+	static get() {
+		return new Promise((resolve, reject) => {
+			Token.request(pid).then(response => {
+				response.json().then(resObject => {
+					if (resObject.error) {
+						setTimeout(() => {
+							showAlert("Your PIN is invalid! The Kahoot server responded with:\n" + resObject.responseCode);
+						}, 200);
+						return;
+					} else {
+						var challengeObject = null;
+						resObject.responseBody = resObject.responseBody.replace('console.log("Offset derived as:", offset);', "");
+						challengeObject = JSON.parse(resObject.responseBody);
+
+						if (challengeObject !== null) {
+							var token = Token.resolve(resObject.tokenHeader, challengeObject.challenge);
+							resolve(token);
+						} else reject("JSON parse error");
+					}
+				})
+				}).catch(error => {
+					reject(error);
+				});
+		});
+	}
 }

@@ -58,57 +58,19 @@ class Interface {
                 } else {
                     showLoading();
                     // Request for token
-                    Token.request(pid).then(response => {
+                    Token.get().then(token => {
                         hideLoading();
-                        response.json().then(resObject => {
-                            if (resObject.error) {
-                                setTimeout(() => {
-                                    showAlert("Your PIN is invalid! The Kahoot server responded with:\n" + resObject.responseCode);
-                                }, 200);
-                                return;
-                            } else {
-                                console.debug('Got response object:', resObject);
-                                var challengeObject = null;
-                                resObject.responseBody = resObject.responseBody.replace('console.log("Offset derived as:", offset);', "");
-                                try {
-                                    challengeObject = JSON.parse(resObject.responseBody);
-                                } catch (e) {
-                                    console.debug('There was an error parsing the challenge JSON:');
-                                    console.error(e);
-                                    setTimeout(() => {
-                                        showAlert("There was an error processing the server's response.");
-                                    }, 200);
-                                    return;
-                                }
-                                if (challengeObject !== null) {
-                                    window.token = Token.resolve(resObject.tokenHeader, challengeObject.challenge);
-                                    if (token) {
-                                        console.debug('Resolved token', token);
-                                        $(start).fadeOut(300);
-                                        setTimeout(() => {
-                                            $(joinArea).fadeIn(300);
-                                        }, 300);
-                                    } else {
-                                        setTimeout(() => {
-                                            showAlert("There was an error resloving the join token.\nPlease use another PIN.");
-                                        });
-                                        return;
-                                    }
-                                }
-                            }
-                        }).catch(err => {
-                            console.debug('There was an error parsing the response JSON:');
-                            console.error(err);
-                            setTimeout(() => {
-                                showAlert("There was an error processing the server's response.");
-                            }, 200);
-                            return;
-                        });
-                    }).catch(error => {
+                        window.token = token;
+                        console.debug('Resolved token', token);
+                        $(start).fadeOut(300);
+                        setTimeout(() => {
+                            $(joinArea).fadeIn(300);
+                        }, 300);
+                    }).catch(err => {
                         hideLoading();
                         setTimeout(() => {
                             showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
-                            console.error(error);
+                            console.error(err);
                         }, 500);
                     });
                 }
