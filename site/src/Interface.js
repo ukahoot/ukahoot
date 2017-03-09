@@ -1,4 +1,30 @@
 class Interface {
+    static showDropdown(msg) {
+		dropDowns.push($("<div class='dropdown'></div>"));
+		var currentBox = dropDowns[dropDowns.length - 1];
+		currentBox.toggle();
+		$("#dropdowns").prepend(currentBox);
+		$("#dropdowns").prepend("<br>");
+		currentBox.text(msg);
+		currentBox.slideDown({duration: 500});
+		setTimeout(() => {
+			currentBox.slideUp({duration: 500});
+		}, 4000);
+	}
+    static showAlert(msg) {
+        $(alertBox).fadeIn(200);
+        $(overlay).fadeIn(300);
+        alertMsg.textContent = msg;
+        alertMsg.innerHTML = alertMsg.innerHTML.replace('\n', '<br>');
+    }
+    static showLoading() {
+        $("#overlay").fadeIn(200);
+        $("#loading").fadeIn(300);
+    }
+    static hideLoading() {
+        $("#overlay").fadeOut(200);
+        $("#loading").fadeOut(300);
+    }
     static init() {
         window.addEventListener('load', () => {
             var join     = document.getElementById('join');
@@ -19,20 +45,6 @@ class Interface {
             var waitText = document.getElementById('wait');
             var loadingArea = document.getElementById('loading-area');
 
-            window.showAlert = msg => {
-                $(alertBox).fadeIn(200);
-                $(overlay).fadeIn(300);
-                alertMsg.textContent = msg;
-                alertMsg.innerHTML = alertMsg.innerHTML.replace('\n', '<br>');
-            }
-            var showLoading = () => {
-                $(overlay).fadeIn(200);
-                $(loading).fadeIn(300);
-            }
-            var hideLoading = () => {
-                $(overlay).fadeOut(200);
-                $(loading).fadeOut(300);
-            }
             $("#title").toggle();
             $(".start-body").toggle();
             $("#dropdown-msg").toggle();
@@ -53,13 +65,13 @@ class Interface {
                 window.pid = pidBox.value;
                 // Do sanity checks before requesting for a token
                 if (!pid || pid === "" || (isNaN(parseInt(pid)))) {
-                    showAlert('You entered an invalid PID! Please retry.');
+                    Interface.showAlert('You entered an invalid PID! Please retry.');
                     return;
                 } else {
-                    showLoading();
+                    Interface.showLoading();
                     // Request for token
                     Token.get().then(token => {
-                        hideLoading();
+                        Interface.hideLoading();
                         window.token = token;
                         console.debug('Resolved token', token);
                         $(start).fadeOut(300);
@@ -67,9 +79,9 @@ class Interface {
                             $(joinArea).fadeIn(300);
                         }, 300);
                     }).catch(err => {
-                        hideLoading();
+                        Interface.hideLoading();
                         setTimeout(() => {
-                            showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
+                            Interface.showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
                             console.error(err);
                         }, 500);
                     });
@@ -89,10 +101,10 @@ class Interface {
                 if (nameArea.value) window.name = nameArea.value;
                 if (clientCount.value) window.clients = clientCount.value;
                 if (parseInt(window.clients) > 67) {
-                    showAlert("The maximum amount of clients allowed is 67.");
+                    Interface.showAlert("The maximum amount of clients allowed is 67.");
                     return;
                 }
-                showLoading();
+                Interface.showLoading();
                 window.wsURI += window.pid;
                 window.wsURI += "/";
                 window.wsURI += window.token;
@@ -102,7 +114,7 @@ class Interface {
                     else sockets.push(new KahootSocket(wsURI, false, i));
                 }
                 KahootSocket.getReady().then(() => { // Wait until all of them have opened
-                    hideLoading();
+                    Interface.hideLoading();
                     $(joinArea).fadeOut(250);
                     $(waitingArea).fadeIn(250);
                     isWaiting = true;
