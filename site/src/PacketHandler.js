@@ -86,7 +86,8 @@ Packet.Handler = {
         showDropdown("Question submitted!");
     }),
     8: new PacketHandler(8, packet => {
-        //
+        // Question ended
+        showDropdown("The question has ended.");
     }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
