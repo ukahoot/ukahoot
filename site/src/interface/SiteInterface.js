@@ -102,6 +102,9 @@ class SiteInterface extends Interface {
             }, 500);
         });
     }
+    onQuizEnd() {
+        this.parent.showAlert("The Kahoot has ended.");
+    }
     init() {
         var me = this;
         me.joinGameButton = document.getElementById('join');
@@ -109,6 +112,7 @@ class SiteInterface extends Interface {
         me.pidBox = document.getElementById("pid");
         me.events.onJoinGame = me.onJoinGame;
         me.events.onJoin = me.onJoin;
+        me.events.onQuizEnd = me.onQuizEnd;
         $(".ans").click(e => {
             me.handleAnswer.call(this, me, e);
         });

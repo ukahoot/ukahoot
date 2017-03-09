@@ -96,6 +96,6 @@ Packet.Handler = {
         }
     }),
     10: new PacketHandler(10, packet => { // QUiz end packet
-        if (packet.client.isMaster) ukahoot.interface.events.showAlert("The Kahoot has ended.");
+        if (packet.client.isMaster) ukahoot.interface.events.onQuizEnd();
     })
 };
