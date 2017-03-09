@@ -44,6 +44,7 @@ class Interface {
     }
     onQuestionEnd() { }
     onQuestionSubmit() { }
+    onQuestionStart() { }
     onLoad() { }
     showDropdown() { }
     showAlert() { }
