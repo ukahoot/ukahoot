@@ -68,9 +68,9 @@ class SiteInterface extends Interface {
             var waitInterval = setInterval(() => { // Make the waiting text 'glow'
                 if (ukahoot.isWaiting) {
                     if (pulse) {
-                        waitText.style.opacity = 1;
+                        me.waitText.style.opacity = 1;
                     } else {
-                        waitText.style.opacity = 0.5;
+                        me.waitText.style.opacity = 0.5;
                     }
                     pulse = !pulse;
                 } else {
@@ -116,7 +116,7 @@ class SiteInterface extends Interface {
         me.nameArea = document.getElementById('name-area');
         me.clientCountArea = document.getElementById('client-count-area');
         me.waitingArea = document.getElementById('waiting-area');
-        var waitText = document.getElementById('wait');
+        me.waitText = document.getElementById('wait');
         var loadingArea = document.getElementById('loading-area');
 
         $("#title").toggle();
