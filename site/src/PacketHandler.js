@@ -76,18 +76,16 @@ Packet.Handler = {
     }),
     2: new PacketHandler(1, packet => { // Question start packet
         if (packet.client.isMaster) {
-            console.debug('Question started');
-            $("#loading-area").fadeOut(250);
-            $("#playing-area").fadeIn(250);
+            ukahoot.interface.onQuestionStart();
         }
     }),
     7: new PacketHandler(7, packet => {
         // Question submit packet
-        ukahoot.interface.showDropdown("Question submitted!");
+        ukahoot.interface.onQuestionSubmit();
     }),
     8: new PacketHandler(8, packet => {
         // Question ended
-        ukahoot.interface.showDropdown("The question has ended.");
+        ukahoot.interface.onQuestionEnd();
     }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages

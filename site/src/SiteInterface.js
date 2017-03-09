@@ -25,6 +25,17 @@ class SiteInterface extends Interface {
         $("#overlay").fadeOut(200);
         $("#loading").fadeOut(300);
     }
+    onQuestionStart() {
+        console.debug('Question started');
+        $("#loading-area").fadeOut(250);
+        $("#playing-area").fadeIn(250);
+    }
+    onQuestionSubmit() {
+        this.showDropdown("Question submitted!");
+    }
+    onQuestionEnd() {
+        this.showDropdown("The question has ended.");
+    }
     handleAnswer(me, e) {
         var ans = null;
         switch (e.target.id) {

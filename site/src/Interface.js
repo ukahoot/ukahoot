@@ -42,6 +42,8 @@ class Interface {
             });
         });
     }
+    onQuestionEnd() { }
+    onQuestionSubmit() { }
     onLoad() { }
     showDropdown() { }
     showAlert() { }
