@@ -61,7 +61,7 @@ class KahootSocket {
             Packet.Handler["subscribe"].handle(packet);
         } else if (packet.obj.data && packet.obj.data.error) {
             console.debug("recieved error packet", packet.obj.data);
-            Interface.showAlert("An error has occured:\n" + packet.obj.data.description + ". \nPlease refresh the page.");
+            ukahoot.interface.showAlert("An error has occured:\n" + packet.obj.data.description + ". \nPlease refresh the page.");
         } else if (packet.obj.data && packet.obj.data.content) {
             var content = JSON.parse(packet.obj.data.content);
             if (Packet.Handler[packet.obj.data.id]) {

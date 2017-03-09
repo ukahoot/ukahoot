@@ -83,11 +83,11 @@ Packet.Handler = {
     }),
     7: new PacketHandler(7, packet => {
         // Question submit packet
-        Interface.showDropdown("Question submitted!");
+        ukahoot.interface.showDropdown("Question submitted!");
     }),
     8: new PacketHandler(8, packet => {
         // Question ended
-        Interface.showDropdown("The question has ended.");
+        ukahoot.interface.showDropdown("The question has ended.");
     }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
@@ -98,6 +98,6 @@ Packet.Handler = {
         }
     }),
     10: new PacketHandler(10, packet => { // QUiz end packet
-        if (packet.client.isMaster) Interface.showAlert("The Kahoot has ended.");
+        if (packet.client.isMaster) ukahoot.interface.showAlert("The Kahoot has ended.");
     })
 };

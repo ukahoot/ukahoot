@@ -51,9 +51,9 @@ class SiteInterface extends Interface {
                 $(me.joinArea).fadeIn(300);
             }, 300);
         }).catch(() => {
-            Interface.hideLoading();
+            me.hideLoading();
             setTimeout(() => {
-                Interface.showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
+                me.showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
                 console.error(err);
             }, 500);
         });
@@ -94,7 +94,7 @@ class SiteInterface extends Interface {
         me.joinButton = document.getElementById('join-game');
         me.pidBox = document.getElementById("pid");
         $(".ans").click(e => {
-            me.handleAnswer.call(me, e);
+            me.handleAnswer.call(this, me, e);
         });
         me.joinGameButton.addEventListener('click', () => {
             me.onJoinGame.call(me, me.pidBox.value);
