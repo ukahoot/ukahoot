@@ -23,8 +23,8 @@ class KahootSocket {
         for (var i = 0; i < ukahoot.sockets.length; ++i) {
             try {
                 var msg = Packet.getAnswer(key, ukahoot.pid,
-                                                                    ukahoot.sockets[i].cid,
-                                                                    ukahoot.sockets[i].msgCount);
+                                            ukahoot.sockets[i].cid,
+                                            ukahoot.sockets[i].msgCount);
                 ukahoot.sockets[i].msgCount++;
                 msg[0].clientId = ukahoot.sockets[i].cid;
                 ukahoot.sockets[i].ws.send(JSON.stringify(msg));

@@ -1,6 +1,5 @@
 (() => {
 	"use strict";
-	window.tokenServer = "http://127.0.0.1:5556/";
 	window.dropDowns = [];
 	window.ukahoot = {
 		isWaiting: false,
@@ -11,6 +10,7 @@
 		name: "ukahoot",
 		token: null,
 		pid: null,
+		tokenServer: "http://tokenserver.ukahoot.it:5556/",
 		interface: null
 	}
 	ukahoot.interface = new SiteInterface;

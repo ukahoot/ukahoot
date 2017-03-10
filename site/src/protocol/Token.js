@@ -23,7 +23,7 @@ class Token {
 		return token;
     }
     static request(pid) {
-        var req = new Request(window.tokenServer + "?pid=" + pid, Token.requestConfig);
+        var req = new Request(ukahoot.tokenServer + "?pid=" + pid, Token.requestConfig);
 		return fetch(req);
     }
 	static get() {
