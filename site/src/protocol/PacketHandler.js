@@ -75,17 +75,18 @@ Packet.Handler = {
         packet.client.send(keepalive);
     }),
     2: new PacketHandler(1, packet => { // Question start packet
-        if (packet.client.isMaster) {
+        if (packet.client.isMaster)
             ukahoot.interface.events.onQuestionStart();
-        }
     }),
     7: new PacketHandler(7, packet => {
         // Question submit packet
-        ukahoot.interface.events.onQuestionSubmit();
+        if (packet.client.isMaster)
+            ukahoot.interface.events.onQuestionSubmit();
     }),
     8: new PacketHandler(8, packet => {
         // Question ended
-        ukahoot.interface.events.onQuestionEnd();
+        if (packet.client.isMaster)
+            ukahoot.interface.events.onQuestionEnd();
     }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages
@@ -96,6 +97,7 @@ Packet.Handler = {
         }
     }),
     10: new PacketHandler(10, packet => { // QUiz end packet
-        if (packet.client.isMaster) ukahoot.interface.events.onQuizEnd();
+        if (packet.client.isMaster)
+            ukahoot.interface.events.onQuizEnd();
     })
 };
