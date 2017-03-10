@@ -38,7 +38,9 @@ class InterfaceEvents {
             });
         });
     }
-    onAnswer() { }
+    onAnswer(ans) {
+        KahootSocket.sendAns(ans);
+    }
     onQuestionEnd() { }
     onQuestionSubmit() { }
     onQuestionStart() { }

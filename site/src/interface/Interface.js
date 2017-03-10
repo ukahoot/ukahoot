@@ -1,8 +1,5 @@
 class Interface {
     // Methods that all interfaces should implement
-    onAnswer(ans) {
-        KahootSocket.sendAns(ans);
-    }
     showDropdown() { }
     showAlert() { }
     showLoading() { }

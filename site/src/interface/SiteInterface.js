@@ -29,14 +29,15 @@ class SiteInterface extends Interface {
         console.debug('Question started');
         $("#loading-area").fadeOut(250);
         $("#playing-area").fadeIn(250);
-        this.playingArea.style.opacity = 1;
+        this.parent.playingArea.style.opacity = 1;
+        this.parent.showDropdown("Question started.");
     }
     onQuestionSubmit() {
-        this.showDropdown("Question submitted!");
-        this.playingArea.style.opacity = 0.4;
+        this.parent.showDropdown("Question submitted!");
+        this.parent.playingArea.style.opacity = 0.4;
     }
     onQuestionEnd() {
-        this.showDropdown("The question has ended.");
+        this.parent.showDropdown("The question has ended.");
     }
     handleAnswer(me, e) {
         var ans = null;
@@ -54,7 +55,7 @@ class SiteInterface extends Interface {
                 ans = 3;
                 break;
         }
-        me.onAnswer.call(me, ans);
+        me.events.onAnswer.call(me, ans);
     }
     onJoin() {
         var me = this;
@@ -117,6 +118,8 @@ class SiteInterface extends Interface {
         me.events.onJoin = me.onJoin;
         me.events.onQuizEnd = me.onQuizEnd;
         me.events.onQuestionStart = me.onQuestionStart;
+        me.events.onQuestionSubmit = me.onQuestionSubmit;
+        me.events.onQuestionEnd = me.onQuestionEnd;
 
         $(".ans").click(e => {
             me.handleAnswer.call(this, me, e);
