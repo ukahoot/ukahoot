@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 namespace UKahoot {
 	class MainClass {
 		public static string[] Hosts = {
-			"127.0.0.1",
-			"localhost"
+			"tokenserver.ukahoot.it"
 		};
 		public static int Port = 5556;
 		public static TokenServer ts;
