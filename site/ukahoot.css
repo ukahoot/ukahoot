@@ -132,6 +132,7 @@ button:hover {
 }
 #playing-area {
 	display: none;
+	transition: opacity 750ms;
 }
 .ans {
 	position: absolute;

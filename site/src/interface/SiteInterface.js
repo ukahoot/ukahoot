@@ -29,9 +29,11 @@ class SiteInterface extends Interface {
         console.debug('Question started');
         $("#loading-area").fadeOut(250);
         $("#playing-area").fadeIn(250);
+        me.playingArea.style.opacity = 1;
     }
     onQuestionSubmit() {
         this.showDropdown("Question submitted!");
+        me.playingArea.style.opacity = 0.5;
     }
     onQuestionEnd() {
         this.showDropdown("The question has ended.");
@@ -110,6 +112,7 @@ class SiteInterface extends Interface {
         me.joinGameButton = document.getElementById('join');
         me.joinButton = document.getElementById('join-game');
         me.pidBox = document.getElementById("pid");
+        me.playingArea = document.getElementById("playing-area");
         me.events.onJoinGame = me.onJoinGame;
         me.events.onJoin = me.onJoin;
         me.events.onQuizEnd = me.onQuizEnd;
