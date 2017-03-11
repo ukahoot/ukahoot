@@ -11,4 +11,5 @@ main:
 run:
 	rm -f $(OUT_FILE)
 	$(CC) -out:$(OUT_DIR)/$(OUT_FILE) $(ARGS) $(SRC_DIR)/*.cs
+	sleep 2
 	mono $(RUN_ARGS) $(OUT_DIR)/$(OUT_FILE)
