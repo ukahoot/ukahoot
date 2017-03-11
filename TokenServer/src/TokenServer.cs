@@ -25,7 +25,8 @@ namespace UKahoot {
 						bool IsValidInt = int.TryParse(ctx.Request.QueryString["pid"], out ClientPID);
 						if (IsValidInt && ClientPID != null) {
 							// Configure headers
-							if (ctx.Request.Headers["Origin"] == "https://ukahoot.github.io") {
+							if (ctx.Request.Headers["Origin"] == "http://ukahoot.it" ||
+							ctx.Request.Headers["Origin"] == "https://ukahoot.it") {
 								ctx.Response.Headers["Access-Control-Allow-Origin"] = ctx.Request.Headers["Origin"];
 							} else if (ctx.Request.Headers["Origin"] == null || ctx.Request.Headers["Origin"] == "null") {
 								ctx.Response.Headers["Access-Control-Allow-Origin"] = "*";
