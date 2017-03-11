@@ -33,7 +33,7 @@ class SiteInterface extends Interface {
         this.parent.showDropdown("Question started.");
     }
     onQuestionSubmit() {
-        this.parent.showDropdown("Question submitted!");
+        this.parent.showDropdown("Your answer has been submitted!");
         this.parent.playingArea.style.opacity = 0.4;
     }
     onQuestionEnd() {
