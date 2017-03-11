@@ -130,6 +130,12 @@ class SiteInterface extends Interface {
         me.events.onQuizStart = me.onQuizStart;
         me.firstQuestionStarted = false;
 
+        me.events.onError = e => {
+            $("#wait-message").html("Failed to join the quiz.");
+            $(me.waitText).html("");
+            this.showAlert("An error has occured:\n'" +
+            e + "'\nPlease refresh the page.");
+        }
         $(".ans").click(e => {
             me.handleAnswer.call(this, me, e);
         });
@@ -139,7 +145,6 @@ class SiteInterface extends Interface {
         me.joinButton.addEventListener('click', () => {
             me.events.onJoin.call(me);
         });
-
         var join     = document.getElementById('join');
         var alertBox = document.getElementById('alert-box');
         var alertOk  = document.getElementById('alert-ok');
