@@ -92,8 +92,7 @@ Packet.Handler = {
         // Ignore non master messages
         if (packet.client.isMaster) {
             console.debug('Quiz is starting!');
-            $("#waiting-area").fadeOut(250);
-            $("#loading-area").fadeIn(250);
+            ukahoot.interface.events.onQuizStart();
         }
     }),
     10: new PacketHandler(10, packet => { // QUiz end packet

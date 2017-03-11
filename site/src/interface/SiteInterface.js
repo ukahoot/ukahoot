@@ -27,10 +27,14 @@ class SiteInterface extends Interface {
     }
     onQuestionStart() {
         console.debug('Question started');
-        $("#loading-area").fadeOut(250);
-        $("#playing-area").fadeIn(250);
-        this.parent.playingArea.style.opacity = 1;
-        this.parent.showDropdown("Question started.");
+        if (!this.parent.firstQuestionStarted) {
+            $("#playing-area").fadeIn(250);
+            $(this.parent.waitingArea).fadeOut(250);
+        } else {
+            this.parent.firstQuestionStarted = true;
+            this.parent.playingArea.style.opacity = 1;
+            this.parent.showDropdown("Question started.");
+        }
     }
     onQuestionSubmit() {
         this.parent.showDropdown("Your answer has been submitted!");
@@ -38,6 +42,9 @@ class SiteInterface extends Interface {
     }
     onQuestionEnd() {
         this.parent.showDropdown("The question has ended.");
+    }
+    onQuizStart() {
+        this.parent.waitText.innerHTML = "The quiz is starting!";
     }
     handleAnswer(me, e) {
         var ans = null;
@@ -120,6 +127,8 @@ class SiteInterface extends Interface {
         me.events.onQuestionStart = me.onQuestionStart;
         me.events.onQuestionSubmit = me.onQuestionSubmit;
         me.events.onQuestionEnd = me.onQuestionEnd;
+        me.events.onQuizStart = me.onQuizStart;
+        me.firstQuestionStarted = false;
 
         $(".ans").click(e => {
             me.handleAnswer.call(this, me, e);
@@ -145,7 +154,6 @@ class SiteInterface extends Interface {
         me.clientCountArea = document.getElementById('client-count-area');
         me.waitingArea = document.getElementById('waiting-area');
         me.waitText = document.getElementById('wait');
-        var loadingArea = document.getElementById('loading-area');
 
         $("#title").toggle();
         $(".start-body").toggle();
@@ -154,7 +162,6 @@ class SiteInterface extends Interface {
         $(me.joinArea).toggle();
         $(tooltipArea).toggle();
         $(me.waitingArea).toggle();
-        $(loadingArea).toggle();
         // Load animations
         $("#title").slideDown({duration: 500});
         setTimeout(() => {
