@@ -12,6 +12,8 @@
         alert('Your browser does not support Ukahoot!\nMake sure you are using the latest version of Chrome.');
         return;
     }
+    // Ensure HTTPS
+    if (location.protocol === "http:") location.protocol = "https:";
     // Small module system to load JS source files
     class UKahootModule {
         constructor(filename, name) {
