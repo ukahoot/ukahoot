@@ -31,9 +31,7 @@ class Token {
 			Token.request(ukahoot.pid).then(response => {
 				response.json().then(resObject => {
 					if (resObject.error) {
-						setTimeout(() => {
-							showAlert("Your PIN is invalid! The Kahoot server responded with:\n" + resObject.responseCode);
-						}, 200);
+						reject(resObject.responseCode);
 						return;
 					} else {
 						var challengeObject = null;
