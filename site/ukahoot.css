@@ -196,6 +196,9 @@ button:hover {
 	z-index: 98;
 	pointer-events: none;
 }
+.finish-data {
+	font-size: 300%;
+}
 #loading, #alert-box, #overlay,
 #tooltipArea, #playing-area, #finish-area {
 	display: none;

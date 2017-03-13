@@ -49,7 +49,9 @@ class SiteInterface extends Interface {
         this.parent.waitText.innerHTML = "The quiz is starting!";
     }
     onQuizFinish(data) {
-        // TODO: Handle SiteInterface quiz finishing
+        $("#finish-metal").text(data.metal);
+        $("#finish-msg").text(data.msg);
+        this.parent.showFinishArea();
     }
     handleAnswer(me, e) {
         var ans = null;
@@ -125,7 +127,7 @@ class SiteInterface extends Interface {
         $("#start").fadeOut(250); // For debugging CSS
         setTimeout(() => {
             $("#finish-area").fadeIn(250);
-        }, 200);
+        }, 100);
     }
     init() {
         var me = this;
