@@ -6,10 +6,14 @@ body, html {
 	color: white;
 	font-family: 'Ubuntu';
 }
-h1 {
+h1, h2 {
 	font-size: 400%;
 	font-family: 'Overpass Mono';
 	color: lime;
+}
+h2 {
+	font-size: 250%;
+	color: #00cc00;
 }
 #client-count-area {
 	width: 40%;
