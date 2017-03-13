@@ -28,10 +28,10 @@ class SiteInterface extends Interface {
     onQuestionStart() {
         console.debug('Question started');
         if (!this.parent.firstQuestionStarted) {
+            this.parent.firstQuestionStarted = true;
             $("#playing-area").fadeIn(250);
             $(this.parent.waitingArea).fadeOut(250);
         } else {
-            this.parent.firstQuestionStarted = true;
             this.parent.playingArea.style.opacity = 1;
             this.parent.showDropdown("Question started.");
         }
@@ -41,7 +41,9 @@ class SiteInterface extends Interface {
         this.parent.playingArea.style.opacity = 0.4;
     }
     onQuestionEnd() {
+        console.debug('Question ended');
         this.parent.showDropdown("The question has ended.");
+        this.parent.playingArea.style.opacity = 0.4;
     }
     onQuizStart() {
         this.parent.waitText.innerHTML = "The quiz is starting!";
