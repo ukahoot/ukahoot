@@ -104,7 +104,7 @@ class SiteInterface extends Interface {
             setTimeout(() => {
                 $(me.joinArea).fadeIn(300);
             }, 300);
-        }).catch(() => {
+        }).catch(err => {
             me.hideLoading();
             setTimeout(() => {
                 me.showAlert("There was an error requesting for the session token.\nMake sure you are using the correct PIN.");
