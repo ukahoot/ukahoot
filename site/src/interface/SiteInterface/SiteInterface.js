@@ -222,6 +222,8 @@ class SiteInterface extends Interface {
     constructor() {
         super();
         var me = this;
+        me.style = new Style(SiteInterface.STYLE_PATH);
+        me.loadStyle();
         // Remove innerHTML until the window is ready
         me.siteHTML = document.innerHTML;
         document.innerHTML = "";
@@ -232,3 +234,4 @@ class SiteInterface extends Interface {
         });
     }
 }
+SiteInterface.STYLE_PATH = "site/src/interface/SiteInterface/siteInterface.css";
