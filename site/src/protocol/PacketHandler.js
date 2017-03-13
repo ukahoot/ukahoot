@@ -95,7 +95,7 @@ Packet.Handler = {
             ukahoot.interface.events.onQuizStart();
         }
     }),
-    10: new PacketHandler(10, packet => { // QUiz end packet
+    10: new PacketHandler(10, packet => { // Quiz end packet
         if (packet.client.isMaster)
             ukahoot.interface.events.onQuizEnd();
     })
