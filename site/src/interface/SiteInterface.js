@@ -195,7 +195,12 @@ class SiteInterface extends Interface {
     constructor() {
         super();
         var me = this;
+        // Remove innerHTML until the window is ready
+        me.siteHTML = document.innerHTML;
+        document.innerHTML = "";
         window.addEventListener('load', () => {
+            // Replace site HTML
+            document.innerHTML = me.siteHTML;
             me.init.call(me);
         });
     }
