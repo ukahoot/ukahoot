@@ -11,7 +11,7 @@ namespace UKahoot {
 			"http://www.tokenserver.ukahoot.it",
 			"https://www.tokenserver.ukahoot.it"
 		};
-		public static int Port = 5556;
+		public static int Port = 443;
 		public static TokenServer ts;
 		public static void Main(string[] args) {
 			ts = new TokenServer(Hosts, Port);
