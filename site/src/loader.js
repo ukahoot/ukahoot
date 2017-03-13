@@ -37,6 +37,7 @@
     }
     window.modules = {
         core: new UKahootModule("site/src/ukahoot.js", "Core"),
+        style: new UKahootModule("site/src/Style.js", "Style"),
         interfaceEvents: new UKahootModule("site/src/interface/InterfaceEvents.js", "Interface Events"),
         interface: new UKahootModule("site/src/interface/Interface.js", "Interface"),
         siteInterface: new UKahootModule('site/src/interface/SiteInterface.js', "Site Interface"),
@@ -51,6 +52,7 @@
         .then(() => modules.packet.load())
         .then(() => modules.packetHandler.load())
         .then(() => modules.kahootSocket.load())
+        .then(() => modules.style.load())
         .then(() => modules.interfaceEvents.load())
         .then(() => modules.interface.load())
         .then(() => modules.siteInterface.load())
