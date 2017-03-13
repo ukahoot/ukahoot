@@ -49,7 +49,25 @@ class SiteInterface extends Interface {
         this.parent.waitText.innerHTML = "The quiz is starting!";
     }
     onQuizFinish(data) {
-        $("#finish-metal").text(data.metal);
+        var color = "";
+        switch (data.metal) {
+            case "gold":
+                color = "yellow";
+                $("#finish-metal").text("Gold");
+                break;
+            case "silver":
+                color = "grey";
+                $("#finish-metal").text("Silver");
+                break;
+            case "bronze":
+                color = "brown";
+                $("#finish-metal").text("Bronze");
+                break;
+            default:
+                $("#finish-metal").text("None"); 
+                break;       
+        }
+        $("#finish-metal").css("color", color);
         $("#finish-msg").text(data.msg);
         this.parent.showFinishArea();
     }
