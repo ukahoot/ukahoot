@@ -47,6 +47,7 @@ class InterfaceEvents {
     onLoad() { }
     onQuizEnd() { }
     onQuizStart() { }
+    onQuizFinish(data) { }
     onError(e) { }
     constructor(parent) {
         this.parent = parent;

@@ -48,6 +48,9 @@ class SiteInterface extends Interface {
     onQuizStart() {
         this.parent.waitText.innerHTML = "The quiz is starting!";
     }
+    onQuizFinish(data) {
+        // TODO: Handle SiteInterface quiz finishing
+    }
     handleAnswer(me, e) {
         var ans = null;
         switch (e.target.id) {
@@ -130,6 +133,7 @@ class SiteInterface extends Interface {
         me.events.onQuestionSubmit = me.onQuestionSubmit;
         me.events.onQuestionEnd = me.onQuestionEnd;
         me.events.onQuizStart = me.onQuizStart;
+        me.events.onQuizFinish = me.onQuizFinish;
         me.firstQuestionStarted = false;
 
         me.events.onError = e => {

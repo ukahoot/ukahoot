@@ -98,5 +98,15 @@ Packet.Handler = {
     10: new PacketHandler(10, packet => { // Quiz end packet
         if (packet.client.isMaster)
             ukahoot.interface.events.onQuizEnd();
+    }),
+    13: new PacketHandler(13, packet => { // Quiz finish with data about the client's performance
+        if (packet.client.isMaster) {
+            var finishData = {
+                metal: packet.obj.podiumMedalType,
+                msg: packet.obj.secondaryMessage,
+                answers: packet.obj.quizQuestionAnswers
+            }
+            ukahoot.interface.events.onQuizFinish(finishData);
+        }
     })
 };
