@@ -1,15 +1,24 @@
 class Style {
     load() {
+        var me = this;
         return new Promise((resolve, reject) => {
-            this.element.rel = "stylesheet";
-            this.element.type = "text/css";
-            this.element.onload = resolve;
-            document.head.appendChild(this.element);
+            if (!me.path)
+                reject("Can't load style without a path");
+            else {
+                me.element.rel = "stylesheet";
+                me.element.type = "text/css";
+                me.element.onload = resolve;
+                document.head.appendChild(me.element);
+            }
         });
     }
     constructor(path) {
-        this.path = path;
         this.element = document.createElement("link");
-        this.element.href = path;
+        if (path) {
+            this.path = path;
+            this.element.href = path;
+        } else {
+            this.path = null;
+        }
     }
 }
