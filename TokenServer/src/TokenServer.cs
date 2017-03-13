@@ -96,10 +96,10 @@ namespace UKahoot {
 			// Asynchronously handle new requests
 			await HandleRequest(await Listener.GetContextAsync());
 		}
-		public TokenServer(string[] hosts, int port_) {
+		public TokenServer(string[] hosts) {
 			Listener = new HttpListener();
 			for (int i = 0; i < hosts.Length; ++i) {
-				Listener.Prefixes.Add("http://" + hosts[i] + ":" + port_ + "/");
+				Listener.Prefixes.Add(hosts[i]);
 			}
 		}
 		public void Init() {
