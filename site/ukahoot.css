@@ -171,8 +171,8 @@ button:hover {
 	left: 50%;
 	color: lime;
 	transform: translate(-50%, -50%);
-	-webkit-box-align:center;
-    -webkit-box-pack:center;
+	-webkit-box-align: center;
+    -webkit-box-pack: center;
     display:-webkit-box;
 	font-size: 600%;
 }
@@ -197,6 +197,6 @@ button:hover {
 	pointer-events: none;
 }
 #loading, #alert-box, #overlay,
-#tooltipArea, #playing-area {
+#tooltipArea, #playing-area, #finish-area {
 	display: none;
 }

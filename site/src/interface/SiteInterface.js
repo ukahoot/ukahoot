@@ -120,6 +120,13 @@ class SiteInterface extends Interface {
     onQuizEnd() {
         this.parent.showAlert("The Kahoot has ended.");
     }
+    showFinishArea() {
+        $("#playing-area").fadeOut(250);
+        $("#start").fadeOut(250); // For debugging CSS
+        setTimeout(() => {
+            $("#finish-area").fadeIn(250);
+        }, 200);
+    }
     init() {
         var me = this;
         me.joinGameButton = document.getElementById('join');
