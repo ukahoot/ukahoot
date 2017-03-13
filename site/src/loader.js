@@ -44,7 +44,7 @@
         packet: new UKahootModule("site/src/protocol/Packet.js", "Packet"),
         packetHandler: new UKahootModule("site/src/protocol/PacketHandler.js", "PacketHandler"),
         kahootSocket: new UKahootModule("site/src/protocol/KahootSocket.js", "KahootSocket"),
-        jquery: new UKahootModule("site/jquery-3.1.1.min.js", "jquery")
+        jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery")
     };
     window.shared = {};
     modules.jquery.load()
