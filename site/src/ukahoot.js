@@ -10,7 +10,7 @@
 		name: "ukahoot",
 		token: null,
 		pid: null,
-		tokenServer: "http://tokenserver.ukahoot.it:5556/",
+		tokenServer: "http://tokenserver.ukahoot.it/",
 		interface: null
 	}
 	ukahoot.interface = new SiteInterface;

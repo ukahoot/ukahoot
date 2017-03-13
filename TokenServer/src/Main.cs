@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace UKahoot {
 	class MainClass {
-		public static bool UseSsl = true;
+		public static bool UseSsl = false;
 		public static string[] Hosts = {
 			"tokenserver.ukahoot.it"
 			// "127.0.0.1"
