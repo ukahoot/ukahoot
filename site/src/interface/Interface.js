@@ -13,5 +13,6 @@ class Interface {
         this.pidBox = null;
         this.nameArea = null;
         this.clientCountArea = null;
+        this.dropDowns = [];
     }
 }

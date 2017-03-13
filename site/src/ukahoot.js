@@ -1,6 +1,5 @@
 (() => {
 	"use strict";
-	window.dropDowns = [];
 	window.ukahoot = {
 		isWaiting: false,
 		sockets: [],

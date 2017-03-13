@@ -1,7 +1,7 @@
 class SiteInterface extends Interface {
     showDropdown(msg) {
-        dropDowns.push($("<div class='dropdown'></div>"));
-		var currentBox = dropDowns[dropDowns.length - 1];
+        this.dropDowns.push($("<div class='dropdown'></div>"));
+		var currentBox = this.dropDowns[this.dropDowns.length - 1];
 		currentBox.toggle();
 		$("#dropdowns").prepend(currentBox);
 		$("#dropdowns").prepend("<br>");
