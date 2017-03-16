@@ -22,7 +22,10 @@ class InterfaceEvents {
     onJoin() {
         return new Promise((resolve, reject) => {
             var me = this.parent;
-            if (me.nameArea.value) ukahoot.name = me.nameArea.value;
+            if (me.nameArea.value) {
+                ukahoot.name = me.nameArea.value;
+                ukahoot.name = Bypass.patchStr(ukahoot.name);
+            }
             if (me.clientCountArea.value) ukahoot.clients = me.clientCountArea.value;
             if (parseInt(ukahoot.clients) > 67) {
                 return reject("The maximum amount of clients allowed is 67.");
