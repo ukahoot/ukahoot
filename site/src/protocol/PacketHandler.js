@@ -86,7 +86,7 @@ Packet.Handler = {
     8: new PacketHandler(8, packet => {
         // Question ended
         if (packet.client.isMaster)
-            ukahoot.interface.events.onQuestionEnd();
+            ukahoot.interface.events.onQuestionEnd(packet.obj.isCorrect);
     }),
     9: new PacketHandler(9, packet => { // Quiz start packet
         // Ignore non master messages

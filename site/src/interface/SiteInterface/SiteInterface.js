@@ -42,9 +42,14 @@ class SiteInterface extends Interface {
         this.parent.showDropdown("Your answer has been submitted!");
         this.parent.playingArea.style.opacity = 0.4;
     }
-    onQuestionEnd() {
-        console.debug('Question ended');
-        this.parent.showDropdown("The question has ended.");
+    onQuestionEnd(isCorrect) {
+        console.debug('Question ended. isCorrect:', isCorrect);
+        var response = "The question has ended. ";
+        if (isCorrect)
+            response += "You got it right!";
+        else
+            response += "You got it wrong...";
+        this.parent.showDropdown(response);
         this.parent.playingArea.style.opacity = 0.4;
     }
     onQuizStart() {
