@@ -10,10 +10,10 @@ class Theme {
         }
     }
     save() {
-        if (localStorage[Theme.STORAGE_KEY]) {
+        if (localStorage[Theme.STORAGE_KEY] !== 'undefined') {
             // There are no themes in localStorage, it is safe to write to
             var saveObject = this.getSaveObject();
-            localStorage[Theme.STORAGE_KEY] = [saveObject];
+            localStorage[Theme.STORAGE_KEY] = JSON.stringify([saveObject]);
         } else {
             var oldThemes = null;
             try {
