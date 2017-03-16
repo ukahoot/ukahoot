@@ -41,7 +41,7 @@ class Theme {
             'sc': this.sc
         }
     }
-    apply() {
+    load() {
         var me = this;
         if (this.bg) {
             document.documentElement.style.backgroundColor = this.bg;
