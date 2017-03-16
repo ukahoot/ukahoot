@@ -3,6 +3,7 @@ This directory contains all the code required to make the client run.
 Building requires the following programs:
 - GNU make
 - [Babel Compiler](http://babeljs.io/)
+- [Babel env Preset](https://github.com/babel/babel-preset-env)
 - [Babeli](https://github.com/babel/babili)
 
 After those are installed, you can build by executing `make` in a terminal window
