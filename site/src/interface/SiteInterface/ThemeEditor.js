@@ -10,6 +10,8 @@ class ThemeEditor {
             if  (themes) {
                 this.theme = new Theme(themes[0]);
                 this.theme.load();
+                this.scPicker.jscolor.fromString(this.theme.sc);
+                this.bgPicker.jscolor.fromString(this.theme.bg);
             }
         } else {
             console.debug("No theme(s) to load");
