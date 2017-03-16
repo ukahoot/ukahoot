@@ -11,5 +11,8 @@
 		tokenServer: "http://tokenserver.ukahoot.it/",
 		interface: null
 	};
-	window.ukahoot.interface = new SiteInterface;
+	if (!window.ElectronInterface)
+		window.ukahoot.interface = new SiteInterface;
+	else
+		window.ukahoot.interface = new ElectronInterface;
 })();
