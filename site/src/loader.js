@@ -51,14 +51,14 @@
     };
     window.shared = {};
     modules.jquery.load()
-        .then(() => modules.packet.load())
-        .then(() => modules.packetHandler.load())
-        .then(() => modules.kahootSocket.load())
-        .then(() => modules.style.load())
         .then(() => modules.interfaceEvents.load())
         .then(() => modules.interface.load())
         .then(() => modules.siteInterface.load())
         .then(() => modules.themeEditor.load())
-        .then(() => modules.token.load())
         .then(() => modules.core.load());
+    modules.token.load();
+    modules.style.load();
+    modules.kahootSocket.load();
+    modules.packet.load()
+        .then(() => modules.packetHandler.load())
 })();
