@@ -21,6 +21,8 @@ h2 {
 }
 .description, #alert-msg {
 	font-size: 125%;
+	color: white;
+	text-decoration: none;
 }
 .start-body, #loading {
 	font-size: 200%;
