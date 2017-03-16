@@ -7,8 +7,34 @@ class ThemeEditor {
         $("#theme-editor").fadeOut(250);
         $("#overlay").fadeOut(250);
     }
+    scPickerChange(e) {
+        this.theme.sc = "#" + this.scPicker.value;
+    }
+    bgPickerChange(e) {
+        this.theme.bg = "#" + this.bgPicker.value;
+    }
+    save() {
+        Theme.clear(); // Only allow one theme for now
+        this.theme.save();
+        this.theme.load();
+    }
     constructor() {
         var me = this;
+        me.theme = new Theme;
+        me.bgPicker = document.getElementById("theme-bg-picker");
+        me.scPicker = document.getElementById("theme-sc-picker");
+        me.saveBtn = document.getElementById("theme-save");
+
+        me.saveBtn.addEventListener("click", e => {
+            return me.save.call(me, e);
+        });
+        me.bgPicker.onchange = e => {
+            return me.bgPickerChange.call(me, e);
+        }
+        me.scPicker.onchange = e => {
+            return me.scPickerChange.call(me, e);
+        }
+
         document.getElementById("show-theme").addEventListener("click",
                                                                                                                     me.show);
         document.getElementById("hide-theme").addEventListener("click",

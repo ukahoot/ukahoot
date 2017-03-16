@@ -67,6 +67,7 @@ class Theme {
                                         document.getElementsByClassName('ans'));
            elms.push(document.getElementById('alert-box'));
            elms.push(document.getElementById('help-tooltip'));
+           elms.push(document.getElementById('theme-editor'));
            elms.forEach(e => {
                 if (e) {
                     e.style.borderColor = me.sc;

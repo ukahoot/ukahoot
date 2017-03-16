@@ -151,6 +151,7 @@ class SiteInterface extends Interface {
     }
     init() {
         var me = this;
+        me.themeEditor = new ThemeEditor();
         me.joinGameButton = document.getElementById('join');
         me.joinButton = document.getElementById('join-game');
         me.pidBox = document.getElementById("pid");
@@ -224,7 +225,6 @@ class SiteInterface extends Interface {
     constructor() {
         super();
         var me = this;
-        me.themeEditor = new ThemeEditor();
         me.dropdownColor = null;
         me.style = new Style(SiteInterface.STYLE_PATH);
         me.loadStyle();
