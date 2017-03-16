@@ -1,8 +1,9 @@
 class ThemeEditor {
-    init() {
-        //
+    show() {
+        $("#theme-editor").fadeIn(250);
     }
-    constructor() {
-        //
+    hide() {
+        $("#theme-editor").fadeOut(250);
     }
+    constructor() { }
 }
