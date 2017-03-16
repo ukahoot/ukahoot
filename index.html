@@ -6,7 +6,26 @@
 	<meta name="description" content="An open source Kahoot client">
 	<link rel="icon" href="assets/icon.png">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Overpass+Mono" rel="stylesheet">
-	<script type="text/javascript" src="site/src/src-loader.js"></script>
+	<script>
+		/*
+			This inline script determines whether or not to use the direct source files in the repository
+			To enable this, set localStorage["ukahootDevMode"] to any value
+			To disable it, remove the localStorage value.
+		*/
+		(function() {
+			var STORAGE_DEV_KEY = "ukahootDevMode";
+			var client = document.createElement("script"); // The client source script
+			client.type = "text/javascript";
+			if (typeof localStorage[STORAGE_DEV_KEY] === "undefined") {
+				console.debug("Using latest build");
+				client.src = "site/ukahoot.build.js";
+			} else {
+				console.debug("Developer mode enabled");
+				client.src = "site/src/src-loader.js";
+			}
+			document.head.appendChild(client);
+		})();
+	</script>
 </head>
 <body>
 	<div id="alert-box">
