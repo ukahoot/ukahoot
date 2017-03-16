@@ -35,7 +35,7 @@
             });
         }
     }
-    window.modules = {
+    var modules = {
         core: new UKahootModule("site/src/ukahoot.js", "Core"),
         style: new UKahootModule("site/src/Style.js", "Style"),
         interfaceEvents: new UKahootModule("site/src/interface/InterfaceEvents.js", "Interface Events"),
@@ -54,7 +54,6 @@
         jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery"),
         jscolor: new UKahootModule("site/lib/jscolor.min.js", "jscolor")
     };
-    window.shared = {};
     modules.bypass.load();
     modules.jquery.load()
     .then(() => modules.jscolor.load())

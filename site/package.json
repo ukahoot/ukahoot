@@ -2,7 +2,7 @@
     "name": "ukahoot",
     "version": "1.0.1",
     "description": "Custom Kahoot web client",
-    "main": "src/ukahoot.js",
+    "main": "src/electron.js",
     "scripts": {
         "start": "electron ."
     },
