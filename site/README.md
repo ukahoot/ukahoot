@@ -6,9 +6,13 @@ Building requires the following programs:
 - [Babel env Preset](https://github.com/babel/babel-preset-env)
 - [Babeli](https://github.com/babel/babili)
 
-After those are installed, you can build by executing `make` in a terminal window
+After those are installed, you can build by executing `make` in a terminal window.
 
 ## Developer mode
 ukahoot has a "developer mode" which loads the source files instead of the build file.<br>
 To enable developer mode, set "ukahootDevMode" in localStorage to any value.<br>
 To disable it, delete the "ukahootDevMode" value.<br>
+
+## Electron
+ukahoot can be run as a desktop app using electron.<br>
+To run ukahoot as an electron app, make sure you have installed [Electron](https://electron.atom.io/) and run `npm start` in a terminal window.
