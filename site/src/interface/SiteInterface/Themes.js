@@ -71,6 +71,7 @@ class Theme {
                 } else console.warn('Not applying theme CSS to null element');
             });
         } else console.warn('Not applying nonexistent theme secondary color');
+        ukahoot.interface.dropdownColor = me.sc;
     }
 }
 Theme.STORAGE_KEY = 'themes';

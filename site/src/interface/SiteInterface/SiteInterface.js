@@ -2,6 +2,7 @@ class SiteInterface extends Interface {
     showDropdown(msg) {
         this.dropDowns.push($("<div class='dropdown'></div>"));
 		var currentBox = this.dropDowns[this.dropDowns.length - 1];
+        if (me.dropdownColor) currentBox.css("color", me.dropdownColor);
 		currentBox.toggle();
 		$("#dropdowns").prepend(currentBox);
 		$("#dropdowns").prepend("<br>");
@@ -222,6 +223,7 @@ class SiteInterface extends Interface {
     constructor() {
         super();
         var me = this;
+        me.dropdownColor = null;
         me.style = new Style(SiteInterface.STYLE_PATH);
         me.loadStyle();
         // Remove innerHTML until the window is ready
