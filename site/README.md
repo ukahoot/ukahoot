@@ -1,3 +1,4 @@
+## Building
 This directory contains all the code required to make the client run.
 Building requires the following programs:
 - GNU make
@@ -5,3 +6,8 @@ Building requires the following programs:
 - [Babeli](https://github.com/babel/babili)
 
 After those are installed, you can build by executing `make` in a terminal window
+
+## Developer mode
+ukahoot has a "developer mode" which loads the source files instead of the build file.
+To enable developer mode, set "ukahootDevMode" in localStorage to any value
+To disable it, delete the "ukahootDevMode" value
