@@ -18,9 +18,9 @@ class Theme {
         }
     }
     save() {
-        if (localStorage[Theme.STORAGE_KEY] !== 'undefined') {
+        var saveObject = this.getSaveObject();
+        if (typeof localStorage[Theme.STORAGE_KEY] === 'undefined') {
             // There are no themes in localStorage, it is safe to write to
-            var saveObject = this.getSaveObject();
             localStorage[Theme.STORAGE_KEY] = JSON.stringify([saveObject]);
         } else {
             var oldThemes = null;
@@ -31,7 +31,8 @@ class Theme {
                 console.error('There was an error parsing localStorage JSON:', e);
             }
             if (oldThemes) {
-                // TODO: append this theme to localStorage
+                oldThemes.push(saveObject);
+                localStorage[Theme.STORAGE_KEY] = JSON.stringify(oldThemes);
             }
         }
     }
