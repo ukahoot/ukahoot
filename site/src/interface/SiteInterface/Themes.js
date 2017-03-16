@@ -8,13 +8,13 @@ class Theme {
         }
     }
     constructor(saveObject) {
-        // bg is background color, br is border color
+        // bg is background color, sc is secondary color
         if (saveObject) {
             this.bg = saveObject.bg;
-            this.br = saveObject.br;
+            this.sc = saveObject.sc;
         } else {
             this.bg = null;
-            this.br = null;
+            this.sc = null;
         }
     }
     save() {
@@ -38,7 +38,7 @@ class Theme {
     getSaveObject() {
         return {
             'bg': this.bg,
-            'br': this.br
+            'sc': this.sc
         }
     }
     apply() {
