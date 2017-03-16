@@ -1,0 +1,20 @@
+{
+    "name": "ukahoot",
+    "version": "1.0.1",
+    "description": "Custom Kahoot web client",
+    "main": "src/ukahoot.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": "https://github.com/ukahoot/ukahoot",
+    "keywords": [
+        "kahoot",
+        "kahoot-api",
+        "client"
+    ],
+    "author": "ukahoot",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "*"
+    }
+}
