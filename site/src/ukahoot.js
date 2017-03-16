@@ -11,5 +11,11 @@
 		tokenServer: "http://tokenserver.ukahoot.it/",
 		interface: null
 	}
-	ukahoot.interface = new SiteInterface;
+	if (window["process"] && window.process.type) {
+		// The client is running in electron
+		// TODO: Add electron compatibility
+	} else {
+		// The client is running in a browser window
+		ukahoot.interface = new SiteInterface;
+	}
 })();
