@@ -8,6 +8,6 @@ Building requires the following programs:
 After those are installed, you can build by executing `make` in a terminal window
 
 ## Developer mode
-ukahoot has a "developer mode" which loads the source files instead of the build file.
-To enable developer mode, set "ukahootDevMode" in localStorage to any value
-To disable it, delete the "ukahootDevMode" value
+ukahoot has a "developer mode" which loads the source files instead of the build file.<br>
+To enable developer mode, set "ukahootDevMode" in localStorage to any value.<br>
+To disable it, delete the "ukahootDevMode" value.<br>
