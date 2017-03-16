@@ -6,5 +6,5 @@ class ElectronInterface extends SiteInterface {
         this.style.load();
     }
 }
-ElectronInterface.STYLE_PATH = "../interface/SiteInterface/siteInterface.css";
+ElectronInterface.STYLE_PATH = "interface/interface.css";
 window.ElectronInterface = ElectronInterface;

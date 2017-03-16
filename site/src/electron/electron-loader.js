@@ -26,7 +26,7 @@
         interface: new UKahootModule("../interface/Interface.js", "Interface"),
         siteInterface: new UKahootModule('../interface/SiteInterface/SiteInterface.js',
                                         "Site Interface"),
-        electronInterface: new UKahootModule('ElectronInterface.js',
+        electronInterface: new UKahootModule('interface/ElectronInterface.js',
                                         "Electron Interface"),
         token: new UKahootModule("../protocol/Token.js", "Token Util"),
         packet: new UKahootModule("../protocol/Packet.js", "Packet"),
