@@ -37,12 +37,10 @@
         packetHandler: new UKahootModule("../protocol/PacketHandler.js", "PacketHandler"),
         kahootSocket: new UKahootModule("../protocol/KahootSocket.js", "KahootSocket"),
         bypass: new UKahootModule("../Bypass.js", "Bypass"),
-        jquery: new UKahootModule("../../lib/jquery-3.1.1.min.js", "jquery"),
         jscolor: new UKahootModule("../../lib/jscolor.min.js", "jscolor")
     };
     modules.bypass.load();
-    modules.jquery.load()
-    .then(() => modules.jscolor.load())
+    modules.jscolor.load()
     .then(() => modules.interfaceEvents.load())
     .then(() => modules.interface.load())
     .then(() => modules.siteInterface.load())
