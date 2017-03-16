@@ -2,6 +2,7 @@ const electron = require("electron");
 const path = require("path");
 const url = require("url");
 const process = require('process');
+const os = require("os");
 
 process.chdir(".."); // Go back one directory
 const LOAD_PATH = url.format({
@@ -21,6 +22,8 @@ var WINDOW_OPTS = {
     title: "ukahoot",
     icon: path.resolve("assets/icon.png")
 }
+if (os.platform() === "win32") // Use ICO file on windows
+    WINDOW_OPTS.icon = path.resolve("assets/icon.ico");
 console.log("loading file " + LOAD_PATH);
 let bw = null; // The browser window to run the app in
 let init = () => {
