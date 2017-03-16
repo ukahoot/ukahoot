@@ -44,7 +44,10 @@
                                         "Site Interface"),
         token: new UKahootModule("site/src/protocol/Token.js", "Token Util"),
         packet: new UKahootModule("site/src/protocol/Packet.js", "Packet"),
-        themeEditor: new UKahootModule('site/src/interface/SiteInterface/Themes.js'),
+        themeEditor: new UKahootModule('site/src/interface/SiteInterface/ThemeEditor.js',
+                                        "Theme Editor"),
+        theme: new UKahootModule('site/src/interface/SiteInterface/Theme.js',
+                                        "Theme"),
         packetHandler: new UKahootModule("site/src/protocol/PacketHandler.js", "PacketHandler"),
         kahootSocket: new UKahootModule("site/src/protocol/KahootSocket.js", "KahootSocket"),
         jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery")
@@ -55,6 +58,7 @@
         .then(() => modules.interface.load())
         .then(() => modules.siteInterface.load())
         .then(() => modules.themeEditor.load())
+        .then(() => modules.theme.load())
         .then(() => modules.core.load());
     modules.token.load();
     modules.style.load();
