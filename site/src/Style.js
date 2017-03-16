@@ -12,6 +12,9 @@ class Style {
             }
         });
     }
+    unload() {
+        this.element.remove();
+    }
     constructor(path) {
         this.element = document.createElement("link");
         if (path) {
