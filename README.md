@@ -8,4 +8,5 @@ ukahoot is as easy to use as the original Kahoot client with features like
  - Anti-Swear bypass
  - No analytics tracking (the original client sends analytics data)
  
-Visit [ukahoot.it](http://ukahoot.it/) to start using ukahoot.
+Visit [ukahoot.it](http://ukahoot.it/) to start using ukahoot.<br>
+Technical documentation can be found in the `ukahoot/` directory,

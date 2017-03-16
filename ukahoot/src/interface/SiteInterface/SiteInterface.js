@@ -245,4 +245,4 @@ class SiteInterface extends Interface {
         });
     }
 }
-SiteInterface.STYLE_PATH = "site/src/interface/SiteInterface/siteInterface.css";
+SiteInterface.STYLE_PATH = "ukahoot/src/interface/SiteInterface/siteInterface.css";

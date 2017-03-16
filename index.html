@@ -18,10 +18,10 @@
 			client.type = "text/javascript";
 			if (typeof localStorage[STORAGE_DEV_KEY] === "undefined") {
 				console.debug("Using latest build");
-				client.src = "site/ukahoot.build.js";
+				client.src = "ukahoot/ukahoot.build.js";
 			} else {
 				console.debug("Developer mode enabled");
-				client.src = "site/src/src-loader.js";
+				client.src = "ukahoot/src/src-loader.js";
 			}
 			document.head.appendChild(client);
 		})();

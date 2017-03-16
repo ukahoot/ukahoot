@@ -6,7 +6,7 @@ const os = require("os");
 
 process.chdir(".."); // Go back one directory
 const LOAD_PATH = url.format({
-    pathname: path.resolve("site/src/electron/app.html"),
+    pathname: path.resolve("ukahoot/src/electron/app.html"),
     protocol: "file:",
     slashes: true
 });

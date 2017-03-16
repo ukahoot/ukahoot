@@ -36,23 +36,23 @@
         }
     }
     var modules = {
-        core: new UKahootModule("site/src/ukahoot.js", "Core"),
-        style: new UKahootModule("site/src/Style.js", "Style"),
-        interfaceEvents: new UKahootModule("site/src/interface/InterfaceEvents.js", "Interface Events"),
-        interface: new UKahootModule("site/src/interface/Interface.js", "Interface"),
-        siteInterface: new UKahootModule('site/src/interface/SiteInterface/SiteInterface.js',
+        core: new UKahootModule("ukahoot/src/ukahoot.js", "Core"),
+        style: new UKahootModule("ukahoot/src/Style.js", "Style"),
+        interfaceEvents: new UKahootModule("ukahoot/src/interface/InterfaceEvents.js", "Interface Events"),
+        interface: new UKahootModule("ukahoot/src/interface/Interface.js", "Interface"),
+        siteInterface: new UKahootModule('ukahoot/src/interface/SiteInterface/SiteInterface.js',
                                         "Site Interface"),
-        token: new UKahootModule("site/src/protocol/Token.js", "Token Util"),
-        packet: new UKahootModule("site/src/protocol/Packet.js", "Packet"),
-        themeEditor: new UKahootModule('site/src/interface/SiteInterface/ThemeEditor.js',
+        token: new UKahootModule("ukahoot/src/protocol/Token.js", "Token Util"),
+        packet: new UKahootModule("ukahoot/src/protocol/Packet.js", "Packet"),
+        themeEditor: new UKahootModule('ukahoot/src/interface/SiteInterface/ThemeEditor.js',
                                         "Theme Editor"),
-        theme: new UKahootModule('site/src/interface/SiteInterface/Theme.js',
+        theme: new UKahootModule('ukahoot/src/interface/SiteInterface/Theme.js',
                                         "Theme"),
-        packetHandler: new UKahootModule("site/src/protocol/PacketHandler.js", "PacketHandler"),
-        kahootSocket: new UKahootModule("site/src/protocol/KahootSocket.js", "KahootSocket"),
-        bypass: new UKahootModule("site/src/Bypass.js", "Bypass"),
-        jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery"),
-        jscolor: new UKahootModule("site/lib/jscolor.min.js", "jscolor")
+        packetHandler: new UKahootModule("ukahoot/src/protocol/PacketHandler.js", "PacketHandler"),
+        kahootSocket: new UKahootModule("ukahoot/src/protocol/KahootSocket.js", "KahootSocket"),
+        bypass: new UKahootModule("ukahoot/src/Bypass.js", "Bypass"),
+        jquery: new UKahootModule("ukahoot/lib/jquery-3.1.1.min.js", "jquery"),
+        jscolor: new UKahootModule("ukahoot/lib/jscolor.min.js", "jscolor")
     };
     modules.bypass.load();
     modules.jquery.load()
