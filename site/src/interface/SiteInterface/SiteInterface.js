@@ -224,6 +224,7 @@ class SiteInterface extends Interface {
     constructor() {
         super();
         var me = this;
+        me.themeEditor = new ThemeEditor();
         me.dropdownColor = null;
         me.style = new Style(SiteInterface.STYLE_PATH);
         me.loadStyle();

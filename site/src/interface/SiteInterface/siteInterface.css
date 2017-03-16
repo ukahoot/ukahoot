@@ -204,6 +204,14 @@ button:hover {
 	font-size: 300%;
 }
 #loading, #alert-box, #overlay,
-#tooltipArea, #playing-area, #finish-area {
+#tooltipArea, #playing-area, #finish-area,
+#theme-editor {
 	display: none;
+}
+#theme-editor {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: black;
+	transform: translate(-50%, -50%);
 }
