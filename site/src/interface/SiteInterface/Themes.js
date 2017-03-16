@@ -1,4 +1,12 @@
 class Theme {
+    static clear() {
+        // Clear all themes from localStorage
+        if (delete localStorage['themes'] === true) {
+            console.debug("Deleted themes successfully");
+        } else {
+            console.error("Couldn't delete themes");
+        }
+    }
     constructor(saveObject) {
         // bg is background color, br is border color
         if (saveObject) {
@@ -11,7 +19,7 @@ class Theme {
     }
     save() {
         if (localStorage[Theme.STORAGE_KEY] !== 'undefined') {
-            // There are no themes in localStorage, it is safe to write to
+            // There are no themess in localStorage, it is safe to write to
             var saveObject = this.getSaveObject();
             localStorage[Theme.STORAGE_KEY] = JSON.stringify([saveObject]);
         } else {
@@ -23,7 +31,7 @@ class Theme {
                 console.error('There was an error parsing localStorage JSON:', e);
             }
             if (oldThemes) {
-                // TODO: append this theme to localStoage
+                // TODO: append this theme to localStorage
             }
         }
     }
