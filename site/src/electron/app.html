@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>ukahoot</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="An open source Kahoot client">
+	<link rel="icon" href="assets/icon.png">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Overpass+Mono" rel="stylesheet">
+	<script type="text/javascript" src="electron-loader.js"></script>
+</head>
+<body>
+	<div id="alert-box">
+		<center>
+			<span id="alert-msg"></span>
+			<br>
+			<br>
+			<button id="alert-ok">Ok</button>
+		</center>
+	</div>
+	<center id="dropdowns"></center>
+	<div id="loading">Loading...</div>
+	<div id="overlay"></div>
+	<div id="start">
+		<center>
+			<h1 id="title">ukahoot</h1>
+			<a class="description" href="https://github.com/ukahoot/ukahoot">Kahoot improved</a>
+			<div class="start-body">
+				<br>
+				<br>
+				<input type="text" id="pid" placeholder="Game PIN">
+				<br>
+				<br>
+				<button id="join">Join Game</button>
+				<br>
+				<br>
+				<button id="show-theme">Edit Theme</button>
+			</div>
+			<div id="theme-editor">
+				<h2>Theme Editor</h2>
+				<br>
+				<span class="theme-desc">Background color:</span>
+				<br>
+				<input class="jscolor" value="#000000" id="theme-bg-picker">
+				<br>
+				<br>
+				<span class="theme-desc">Secondary Color:</span>
+				<br>
+				<input class="jscolor" value="#00ff00" id="theme-sc-picker">
+				<br>
+				<br>
+				<button id="theme-save">Save</button>
+				<button id="hide-theme">Close</button>
+			</div>
+		</center>
+	</div>
+	<div id="join-area">
+		<center>
+			<h1>Join game</h1>
+			<input type="text" id="name-area" placeholder="Name(s)">
+			<br>
+			<br>
+			<input type="number" id="client-count-area" placeholder="Clients">  
+			<span id="help-tooltip">?</span>
+			<br>
+			<br>
+			<span id="tooltip-area">The amount of clients that will join the Kahoot. You will be able to control them all at once.</span>
+			<br>
+			<br>
+			<button id="join-game">Join</button>
+		</center>
+	</div>
+	<div id="waiting-area">
+		<center>
+			<h1 id="wait-message">Joined Kahoot Successfully.</h1>
+		</center>
+		<br>
+		<span id="wait">Waiting for the game to start...</span>
+	</div>
+	<div id="playing-area">
+		<div id="ans0" class="ans">
+			<span class="shape">▲</span>
+		</div>
+		<div id="ans1" class="ans">
+			<span class="shape">◆</span>
+		</div>
+		<div id="ans2" class="ans">
+			<span class="shape">●</span>
+		</div>
+		<div id="ans3" class="ans">
+			<span class="shape">■</span>
+		</div>
+	</div>
+	<div id="finish-area">
+		<center>
+			<h1>The quiz has ended.</h1>
+			<h2>Your results:</h2>
+			<p class="finish-data">
+				Metal: <span id="finish-metal"></span>
+				<br>
+				<br>
+				Message: <span id="finish-msg"></span>
+			</p>
+		</center>
+	</div>
+</body>
+</html>
