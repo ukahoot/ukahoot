@@ -1,5 +1,4 @@
 (() => {
-	"use strict";
 	window.ukahoot = {
 		isWaiting: false,
 		sockets: [],
