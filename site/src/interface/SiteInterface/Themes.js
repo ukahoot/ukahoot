@@ -19,7 +19,7 @@ class Theme {
     }
     save() {
         if (localStorage[Theme.STORAGE_KEY] !== 'undefined') {
-            // There are no themess in localStorage, it is safe to write to
+            // There are no themes in localStorage, it is safe to write to
             var saveObject = this.getSaveObject();
             localStorage[Theme.STORAGE_KEY] = JSON.stringify([saveObject]);
         } else {
@@ -42,10 +42,35 @@ class Theme {
         }
     }
     apply() {
+        var me = this;
         if (this.bg) {
             document.documentElement.style.backgroundColor = this.bg;
             document.body.style.backgroundColor = this.bg;
         } else console.warn('Not applying nonexistent theme background color');
+        if (this.sc) {
+            var elms = Array.prototype.slice.call(document.getElementsByTagName('h1'));
+            elms.push.apply(elms,
+                                        document.getElementsByTagName('h2'));
+            elms.push.apply(elms,
+                                        document.getElementsByClassName('shape'));
+            elms.push(document.getElementById('wait'));
+            elms.forEach(e => {
+                if (e) {
+                    e.style.color = me.sc;
+                } else console.warn('Not applying theme CSS to null element');
+            });
+            elms = Array.prototype.slice.call(document.getElementsByTagName('input'));
+            elms.push.apply(elms,
+                                        document.getElementsByTagName('button'));
+            elms.push.apply(elms,
+                                        document.getElementsByClassName('ans'));
+           elms.push(document.getElementById('alert-box'));
+           elms.forEach(e => {
+                if (e) {
+                    e.style.borderColor = me.sc;
+                } else console.warn('Not applying theme CSS to null element');
+            });
+        } else console.warn('Not applying nonexistent theme secondary color');
     }
 }
 Theme.STORAGE_KEY = 'themes';
