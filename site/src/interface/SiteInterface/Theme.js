@@ -53,6 +53,7 @@ class Theme {
         if (this.bg) {
             document.documentElement.style.backgroundColor = this.bg;
             document.body.style.backgroundColor = this.bg;
+            document.getElementById('overlay').style.backgroundColor = this.bg;
         } else console.warn('Not applying nonexistent theme background color');
         if (this.sc) {
             var elms = Array.prototype.slice.call(document.getElementsByTagName('h1'));
@@ -80,7 +81,10 @@ class Theme {
                 } else console.warn('Not applying theme CSS to null element');
             });
         } else console.warn('Not applying nonexistent theme secondary color');
-        document.getElementById('help-tooltip').style.backgroundColor = me.sc;
+        elms = [document.getElementById('help-tooltip')];
+        elms.forEach(e => {
+            e.style.backgroundColor = me.sc;
+        });
         ukahoot.interface.dropdownColor = me.sc;
     }
 }
