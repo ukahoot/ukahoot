@@ -44,7 +44,7 @@
                                         "Site Interface"),
         token: new UKahootModule("site/src/protocol/Token.js", "Token Util"),
         packet: new UKahootModule("site/src/protocol/Packet.js", "Packet"),
-        themeEditor: new UKahootModule('site/src/interface/SiteInterface/Theme.js'),
+        themeEditor: new UKahootModule('site/src/interface/SiteInterface/Themes.js'),
         packetHandler: new UKahootModule("site/src/protocol/PacketHandler.js", "PacketHandler"),
         kahootSocket: new UKahootModule("site/src/protocol/KahootSocket.js", "KahootSocket"),
         jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery")
