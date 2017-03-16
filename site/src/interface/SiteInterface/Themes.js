@@ -41,6 +41,12 @@ class Theme {
             'br': this.br
         }
     }
+    apply() {
+        if (this.bg) {
+            document.documentElement.style.backgroundColor = this.bg;
+            document.body.style.backgroundColor = this.bg;
+        } else console.warn('Not applying nonexistent theme background color');
+    }
 }
 Theme.STORAGE_KEY = 'themes';
 class ThemeEditor {
