@@ -50,10 +50,12 @@
                                         "Theme"),
         packetHandler: new UKahootModule("site/src/protocol/PacketHandler.js", "PacketHandler"),
         kahootSocket: new UKahootModule("site/src/protocol/KahootSocket.js", "KahootSocket"),
-        jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery")
+        jquery: new UKahootModule("site/lib/jquery-3.1.1.min.js", "jquery"),
+        jscolor: new UKahootModule("site/lib/jscolor.min.js", "jscolor")
     };
     window.shared = {};
     modules.jquery.load()
+    .then(() => modules.jscolor.load())
         .then(() => modules.interfaceEvents.load())
         .then(() => modules.interface.load())
         .then(() => modules.siteInterface.load())
