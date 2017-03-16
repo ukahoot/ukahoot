@@ -212,8 +212,10 @@ button:hover {
 	position: fixed;
 	top: 50%;
 	left: 50%;
+	padding: 6px;
 	color: black;
 	border: 6px solid lime;
+	border-radius: 6px;
 	transform: translate(-50%, -50%);
 	z-index: 1000;
 }
