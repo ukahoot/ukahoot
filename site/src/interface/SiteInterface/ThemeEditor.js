@@ -1,4 +1,20 @@
 class ThemeEditor {
+    readStorage() {
+        if (localStorage[Theme.STORAGE_KEY]) {
+            var themes = null;
+            try {
+                themes = JSON.parse(localStorage[Theme.STORAGE_KEY]);
+            } catch (e) {
+                console.error("Error parsing localStorage themes:", e);
+            }
+            if  (themes) {
+                this.theme = new Theme(themes[0]);
+                this.theme.load();
+            }
+        } else {
+            console.debug("No theme(s) to load");
+        }
+    }
     show() {
         $("#overlay").fadeIn(250);
         $("#theme-editor").fadeIn(250);

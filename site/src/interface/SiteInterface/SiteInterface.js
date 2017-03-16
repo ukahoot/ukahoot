@@ -152,6 +152,8 @@ class SiteInterface extends Interface {
     init() {
         var me = this;
         me.themeEditor = new ThemeEditor();
+        me.themeEditor.readStorage();
+
         me.joinGameButton = document.getElementById('join');
         me.joinButton = document.getElementById('join-game');
         me.pidBox = document.getElementById("pid");

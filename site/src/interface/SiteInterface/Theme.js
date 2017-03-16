@@ -10,8 +10,14 @@ class Theme {
     constructor(saveObject) {
         // bg is background color, sc is secondary color
         if (saveObject) {
-            this.bg = saveObject.bg;
-            this.sc = saveObject.sc;
+            if (typeof saveObject === 'object') {
+                this.bg = saveObject.bg;
+                this.sc = saveObject.sc;
+            } else if (typeof saveObject === 'string') {
+                var obj = JSON.parse(saveObject);
+                this.bg = obj.bg;
+                this.sc = obj.sc;
+            }
         } else {
             this.bg = null;
             this.sc = null;
