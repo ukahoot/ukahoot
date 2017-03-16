@@ -65,12 +65,14 @@ class Theme {
             elms.push.apply(elms,
                                         document.getElementsByClassName('ans'));
            elms.push(document.getElementById('alert-box'));
+           elms.push(document.getElementById('help-tooltip'));
            elms.forEach(e => {
                 if (e) {
                     e.style.borderColor = me.sc;
                 } else console.warn('Not applying theme CSS to null element');
             });
         } else console.warn('Not applying nonexistent theme secondary color');
+        document.getElementById('help-tooltip').style.backgroundColor = me.sc;
         ukahoot.interface.dropdownColor = me.sc;
     }
 }
