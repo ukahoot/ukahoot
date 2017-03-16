@@ -6,8 +6,20 @@
 	<meta name="description" content="An open source Kahoot client">
 	<link rel="icon" href="assets/icon.png">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu|Overpass+Mono" rel="stylesheet">
+	<script>
+		if (typeof module === 'object') {
+			window.module = module;
+			module = undefined;
+		}
+	</script>
+
 	<script type="text/javascript" src="../../lib/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="electron-loader.js"></script>
+
+	<script>
+		if (window.module)
+			module = window.module;
+	</script>
 </head>
 <body>
 	<div id="alert-box">
