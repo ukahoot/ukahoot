@@ -13,8 +13,12 @@ LIB =$(wildcard lib/*.js)
 OUT =ukahoot.build.js
 OPTS =--minified
 
-main:
+client:
 	clear
 	babel -o $(OUT) $(OPTS) $(LIB) $(SRC)
 electron:
 	npm run build
+clean:
+	rm -rf dist/
+	rm $(OUT)
+all: client, electron

@@ -20,7 +20,6 @@ let bw = null; // The browser window to run the app in
 let init = () => {
     bw = new electron.BrowserWindow(WINDOW_OPTS);
     bw.loadURL('file://' + __dirname + '/app.html');
-    bw.webContents.openDevTools();
     bw.on('closed', () => {
         bw = null;
         process.exit(0);

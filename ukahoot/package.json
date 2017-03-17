@@ -1,11 +1,11 @@
 {
     "name": "ukahoot",
-    "version": "1.0.1",
+    "version": "1.0.1", 
     "description": "Custom Kahoot web client",
     "main": "src/electron/electron.js",
     "scripts": {
         "start": "electron .",
-        "build": "build --config config.json" 
+        "build": "build -w --linux deb --linux rpm --config config.json" 
     },
     "repository": "https://github.com/ukahoot/ukahoot",
     "keywords": [
@@ -13,7 +13,11 @@
         "kahoot-api",
         "client"
     ],
-    "author": "ukahoot",
+    "author": {
+        "email": "support@ukahoot.it",
+        "name": "ukahoot",
+        "url": "http://ukahoot.it/"
+    },
     "license": "MIT",
     "devDependencies": {
         "electron": "*",

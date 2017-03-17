@@ -6,5 +6,18 @@
         "**/*",
         "*"
     ],
-    "appId": "ukahoot"
+    "appId": "ukahoot",
+    "mac": {
+        "category": "games"
+    },
+    "linux": {
+        "icon": "../assets/"
+    },
+    "win": {
+        "target": [
+            "zip",
+            "nsis"
+        ],
+        "icon": "../assets/icon.ico"
+    }
 }
