@@ -21,3 +21,5 @@ electron:
 clean:
 	rm -rf dist/
 	rm -f $(OUT)
+clean-electron:
+	rm -rf dist/
