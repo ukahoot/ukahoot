@@ -19,11 +19,5 @@
         "electron": "*",
         "electron-builder": "14.1.1",
         "electron-prebuilt": "*"
-    },
-    "config": {
-        "url": "src/electron/app.html",
-        "update": {
-            "url": false
-        }
     }
 }
