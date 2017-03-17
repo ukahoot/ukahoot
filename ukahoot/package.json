@@ -4,7 +4,8 @@
     "description": "Custom Kahoot web client",
     "main": "src/electron/electron.js",
     "scripts": {
-        "start": "electron ."
+        "start": "electron .",
+        "dist": "build --config config.json" 
     },
     "repository": "https://github.com/ukahoot/ukahoot",
     "keywords": [
@@ -15,6 +16,14 @@
     "author": "ukahoot",
     "license": "MIT",
     "devDependencies": {
-        "electron": "*"
+        "electron": "*",
+        "electron-builder": "14.1.1",
+        "electron-prebuilt": "*"
+    },
+    "config": {
+        "url": "src/electron/app.html",
+        "update": {
+            "url": false
+        }
     }
 }
