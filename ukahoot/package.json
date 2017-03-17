@@ -5,7 +5,7 @@
     "main": "src/electron/electron.js",
     "scripts": {
         "start": "electron .",
-        "dist": "build --config config.json" 
+        "build": "build --config config.json" 
     },
     "repository": "https://github.com/ukahoot/ukahoot",
     "keywords": [

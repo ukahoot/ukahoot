@@ -16,3 +16,5 @@ OPTS =--minified
 main:
 	clear
 	babel -o $(OUT) $(OPTS) $(LIB) $(SRC)
+electron:
+	npm run build
