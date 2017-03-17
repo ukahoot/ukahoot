@@ -21,4 +21,3 @@ electron:
 clean:
 	rm -rf dist/
 	rm $(OUT)
-all: client, electron
