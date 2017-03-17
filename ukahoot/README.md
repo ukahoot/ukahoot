@@ -18,6 +18,7 @@ make electron # Builds binaries
 This will export the following to the dist/ directory:
 - rpm amd64 package
 - deb amd64 package
+- Linux amd64 tarball
 - ZIP archive of Windows build
 - NSIS Windows installer
 - Directories containing both Windows and Linux binaries

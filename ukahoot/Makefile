@@ -20,4 +20,4 @@ electron:
 	npm run build
 clean:
 	rm -rf dist/
-	rm $(OUT)
+	rm -f $(OUT)

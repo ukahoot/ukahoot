@@ -1,11 +1,11 @@
 {
     "name": "ukahoot",
     "version": "1.0.1", 
-    "description": "Custom Kahoot web client",
+    "description": "Kahoot client with extra features",
     "main": "src/electron/electron.js",
     "scripts": {
         "start": "electron .",
-        "build": "build -w --linux deb --linux rpm --config config.json" 
+        "build": "build -wl --config config.json" 
     },
     "repository": "https://github.com/ukahoot/ukahoot",
     "keywords": [

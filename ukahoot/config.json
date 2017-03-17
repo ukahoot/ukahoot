@@ -11,6 +11,11 @@
         "category": "games"
     },
     "linux": {
+        "target": [
+            "deb",
+            "rpm",
+            "tar.gz"
+        ],
         "icon": "../assets/"
     },
     "win": {
