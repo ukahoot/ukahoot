@@ -80,7 +80,15 @@ class SiteInterface extends Interface {
     }
     handleAnswer(me, e) {
         var ans = null;
-        switch (e.target.id) {
+        var targetElem = null;
+        if (e.target.className == "shape") {
+            // The user clicked a shape
+            targetElem = e.target.parentElement; // Make sure the correct element is used
+        } else {
+            // The user clicked the answer element
+            targetElem = e.target;
+        }
+        switch (targetElem.id) {
             case "ans0":
                 ans = 0;
                 break;
@@ -92,6 +100,9 @@ class SiteInterface extends Interface {
                 break;
             case "ans3":
                 ans = 3;
+                break;
+            default:
+                debugger;
                 break;
         }
         me.events.onAnswer.call(me, ans);
