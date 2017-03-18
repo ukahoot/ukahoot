@@ -76,7 +76,8 @@ Packet.Handler = {
     }),
     1: new PacketHandler(1, packet => {
         packet.client.ansMap = packet.obj.answerMap;
-        console.debug("Updated client answer map", packet.client.ansMap);
+        if (packet.client.isMaster)
+            console.debug("Updated client answer map", packet.client.ansMap);
     }),
     2: new PacketHandler(2, packet => { // Question start packet
         if (packet.client.isMaster)

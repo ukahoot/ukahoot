@@ -21,8 +21,9 @@ class KahootSocket {
     }
     static sendAns(key) {
         for (var i = 0; i < ukahoot.sockets.length; ++i) {
+            var ans = ukahoot.sockets[i].ansMap[key]; // Map the user's choice the the answer map provided by the server
             try {
-                var msg = Packet.getAnswer(key, ukahoot.pid,
+                var msg = Packet.getAnswer(ans, ukahoot.pid,
                                             ukahoot.sockets[i].cid,
                                             ukahoot.sockets[i].msgCount);
                 ukahoot.sockets[i].msgCount++;
