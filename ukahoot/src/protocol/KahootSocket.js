@@ -21,7 +21,13 @@ class KahootSocket {
     }
     static sendAns(key) {
         for (var i = 0; i < ukahoot.sockets.length; ++i) {
-            var ans = ukahoot.sockets[i].ansMap[key]; // Map the user's choice the the answer map provided by the server
+            var ans = null;
+            if (ukahoot.sockets[i].ansMap[key]) {
+                ans = ukahoot.sockets[i].ansMap[key]; // Map the user's choice the the answer map provided by the server
+            } else {
+                if (ukahoot.sockets[i].isMaster)
+                    console.debug("Failed to map answer");
+            }
             try {
                 var msg = Packet.getAnswer(ans, ukahoot.pid,
                                             ukahoot.sockets[i].cid,
