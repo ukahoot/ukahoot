@@ -12,7 +12,7 @@ class Packet {
 							userAgent: navigator.userAgent,
 							screen: {
 								width: window.innerWidth,
-								height: window.height
+								height: window.innerHeight
 							}
 						}
 					}

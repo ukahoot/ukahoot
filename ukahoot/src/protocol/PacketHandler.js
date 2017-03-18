@@ -74,7 +74,11 @@ Packet.Handler = {
         keepalive.obj[0].id = packet.client.msgCount+"";
         packet.client.send(keepalive);
     }),
-    2: new PacketHandler(1, packet => { // Question start packet
+    1: new PacketHandler(1, packet => {
+        packet.client.ansMap = packet.obj.answerMap;
+        console.debug("Updated client answer map", packet.client.ansMap);
+    }),
+    2: new PacketHandler(2, packet => { // Question start packet
         if (packet.client.isMaster)
             ukahoot.interface.events.onQuestionStart();
     }),

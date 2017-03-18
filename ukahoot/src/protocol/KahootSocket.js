@@ -84,6 +84,8 @@ class KahootSocket {
         // The master socket will control all the website's events
         if (isMaster) this.isMaster = true;
         else this.isMaster = false;
+        // Answer map to ensure the client submits the correct answer
+        this.ansMap = [];
         this.ws.onopen = this.onopen;
         this.ws.onclose = this.onclose;
         this.ws.onmessage = msg => {
