@@ -43,7 +43,7 @@ class SiteInterface extends Interface {
         this.parent.playingArea.style.opacity = 0.4;
     }
     onQuestionEnd(data) {
-        console.debug('Question ended. isCorrect:', data.isCorrect);
+        console.debug('Question ended. Packet data:', data);
         var response = "The question has ended. ";
         if (data.isCorrect)
             response += "You got it right!";
