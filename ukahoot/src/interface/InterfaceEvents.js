@@ -44,7 +44,7 @@ class InterfaceEvents {
     onAnswer(ans) {
         KahootSocket.sendAns(ans);
     }
-    onQuestionEnd(isCorrect) { }
+    onQuestionEnd(data) { }
     onQuestionSubmit() { }
     onQuestionStart() { }
     onLoad() { }
