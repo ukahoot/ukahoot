@@ -31,6 +31,7 @@
 		font-size: 800%;
 		font-family: 'Overpass Mono';
 		color: lime;
+		margin-bottom: 16px;
 	}
 	.description, #alert-msg {
 		color: white;
@@ -50,28 +51,23 @@
 	input {
 		font-size: 500%;
 		background: none;
-		border: 5px solid lime;
-		border-radius: 10px;
+		border: 10px solid lime;
+		border-radius: 20px;
 		opacity: 0.7;
 		transition: opacity 750ms;
 		color: white;
-		padding: 3px;
+		padding: 12px;
 		text-align: center;
 	}
 	button {
 		background: none;
 		font-size: 500%;
-		border: 5px solid lime;
-		border-radius: 10px;
+		border: 10px solid lime;
+		border-radius: 20px;
 		opacity: 0.7;
 		transition: opacity 750ms;
-		padding: 5px;
-		color: white;
-	}
-	#join, #show-theme, #pid {
-		border-width: 10px;
-		border-radius: 20px;
 		padding: 12px;
+		color: white;
 	}
 	#loading, #alert-box, #overlay,
 	#tooltipArea, #playing-area, #finish-area,
@@ -115,6 +111,10 @@
 		transform: translate(-50%, -50%);
 		z-index: 1000;
 		padding: 20px;
+	}
+	#join-game {
+		font-size: 700%;
+		width: 60%;
 	}
 }
 
