@@ -154,6 +154,50 @@
 		margin-right: -50%;
 		transform: translate(-50%, -20%);
 	}
+	.ans {
+		position: absolute;
+		font-size: 150%;
+		font-family: 'Ubuntu';
+		color: lime;
+		width: 45%;
+		height: 45%;
+		opacity: 0.7;
+		background-color: black;
+		cursor: pointer;
+		border: 10px solid lime;
+		transition: opacity 250ms;
+	}
+	#ans0 {
+		top: 4%;
+		left: 4%;
+		transform: translate(-3%, -3%);
+	}
+	#ans1 {
+		top: 4%;
+		left: 97%;
+		transform: translate(-97%, -3%);
+	}
+	#ans2 {
+		top: 96%;
+		left: 4%;
+		transform: translate(-3%, -97%);
+	}
+	#ans3 {
+		top: 96%;
+		left: 97%;
+		transform: translate(-97%, -97%);
+	}
+	.shape {
+		position: relative;
+		top: 50%;
+		left: 50%;
+		color: lime;
+		transform: translate(-50%, -50%);
+		-webkit-box-align: center;
+		-webkit-box-pack: center;
+		display:-webkit-box;
+		font-size: 1000%;
+	}
 }
 
 @media only screen and (orientation:landscape) {
