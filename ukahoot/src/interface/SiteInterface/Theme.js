@@ -83,7 +83,7 @@ class Theme {
         } else console.warn('Not applying nonexistent theme secondary color');
         elms = [document.getElementById('help-tooltip')];
         elms.forEach(e => {
-            e.style.backgroundColor = me.sc;
+            if (e) e.style.backgroundColor = me.sc;
         });
         ukahoot.interface.dropdownColor = me.sc;
     }
