@@ -55,9 +55,6 @@
 		padding: 5px;
 		color: white;
 	}
-	#join {
-		margin-right: 1%;
-	}
 	#loading, #alert-box, #overlay,
 	#tooltipArea, #playing-area, #finish-area,
 	#theme-editor {
