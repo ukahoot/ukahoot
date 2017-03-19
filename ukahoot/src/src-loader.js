@@ -51,7 +51,6 @@
         packetHandler: new UKahootModule("ukahoot/src/protocol/PacketHandler.js", "PacketHandler"),
         kahootSocket: new UKahootModule("ukahoot/src/protocol/KahootSocket.js", "KahootSocket"),
         bypass: new UKahootModule("ukahoot/src/Bypass.js", "Bypass"),
-        mobileInterface: new UKahootModule("ukahoot/src/mobile/MobileInterface.js"),
         jquery: new UKahootModule("ukahoot/lib/jquery-3.1.1.min.js", "jquery"),
         jscolor: new UKahootModule("ukahoot/lib/jscolor.min.js", "jscolor")
     };
@@ -61,7 +60,6 @@
         .then(() => modules.interfaceEvents.load())
         .then(() => modules.interface.load())
         .then(() => modules.siteInterface.load())
-        .then(() => modules.mobileInterface.load())
         .then(() => modules.themeEditor.load())
         .then(() => modules.theme.load())
         .then(() => modules.core.load());
