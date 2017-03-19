@@ -117,6 +117,9 @@
 		font-size: 700%;
 		width: 60%;
 	}
+	#join, #show-theme {
+		width: 60%;
+	}
 	#alert-box {
 		margin: 0;
 		position: absolute;
@@ -218,6 +221,18 @@
 		height: 100%;
 		z-index: 98;
 		pointer-events: none;
+	}
+	.mobile-ended {
+		font-size: 500%;
+		margin-bottom: 20px;
+		white-space: nowrap;
+	}
+	.mobile-ended-2 {
+		font-size: 400%;
+		text-align: center;
+	}
+	.finish-data {
+		font-size: 400%;
 	}
 }
 
