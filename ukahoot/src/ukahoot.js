@@ -18,11 +18,11 @@
 		tokenServer: "http://tokenserver.ukahoot.it/",
 		interface: null
 	};
-	if (window && window.process && window.process.type) {
-		window.ukahoot.interface = new ElectronInterface;
-	} else if (isMobile()) {
+	if (isMobile()) {
 		window.ukahoot.interface = new MobileInterface;
-	} else { // The client isn't using a mobile device or electron, start the site interface
+	} else if (window && window.process && window.process.type) {
+		window.ukahoot.interface = new ElectronInterface;
+	}  else { // The client isn't using a mobile device or electron, start the site interface
 		window.ukahoot.interface = new SiteInterface;
 	}
 })();

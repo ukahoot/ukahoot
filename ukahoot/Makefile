@@ -9,17 +9,26 @@ SRC +=$(wildcard src/interface/*.js)
 SRC +=$(wildcard src/interface/*/*.js)
 SRC +=src/ukahoot.js
 
+MOBILE_SRC := $(filter-out src/ukahoot.js,$(SRC))
+MOBILE_SRC +=src/mobile/MobileInterface.js
+MOBILE_SRC +=src/ukahoot.js
+
 LIB =$(wildcard lib/*.js)
 OUT =ukahoot.build.js
+MOBILE_OUT =ukahoot.m.build.js
 OPTS =--minified
 
 client:
 	clear
 	babel -o $(OUT) $(OPTS) $(LIB) $(SRC)
+mobile-client:
+	clear
+	babel -o $(MOBILE_OUT) $(OPTS) $(LIB) $(MOBILE_SRC)
 electron:
 	npm run build
 clean:
 	rm -rf dist/
 	rm -f $(OUT)
+	rm -f $(MOBILE_OUT)
 clean-electron:
 	rm -rf dist/

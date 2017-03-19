@@ -76,3 +76,4 @@ class MobileInterface extends SiteInterface {
     }
 }
 MobileInterface.STYLE_PATH = "mobileInterface.css";
+window.MobileInterface = MobileInterface;
