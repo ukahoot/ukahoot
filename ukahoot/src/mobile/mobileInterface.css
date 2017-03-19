@@ -1,0 +1,18 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+	color: white;
+	font-family: 'Ubuntu';
+}
+h1, h2 {
+	font-size: 600%;
+	font-family: 'Overpass Mono';
+	color: lime;
+}
+#loading, #alert-box, #overlay,
+#tooltipArea, #playing-area, #finish-area,
+#theme-editor {
+	display: none;
+}
