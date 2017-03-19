@@ -136,6 +136,24 @@
 		font-size: 300%;
 		width: 70%;
 	}
+	#wait-message {
+		font-size: 700%;
+	}
+	#wait {
+		font-size: 400%;
+		position: relative;
+		font-family: 'Ubuntu';
+		color: lime;
+		opacity: 0.5;
+		transition: opacity 750ms;
+	}
+	.mobile-wait {
+		position: absolute;
+		top: 20%;
+		left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%, -20%);
+	}
 }
 
 @media only screen and (orientation:landscape) {
