@@ -6,4 +6,4 @@ class MobileInterface extends SiteInterface {
         this.style.load();
     }
 }
-MobileInterface.STYLE_PATH = "ukahoot/src/mobile/mobileInterface.css";
+MobileInterface.STYLE_PATH = "mobileInterface.css";
