@@ -7,12 +7,37 @@ body, html {
 	font-family: 'Ubuntu';
 }
 h1, h2 {
-	font-size: 600%;
+	font-size: 800%;
 	font-family: 'Overpass Mono';
 	color: lime;
+	margin: 5px;
+}
+.description, #alert-msg {
+	color: white;
+	text-decoration: none;
+}
+.description {
+	font-size: 300%;
+}
+input {
+	font-size: 450%;
+	background: none;
+	border: 5px solid lime;
+	border-radius: 10px;
+	opacity: 0.7;
+	transition: opacity 750ms;
+	color: white;
+	padding: 3px;
+	text-align: center;
 }
 #loading, #alert-box, #overlay,
 #tooltipArea, #playing-area, #finish-area,
 #theme-editor {
 	display: none;
+}
+.mobile-center {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -25%);
 }
