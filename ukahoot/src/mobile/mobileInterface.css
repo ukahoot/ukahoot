@@ -21,8 +21,8 @@
 	.content {
 		display: inline-block;
 	}
-	h1, h2 {
-		font-size: 800%;
+	h1 {
+		font-size: 1000%;
 		font-family: 'Overpass Mono';
 		color: lime;
 		margin: 5px;
@@ -35,7 +35,7 @@
 		font-size: 300%;
 	}
 	input {
-		font-size: 450%;
+		font-size: 500%;
 		background: none;
 		border: 5px solid lime;
 		border-radius: 10px;
@@ -47,13 +47,18 @@
 	}
 	button {
 		background: none;
-		font-size: 400%;
+		font-size: 500%;
 		border: 5px solid lime;
 		border-radius: 10px;
 		opacity: 0.7;
 		transition: opacity 750ms;
 		padding: 5px;
 		color: white;
+	}
+	#join, #show-theme, #pid {
+		border-width: 10px;
+		border-radius: 20px;
+		padding: 12px;
 	}
 	#loading, #alert-box, #overlay,
 	#tooltipArea, #playing-area, #finish-area,
@@ -62,9 +67,9 @@
 	}
 	.mobile-center {
 		position: absolute;
-		top: 25%;
+		top: 35%;
 		left: 50%;
-		transform: translate(-50%, -25%);
+		transform: translate(-50%, -35%);
 	}
 }
 
