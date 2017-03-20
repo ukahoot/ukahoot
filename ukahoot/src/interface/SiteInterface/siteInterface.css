@@ -1,7 +1,7 @@
 body, html {
 	width: 100%;
 	height: 100%;
-	overflow-x: hidden;
+	overflow: hidden;
 	background-color: black;
 	color: white;
 	font-family: 'Ubuntu';
