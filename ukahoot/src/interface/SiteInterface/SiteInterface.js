@@ -28,6 +28,7 @@ class SiteInterface extends Interface {
         $("#loading").fadeOut(300);
     }
     onQuestionStart() {
+        this.isAnswering = true;
         console.debug('Question started');
         if (!this.parent.firstQuestionStarted) {
             this.parent.firstQuestionStarted = true;
@@ -43,6 +44,7 @@ class SiteInterface extends Interface {
         this.parent.playingArea.style.opacity = 0.4;
     }
     onQuestionEnd(data) {
+        this.isAnswering = false;
         console.debug('Question ended. Packet data:', data);
         var response = "The question has ended. ";
         if (data.isCorrect)
@@ -72,40 +74,42 @@ class SiteInterface extends Interface {
                 break;
             default:
                 $("#finish-metal").text("None"); 
-                break;       
+                break;
         }
         $("#finish-metal").css("color", color);
         $("#finish-msg").text(data.msg);
         this.parent.showFinishArea();
     }
     handleAnswer(me, e) {
-        var ans = null;
-        var targetElem = null;
-        if (e.target.className == "shape") {
-            // The user clicked a shape
-            targetElem = e.target.parentElement; // Make sure the correct element is used
-        } else {
-            // The user clicked the answer element
-            targetElem = e.target;
+        if (this.isAnswering) {
+            var ans = null;
+            var targetElem = null;
+            if (e.target.className == "shape") {
+                // The user clicked a shape
+                targetElem = e.target.parentElement; // Make sure the correct element is used
+            } else {
+                // The user clicked the answer element
+                targetElem = e.target;
+            }
+            switch (targetElem.id) {
+                case "ans0":
+                    ans = 0;
+                    break;
+                case "ans1":
+                    ans = 1;
+                    break;
+                case "ans2":
+                    ans = 2;
+                    break;
+                case "ans3":
+                    ans = 3;
+                    break;
+                default:
+                    debugger;
+                    break;
+            }
+            me.events.onAnswer.call(me, ans);
         }
-        switch (targetElem.id) {
-            case "ans0":
-                ans = 0;
-                break;
-            case "ans1":
-                ans = 1;
-                break;
-            case "ans2":
-                ans = 2;
-                break;
-            case "ans3":
-                ans = 3;
-                break;
-            default:
-                debugger;
-                break;
-        }
-        me.events.onAnswer.call(me, ans);
     }
     onJoin() {
         var me = this;
@@ -243,6 +247,7 @@ class SiteInterface extends Interface {
     constructor() {
         super();
         var me = this;
+        me.isAnswering = false;
         me.dropdownColor = null;
         me.style = new Style(SiteInterface.STYLE_PATH);
         me.loadStyle();
