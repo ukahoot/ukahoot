@@ -29,6 +29,7 @@ mobile-client:
 	clear
 	babel -o $(MOBILE_OUT) $(OPTS) $(LIB) $(MOBILE_SRC)
 electron:
+	babel -o $(OUT) $(OPTS) $(LIB) $(SRC)
 	npm run build
 clean:
 	rm -rf dist/
