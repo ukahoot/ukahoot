@@ -28,7 +28,7 @@ class SiteInterface extends Interface {
         $("#loading").fadeOut(300);
     }
     onQuestionStart() {
-        this.isAnswering = true;
+        this.parent.isAnswering = true;
         console.debug('Question started');
         if (!this.parent.firstQuestionStarted) {
             this.parent.firstQuestionStarted = true;
