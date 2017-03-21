@@ -9,6 +9,9 @@ SRC +=$(wildcard src/interface/*.js)
 SRC +=$(wildcard src/interface/*/*.js)
 SRC +=src/ukahoot.js
 
+# Add electron interface files
+SRC += $(wildcard src/electron/interface/*.js)
+
 MOBILE_SRC := $(filter-out src/ukahoot.js,$(SRC))
 MOBILE_SRC +=src/mobile/MobileInterface.js
 MOBILE_SRC +=src/ukahoot.js
