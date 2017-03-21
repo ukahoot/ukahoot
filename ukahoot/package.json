@@ -23,7 +23,7 @@
         "electron": "*",
         "electron-builder": "14.1.1",
         "electron-prebuilt": "*",
-        "babel": "*",
+        "babel-cli": "*",
         "babel-preset-env": "*",
         "babili": "*"
     }
