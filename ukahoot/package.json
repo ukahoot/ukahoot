@@ -22,6 +22,9 @@
     "devDependencies": {
         "electron": "*",
         "electron-builder": "14.1.1",
-        "electron-prebuilt": "*"
+        "electron-prebuilt": "*",
+        "babel": "*",
+        "babel-preset-env": "*",
+        "babili": "*"
     }
 }
