@@ -169,10 +169,21 @@ class SiteInterface extends Interface {
             $("#finish-area").fadeIn(250);
         }, 100);
     }
+    onEsc() {
+        var me = this;
+        if (!me.editorOpen) {
+            me.themeEditor.show();
+            me.editorOpen = true;
+        } else {
+            me.themeEditor.hide();
+            me.editorOpen = false;
+        }
+    }
     init() {
         var me = this;
         me.themeEditor = new ThemeEditor();
         me.themeEditor.readStorage();
+        me.editorOpen = false;
 
         me.joinGameButton = document.getElementById('join');
         me.joinButton = document.getElementById('join-game');
@@ -242,6 +253,9 @@ class SiteInterface extends Interface {
         });
         tooltip.addEventListener('mouseleave', () => {
             $(tooltipArea).fadeOut(200);
+        });
+        document.documentElement.addEventListener('keydown', e => {
+            if (e.keyCode === 27) return me.onEsc.call(me, e);
         });
     }
     constructor() {
