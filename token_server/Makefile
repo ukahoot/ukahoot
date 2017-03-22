@@ -8,3 +8,5 @@ SRC =$(wildcard src/*.c)
 all:
 	mkdir -p out
 	$(CC) -o out/$(OUT_FILE) $(OPTS) $(SRC)
+clean:
+	rm -rf out/
