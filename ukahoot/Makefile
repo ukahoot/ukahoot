@@ -31,6 +31,9 @@ mobile-client:
 electron:
 	babel -o $(OUT) $(OPTS) $(LIB) $(SRC)
 	npm run build
+mac-electron:
+	babel -o $(OUT) $(OPTS) $(LIB) $(SRC)
+	npm run build-mac
 clean:
 	rm -rf dist/
 	rm -f $(OUT)
