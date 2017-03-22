@@ -5,7 +5,8 @@
     "main": "src/electron/electron.js",
     "scripts": {
         "start": "electron .",
-        "build": "build -wl --config config.json" 
+        "build": "build -wl --config config.json",
+        "build-mac": "build -m --config config.json" 
     },
     "repository": "https://github.com/ukahoot/ukahoot",
     "keywords": [
