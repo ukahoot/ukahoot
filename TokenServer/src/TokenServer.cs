@@ -28,6 +28,8 @@ namespace UKahoot {
 							switch (ctx.Request.Headers["Origin"]) {
 								case "http://ukahoot.it":
 								case "https://ukahoot.it":
+								case "http://kahoot.it":
+								case "https://kahoot.it":
 									ctx.Response.Headers["Access-Control-Allow-Origin"] = ctx.Request.Headers["Origin"];
 									break;
 								case null:
