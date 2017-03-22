@@ -23,6 +23,8 @@ This will export the following to the dist/ directory:
 - NSIS Windows installer
 - Directories containing both Windows and Linux binaries
 
+To build the Mac binaries, run `make mac-electron`
+
 ## Developer mode
 ukahoot has a "developer mode" which loads the source files instead of the build file.<br>
 To enable developer mode, set "ukahootDevMode" in localStorage to any value.<br>
