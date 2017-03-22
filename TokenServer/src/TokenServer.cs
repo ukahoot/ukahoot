@@ -37,12 +37,6 @@ namespace UKahoot {
 									ctx.Response.Headers["Access-Control-Allow-Origin"] = "*";
 									break;
 							}
-							if (ctx.Request.Headers["Origin"] == "http://ukahoot.it" ||
-							ctx.Request.Headers["Origin"] == "https://ukahoot.it") {
-								ctx.Response.Headers["Access-Control-Allow-Origin"] = ctx.Request.Headers["Origin"];
-							} else if (ctx.Request.Headers["Origin"] == null || ctx.Request.Headers["Origin"] == "null") {
-								ctx.Response.Headers["Access-Control-Allow-Origin"] = "*";
-							}
 							ctx.Response.StatusCode = 200;
 							ctx.Response.Headers["Content-Type"] = "application/json";
 							// Send a request to Kahoot to get the tokens
