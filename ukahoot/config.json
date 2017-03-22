@@ -8,7 +8,13 @@
     ],
     "appId": "ukahoot",
     "mac": {
-        "category": "games"
+        "category": "games",
+        "target": [
+            "dmg",
+            "zip",
+            "default"
+        ],
+        "icon": "../assets/icon.icns"
     },
     "linux": {
         "target": [
