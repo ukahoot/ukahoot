@@ -1,6 +1,6 @@
 {
     "name": "ukahoot",
-    "version": "1.0.2", 
+    "version": "1.0.3", 
     "description": "Kahoot client with extra features",
     "main": "src/electron/electron.js",
     "scripts": {
