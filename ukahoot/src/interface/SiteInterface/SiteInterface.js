@@ -273,6 +273,9 @@ class SiteInterface extends Interface {
             document.innerHTML = me.siteHTML;
             me.init.call(me);
         });
+        window.onbeforeunload = () => {
+            return true;
+        }
     }
 }
 SiteInterface.STYLE_PATH = "ukahoot/src/interface/SiteInterface/siteInterface.css";
