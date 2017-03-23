@@ -11,6 +11,7 @@ all:
 run:
 	mkdir -p out
 	$(CC) -o out/$(OUT_FILE) $(OPTS) $(SRC)
+	clear
 	out/$(OUT_FILE)
 clean:
 	rm -rf out/
