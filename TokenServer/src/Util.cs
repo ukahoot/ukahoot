@@ -32,7 +32,7 @@ namespace UKahoot {
 			ResponseBody = ResponseBody.Replace("%ESCAPED_QUOT%", "\\\"");
 			// Build the JSON string
 			StringBuilder TokenBuilder = new StringBuilder("");
-			TokenBuilder.Append("{\"tokenHeader\":\"");
+			TokenBuilder.Append("{\"tokenHeader\":\""); 
 			TokenBuilder.Append(TokenHeader);
 			TokenBuilder.Append("\"");
 			TokenBuilder.Append(",\"responseBody\":");
