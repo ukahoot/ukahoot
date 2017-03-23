@@ -8,5 +8,9 @@ SRC =$(wildcard src/*.c)
 all:
 	mkdir -p out
 	$(CC) -o out/$(OUT_FILE) $(OPTS) $(SRC)
+run:
+	mkdir -p out
+	$(CC) -o out/$(OUT_FILE) $(OPTS) $(SRC)
+	out/$(OUT_FILE)
 clean:
 	rm -rf out/
