@@ -17,6 +17,12 @@ typedef struct {
     struct hostent* serv;
     int sockfd;
 } req;
+
+void setup_openssl(void) {
+    SSL_load_error_strings();
+    SSL_library_init();
+};
+
 req* init_request(void) {
     req* request;
     request = malloc(sizeof(req)); // Allocate a request on the heap
@@ -29,7 +35,9 @@ req* init_request(void) {
     request->addr.sin_addr.s_addr = request->serv->h_addr;
     return request;
 };
-void setup_openssl(void) {
-    SSL_load_error_strings();
-    SSL_library_init();
+
+void requst_connect(req* request) {
+    connect(request->sockfd, 
+    (struct sockaddr *) &request->addr,
+    sizeof(request->addr));
 }
