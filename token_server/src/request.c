@@ -32,7 +32,7 @@ req* init_request(void) {
     SSL_set_fd(request->conn, request->sockfd);
     request->serv = gethostbyname(KAHOOT_HOST_URI);
     request->addr.sin_family = AF_INET;
-    request->addr.sin_addr.s_addr = request->serv->h_addr;
+   request->addr.sin_addr.s_addr = request->serv->h_addr;
     request->addr.sin_port = htons(KAHOOT_SSL_PORT);
     return request;
 };
@@ -40,4 +40,9 @@ void request_connect(req* request) {
     connect(request->sockfd, 
     (struct sockaddr *) &request->addr,
     sizeof(request->addr));
+};
+int request_write_str(req* request, char* msg) {
+    int res = 0;
+    res = SSL_write(request->conn, msg, strlen(msg));
+    return res;
 };
