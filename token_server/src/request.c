@@ -23,6 +23,9 @@ void setup_openssl(void) {
     SSL_library_init();
     ssl_context = SSL_CTX_new(SSLv23_client_method());
 };
+void unload_ctx(void) {
+    SSL_CTX_free(ssl_context);
+}
 
 req* init_request(void) {
     req* request;
