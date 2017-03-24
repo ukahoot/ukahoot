@@ -4,5 +4,6 @@
 #include "request.h"
 
 int main(int argc, char* argv[]) {
+	setup_openssl();
 	req* r = init_request();
 };
