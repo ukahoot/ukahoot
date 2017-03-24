@@ -56,3 +56,7 @@ void request_close(req* request) {
     SSL_shutdown(request->conn);
     close(request->sockfd);
 };
+void request_free(req* request) {
+    SSL_free(request->conn);
+    free(request);
+}

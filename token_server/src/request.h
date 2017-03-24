@@ -5,3 +5,4 @@ void request_connect(req*);
 void request_write_str(req*, char*);
 int request_read(req*, char*, int);
 void request_close(req*);
+void request_free(req*);
