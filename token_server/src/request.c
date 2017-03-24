@@ -11,24 +11,24 @@
 #include "kahoot.h"
 
 typedef struct {
-    SSL_CTX* context;
     SSL* conn;
     struct sockaddr_in addr;
     struct hostent* serv;
     int sockfd;
 } req;
+SSL_CTX* ssl_context;
 
 void setup_openssl(void) {
     SSL_load_error_strings();
     SSL_library_init();
+    ssl_context = SSL_CTX_new(SSLv23_client_method());
 };
 
 req* init_request(void) {
     req* request;
     request = malloc(sizeof(req)); // Allocate a request on the heap
     request->sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    request->context = SSL_CTX_new(SSLv23_client_method());
-    request->conn = SSL_new(request->context);
+    request->conn = SSL_new(ssl_context);
     SSL_set_fd(request->conn, request->sockfd);
     request->serv = gethostbyname(KAHOOT_HOST_URI);
     request->addr.sin_family = AF_INET;
