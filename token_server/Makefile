@@ -2,7 +2,7 @@ OUT_FILE = out # Binary file name
 SRC_DIR = src # Source code directory
 
 CC = gcc
-OPTS =-pthread -lpthread
+OPTS =-lssl -lcrypto -pthread -lpthread
 SRC =$(wildcard src/*.c)
 
 all:
