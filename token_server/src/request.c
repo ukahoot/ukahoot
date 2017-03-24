@@ -35,6 +35,7 @@ req* init_request(void) {
    bcopy((char*)request->serv->h_addr,
    (char*)&request->addr.sin_addr.s_addr,
    request->serv->h_length);
+
     request->addr.sin_port = htons(KAHOOT_SSL_PORT);
     return request;
 };
@@ -50,4 +51,8 @@ int request_write_str(req* request, char* msg) {
 };
 int request_read(req* request, char* buffer, int len) {
     return SSL_read(request->conn, buffer, len);
-}
+};
+void request_close(req* request) {
+    SSL_shutdown(request->conn);
+    close(request->sockfd);
+};
