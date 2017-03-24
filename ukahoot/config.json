@@ -1,0 +1,34 @@
+{
+    "files": [
+        "src/*",
+        "src/*/*",
+        "src/*/*/*",
+        "**/*",
+        "*"
+    ],
+    "appId": "ukahoot",
+    "mac": {
+        "category": "games",
+        "target": [
+            "dmg",
+            "zip",
+            "default"
+        ],
+        "icon": "../assets/icon.icns"
+    },
+    "linux": {
+        "target": [
+            "deb",
+            "rpm",
+            "tar.gz"
+        ],
+        "icon": "../assets/"
+    },
+    "win": {
+        "target": [
+            "zip",
+            "nsis"
+        ],
+        "icon": "../assets/icon.ico"
+    }
+}

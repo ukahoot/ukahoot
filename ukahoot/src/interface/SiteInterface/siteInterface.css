@@ -1,0 +1,228 @@
+body, html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: black;
+	color: white;
+	font-family: 'Ubuntu';
+}
+h1, h2 {
+	font-size: 400%;
+	font-family: 'Overpass Mono';
+	color: lime;
+}
+h2 {
+	font-size: 250%;
+	color: #00cc00;
+}
+#client-count-area {
+	width: 40%;
+	color: white;
+}
+.description, #alert-msg {
+	font-size: 125%;
+	color: white;
+	text-decoration: none;
+}
+.start-body, #loading {
+	font-size: 200%;
+}
+#loading {
+	font-size: 400%;
+	color: white;
+	opacity: 1;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
+input {
+	font-size: 125%;
+	background: none;
+	border: 5px solid lime;
+	border-radius: 10px;
+	opacity: 0.7;
+	transition: opacity 750ms;
+	color: white;
+	padding: 3px;
+	text-align: center;
+}
+input:hover {
+	opacity: 1;
+}
+button {
+	background: none;
+	font-size: 125%;
+	border: 5px solid lime;
+	border-radius: 10px;
+	opacity: 0.7;
+	transition: opacity 750ms;
+	padding: 5px;
+	color: white;
+}
+button:hover {
+	opacity: 1;
+}
+#alert-box {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+	border: 4px solid lime;
+	border-radius: 10px;
+	z-index: 3;
+}
+#overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
+	background-color: black;
+	z-index: 2;
+}
+#help-tooltip {
+	font-size: 200%;
+	padding: 10px;
+	border: 4px solid lime;
+	border-radius: 10px;
+	opacity: 0.7;
+}
+#help-tooltip:hover {
+	opacity: 1;
+	background-color: lime;
+	color: black;
+}
+#tooltipArea {
+	padding: 3px;
+	border: 4px solid lime;
+	border-radius: 7%;
+	opacity: 0.7;
+	transition: opacity 250ms, color 250ms, background-color 250ms;
+}
+#tooltipArea:hover {
+	opacity: 1;
+	color: black;
+	background-color: lime;
+}
+#join-game, #name-area, #client-count-area {
+	font-size: 250%;
+}
+#wait {
+	font-size: 250%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Ubuntu';
+	color: lime;
+	opacity: 0.5;
+	transition: opacity 750ms;
+}
+#please-wait {
+	font-size: 250%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: 'Ubuntu';
+	color: lime;
+}
+#playing-area {
+	transition: opacity 750ms;
+}
+.ans {
+	position: absolute;
+	font-size: 150%;
+	font-family: 'Ubuntu';
+	color: lime;
+	width: 47%;
+	height: 46%;
+	opacity: 0.7;
+	background-color: black;
+	cursor: pointer;
+	border: 5px solid lime;
+	transition: opacity 250ms;
+}
+.ans:hover {
+	opacity: 1;
+}
+#ans0 {
+	top: 3%;
+	left: 3%;
+	transform: translate(-3%, -3%);
+}
+#ans1 {
+	top: 3%;
+	left: 97%;
+	transform: translate(-97%, -3%);
+}
+#ans2 {
+	top: 97%;
+	left: 3%;
+	transform: translate(-3%, -97%);
+}
+#ans3 {
+	top: 97%;
+	left: 97%;
+	transform: translate(-97%, -97%);
+}
+.shape {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	color: lime;
+	transform: translate(-50%, -50%);
+	-webkit-box-align: center;
+    -webkit-box-pack: center;
+    display:-webkit-box;
+	font-size: 600%;
+}
+.dropdown {
+	font-size: 200%;
+	font-family: 'Ubuntu';
+	color: black;
+	background-color: lime;
+	border-radius: 5px;
+	padding: 5px;
+	z-index: 99;
+	margin: 10px;
+	width: auto;
+	display: inline-block;
+	position: relative;
+}
+#dropdowns {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 98;
+	pointer-events: none;
+}
+.finish-data {
+	font-size: 300%;
+}
+#loading, #alert-box, #overlay,
+#tooltipArea, #playing-area, #finish-area,
+#theme-editor {
+	display: none;
+}
+#theme-editor {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 9px;
+	color: white;
+	border: 6px solid lime;
+	border-radius: 6px;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+.theme-desc {
+	font-size: 175%;
+	color: white;
+	padding: 2px;
+}

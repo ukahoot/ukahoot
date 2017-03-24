@@ -1,0 +1,31 @@
+{
+    "name": "ukahoot",
+    "version": "1.0.3", 
+    "description": "Kahoot client with extra features",
+    "main": "src/electron/electron.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "build -wl --config config.json",
+        "build-mac": "build -m --config config.json" 
+    },
+    "repository": "https://github.com/ukahoot/ukahoot",
+    "keywords": [
+        "kahoot",
+        "kahoot-api",
+        "client"
+    ],
+    "author": {
+        "email": "support@ukahoot.it",
+        "name": "ukahoot",
+        "url": "http://ukahoot.it/"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "*",
+        "electron-builder": "14.1.1",
+        "electron-prebuilt": "*",
+        "babel-cli": "*",
+        "babel-preset-env": "*",
+        "babili": "*"
+    }
+}
