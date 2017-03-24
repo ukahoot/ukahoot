@@ -48,3 +48,6 @@ int request_write_str(req* request, char* msg) {
     res = SSL_write(request->conn, msg, strlen(msg));
     return res;
 };
+int request_read(req* request, char* buffer, int len) {
+    return SSL_read(request->conn, buffer, len);
+}
