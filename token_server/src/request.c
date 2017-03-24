@@ -8,6 +8,7 @@
 #include <netdb.h>
 
 #include <openssl/ssl.h>
+#include "kahoot.h"
 
 struct req {
     SSL_CTX* context;
