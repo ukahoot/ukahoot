@@ -6,3 +6,4 @@ void request_write_str(req*, char*);
 int request_read(req*, char*, int);
 void request_close(req*);
 void request_free(req*);
+char* request_kahoot_token(req*, char*);

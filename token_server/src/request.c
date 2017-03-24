@@ -60,4 +60,15 @@ void request_close(req* request) {
 void request_free(req* request) {
     SSL_free(request->conn);
     free(request);
-}
+};
+char* request_kahoot_token(req* request, char* PID) {
+    char* headers = get_req_headers(PID);
+    char* res = malloc(1024); // Buffer the response will be written to
+    request_connect(request);
+    request_write_str(request, headers);
+    int e = request_read(request, res, 1024);
+    free(headers); // Make sure the headers are destroyed
+    if (e == 0 || e == -1)
+        return NULL;
+    return res;
+};
