@@ -1,2 +1,2 @@
-struct req;
-void init_request(struct req);
+typedef struct req* req;
+req* init_request(void);

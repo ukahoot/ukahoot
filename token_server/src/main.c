@@ -4,5 +4,5 @@
 #include "request.h"
 
 int main(int argc, char* argv[]) {
-	//
-}
+	req* r = init_request();
+};
