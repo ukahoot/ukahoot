@@ -7,10 +7,10 @@ SRC =$(wildcard src/*.c)
 
 all:
 	mkdir -p out
-	$(CC) -o out/$(OUT_FILE) $(OPTS) $(SRC)
+	$(CC) -o out/$(OUT_FILE) $(SRC) $(OPTS) 
 run:
 	mkdir -p out
-	$(CC) -o out/$(OUT_FILE) $(OPTS) $(SRC)
+	$(CC) -o out/$(OUT_FILE) $(SRC) $(OPTS) 
 	clear
 	out/$(OUT_FILE)
 clean:
