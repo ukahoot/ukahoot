@@ -36,9 +36,8 @@ req* init_request(void) {
     request->addr.sin_port = htons(KAHOOT_SSL_PORT);
     return request;
 };
-
-void requst_connect(req* request) {
+void request_connect(req* request) {
     connect(request->sockfd, 
     (struct sockaddr *) &request->addr,
     sizeof(request->addr));
-}
+};
