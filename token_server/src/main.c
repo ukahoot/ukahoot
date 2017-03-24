@@ -2,9 +2,11 @@
 #include <stdlib.h>
 
 #include "request.h"
+#include "kahoot.h"
 
 int main(int argc, char* argv[]) {
 	setup_openssl();
+	get_req_headers("12345");
 	req* r = init_request();
 	printf("connecting\n");
 	request_connect(r);
