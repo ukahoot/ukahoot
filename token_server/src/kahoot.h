@@ -9,6 +9,7 @@ Connection: keep-alive\r\n\
 Accept: application/json, text/plain, */*\r\n\
 User-Agent: ukahoot-token-server\r\n\
 Referer: https://kahoot.it/\r\n\
-Accept-Language: en-US,en;q=0.8\r\n";
+Accept-Language: en-US,en;q=0.8\r\n\
+\r\n";
 static const int KAHOOT_HEADERS_SIZE = 191;
 char* get_req_headers(char*);
