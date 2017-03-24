@@ -22,4 +22,7 @@ void init_request(struct req* request) {
     request->context = SSL_CTX_new(SSLv23_client_method());
     request->conn = SSL_new(request->context);
     SSL_set_fd(request->conn, request->sockfd);
+    request->serv = gethostbyname(KAHOOT_HOST_URI);
+    request->addr.sin_family = AF_INET;
+    request->addr.sin_addr.s_addr = request->serv->h_addr;
 };
