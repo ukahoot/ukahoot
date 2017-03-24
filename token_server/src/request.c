@@ -26,7 +26,7 @@ req* init_request(void) {
     SSL_set_fd(request->conn, request->sockfd);
     request->serv = gethostbyname(KAHOOT_HOST_URI);
     request->addr.sin_family = AF_INET;
-    //request->addr.sin_addr.s_addr = request->serv->h_addr;
+    request->addr.sin_addr.s_addr = request->serv->h_addr;
     return request;
 };
 void setup_openssl(void) {
