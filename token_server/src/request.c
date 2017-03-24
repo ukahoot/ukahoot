@@ -32,7 +32,9 @@ req* init_request(void) {
     SSL_set_fd(request->conn, request->sockfd);
     request->serv = gethostbyname(KAHOOT_HOST_URI);
     request->addr.sin_family = AF_INET;
-   request->addr.sin_addr.s_addr = request->serv->h_addr;
+   bcopy((char*)request->serv->h_addr,
+   (char*)&request->addr.sin_addr.s_addr,
+   request->serv->h_length);
     request->addr.sin_port = htons(KAHOOT_SSL_PORT);
     return request;
 };
