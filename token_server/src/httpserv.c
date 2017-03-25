@@ -24,7 +24,7 @@ typedef struct {
 } httpcli;
 
 void* http_handle_client(void* vargp) {
-    // TODO: handle client
+    httpcli* cli = (httpcli*) vargp;
 }
 
 httpserv* http_init_server(int port, int backlog) {
