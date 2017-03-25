@@ -66,11 +66,22 @@ void request_free(req* request) {
 };
 char* request_kahoot_token(req* request, char* PID) {
     char* headers = get_req_headers(PID);
-    char* res = malloc(1024); // Buffer the response will be written to
+    char* res = malloc(770); // Buffer the response will be written to
+    
+    char* chu1 = malloc(512);
+    char* chu2 = malloc(256);
+
     request_connect(request);
     request_write_str(request, headers);
-    int e = request_read(request, res, 1024);
-    free(headers); // Make sure the headers are destroyed
+    int e = request_read(request, chu1, 512);
+    e = request_read(request, chu2, 256);
+    strcat(res, chu1);
+    strcat(res, chu2);
+
+    // Free resources
+    free(chu1);
+    free(chu2);
+    free(headers);
     if (e == 0 || e == -1)
         return NULL;
     return res;
