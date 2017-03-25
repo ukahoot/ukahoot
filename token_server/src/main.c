@@ -4,10 +4,9 @@
 
 #include "request.h"
 #include "kahoot.h"
+#include "httpserv.h"
 
 int main(int argc, char* argv[]) {
 	setup_openssl();
-	req* r = init_request();
-	char* res = request_kahoot_token(r, "5005640");
-	printf("%s\n", res);
+	httpserv* h = init_http_server(5556);
 };
