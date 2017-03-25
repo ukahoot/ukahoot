@@ -15,6 +15,7 @@ typedef struct {
     int sockfd;
     int backl;
     struct sockaddr_in addr;
+    int running;
 } httpserv;
 
 typedef struct {
@@ -58,6 +59,7 @@ void* http_handle_client(void* vargp) {
 
 httpserv* http_init_server(int port, int backlog) {
     httpserv* server = malloc(sizeof(httpserv)); // Create HTTP server structure
+    server->running = 1;
     server->backl = backlog;
     server->sockfd = socket(AF_INET, SOCK_STREAM, 0);
     server->addr.sin_family = AF_INET;
@@ -77,19 +79,21 @@ httpserv* http_init_server(int port, int backlog) {
 void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
     listen(h->sockfd, h->backl);
-    httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd
-    cli->len = sizeof(cli->addr);
-    cli->fd = accept(h->sockfd, 
-                    (struct sockaddr*) &cli->addr,
-                    &cli->len);
-    if (cli->fd < 0) {
-        // Error accepting the socket
-        printf("%s%s\n", "Client accept error: ", strerror(errno));
-        free(cli);
-    } else {
-        // Socket accepted successfully
-        pthread_create(&cli->tid, NULL, http_handle_client, cli);
-        pthread_join(cli->tid, NULL);
+    while (server->running) {
+        httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd
+        cli->len = sizeof(cli->addr);
+        cli->fd = accept(h->sockfd, 
+                        (struct sockaddr*) &cli->addr,
+                        &cli->len);
+        if (cli->fd < 0) {
+            // Error accepting the socket
+            printf("%s%s\n", "Client accept error: ", strerror(errno));
+            free(cli);
+        } else {
+            // Socket accepted successfully
+            pthread_create(&cli->tid, NULL, http_handle_client, cli);
+            pthread_join(cli->tid, NULL);
+        }
     }
 };
 void http_server_listen(httpserv* server) {
