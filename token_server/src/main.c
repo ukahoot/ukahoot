@@ -8,6 +8,6 @@
 int main(int argc, char* argv[]) {
 	setup_openssl();
 	req* r = init_request();
-	char* res = request_kahoot_token(r, "6413149");
+	char* res = request_kahoot_token(r, "5005640");
 	printf("%s\n", res);
 };

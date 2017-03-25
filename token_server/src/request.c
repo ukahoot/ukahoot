@@ -52,6 +52,11 @@ int request_write_str(req* request, char* msg) {
     res = SSL_write(request->conn, msg, strlen(msg));
     return res;
 };
+int request_write(req* request, void* msg, int len) {
+    int res = 0;
+    res = SSL_write(request->conn, msg, len);
+    return res;
+};
 int request_read(req* request, char* buffer, int len) {
     int e = SSL_read(request->conn, buffer, len);
     return e;
@@ -66,22 +71,24 @@ void request_free(req* request) {
 };
 char* request_kahoot_token(req* request, char* PID) {
     char* headers = get_req_headers(PID);
-    char* res = malloc(770); // Buffer the response will be written to
-    
-    char* chu1 = malloc(512);
-    char* chu2 = malloc(256);
+    char* res = malloc(2048); // Buffer the response will be written to
+    char* chunk = malloc(512); // Buffer that holds the response chunks
 
     request_connect(request);
-    request_write_str(request, headers);
-    int e = request_read(request, chu1, 512);
-    e = request_read(request, chu2, 256);
-    strcat(res, chu1);
-    strcat(res, chu2);
+    int e = request_write_str(request, headers);
+    int siz = 0;
+    e = request_read(request, chunk, 512);
+    strcat(res, chunk); // Initial headers
+    e = 256;
 
+    while(e == 256) {
+        e = request_read(request, chunk, 256);
+        strncat(res, chunk, e);
+    };
     // Free resources
-    free(chu1);
-    free(chu2);
     free(headers);
+    free(chunk);
+
     if (e == 0 || e == -1)
         return NULL;
     return res;
