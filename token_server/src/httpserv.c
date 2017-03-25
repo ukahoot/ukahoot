@@ -43,6 +43,7 @@ void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
     listen(h->sockfd, h->backl);
     httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd
+    cli->len = sizeof(cli->addr);
     cli->fd = accept(h->sockfd, 
                     (struct sockaddr*) &cli->addr,
                     &cli->len);
