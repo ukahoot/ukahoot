@@ -25,6 +25,15 @@ typedef struct {
     pthread_t tid;
 } httpcli;
 
+int httpcli_write_str(httpcli* h, char* str) {
+    return write(h->fd, str, strlen(str));
+};
+int httpcli_write(httpcli* h, char* buffer, int len) {
+    return write(h->fd, buffer, len);
+};
+int httpcli_read(httpcli* h, char* buffer, int len) {
+    return read(h->fd, buffer, len);
+}
 void* http_handle_client(void* vargp) {
     httpcli* cli = (httpcli*) vargp;
     printf("%s\n", "Accepted new connection");
@@ -57,7 +66,7 @@ void* http_handle_client(void* vargp) {
         }
         // TODO: Handle client's request
     }
-}
+};
 
 httpserv* http_init_server(int port, int backlog) {
     httpserv* server = malloc(sizeof(httpserv)); // Create HTTP server structure
