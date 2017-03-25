@@ -81,6 +81,7 @@ void* http_listen_thread(void* vargp) {
                     &cli->len);
     if (cli->fd < 0) {
         // Error accepting the socket
+        printf("%s%s\n", "Client accept error: ", strerror(errno));
         free(cli);
     } else {
         // Socket accepted successfully
