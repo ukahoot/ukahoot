@@ -39,7 +39,7 @@ void* http_handle_client(void* vargp) {
         free(cli_req);
     } else {
         // Safe to write
-        e = write(cli->fd, "HTTP/1.1 200 OK\r\ntest\r\n", 23);
+        e = write(cli->fd, "HTTP/1.1 200 OK\r\n\r\ntest", 23);
         if (e < 0) {
             // Write error, destroy and close socket
             printf("%s%s%s\n",
