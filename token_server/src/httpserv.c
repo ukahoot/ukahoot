@@ -20,9 +20,13 @@ typedef struct {
     socklen_t len;
     struct sockaddr_in addr;
     int fd;
+    pthread_t tid;
 } httpcli;
 
-// HTTP server
+void* http_handle_client(void* vargp) {
+    // TODO: handle client
+}
+
 httpserv* http_init_server(int port, int backlog) {
     httpserv* server = malloc(sizeof(httpserv)); // Create HTTP server structure
     server->backl = backlog;
@@ -47,6 +51,8 @@ void* http_listen_thread(void* vargp) {
         free(cli);
     } else {
         // Socket accepted successfully
+        pthread_create(&cli->tid, NULL, http_handle_client, cli);
+        pthread_join(cli->tid, NULL);
     }
 };
 void http_server_listen(httpserv* server) {
