@@ -6,6 +6,7 @@ OPTS =-lssl -lcrypto -pthread -lpthread
 SRC =$(wildcard src/*.c)
 
 all:
+	clear
 	mkdir -p out
 	$(CC) -o out/$(OUT_FILE) $(SRC) $(OPTS) 
 run:
