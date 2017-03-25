@@ -52,6 +52,8 @@ void* http_handle_client(void* vargp) {
         } else {
             // Write success
             close(cli->fd);
+            free(cli);
+            free(cli_req);
         }
         // TODO: Handle client's request
     }
