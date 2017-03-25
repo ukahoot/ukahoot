@@ -18,10 +18,11 @@ typedef struct {
 
 typedef struct {
     socklen_t len;
-    struct sockaddr_in addre;
+    struct sockaddr_in addr;
     int fd;
 } httpcli;
 
+// HTTP server
 httpserv* http_init_server(int port, int backlog) {
     httpserv* server = malloc(sizeof(httpserv)); // Create HTTP server structure
     server->backl = backlog;
@@ -37,6 +38,16 @@ httpserv* http_init_server(int port, int backlog) {
 void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
     listen(h->sockfd, h->backl);
+    httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd
+    cli->fd = accept(h->sockfd, 
+                    (struct sockaddr*) &cli->addr,
+                    &cli->len);
+    if (cli->fd < 0) {
+        // Error accepting the socket
+        free(cli);
+    } else {
+        // Socket accepted successfully
+    }
 };
 void http_server_listen(httpserv* server) {
     pthread_create(&server->tid, NULL, http_listen_thread, server);
