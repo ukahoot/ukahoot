@@ -8,5 +8,5 @@
 
 int main(int argc, char* argv[]) {
 	setup_openssl();
-	httpserv* h = init_http_server(5556);
+	httpserv* h = http_init_server(5556);
 };

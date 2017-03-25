@@ -20,7 +20,7 @@ typedef struct {
     int fd;
 } httpcli;
 
-httpserv* init_http_server(int port) {
+httpserv* http_init_server(int port) {
     httpserv* server = malloc(sizeof(httpserv)); // Create HTTP server structure
     server->sockfd = socket(AF_INET, SOCK_STREAM, 0);
     server->addr.sin_family = AF_INET;
@@ -30,4 +30,4 @@ httpserv* init_http_server(int port) {
     server->portno = port;
     bind(server->sockfd, (struct sockaddr *) &server->addr, sizeof(server->addr));
     return server;
-}
+};
