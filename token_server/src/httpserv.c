@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <pthread.h>
+#include <errno.h>
 
 typedef struct {
     pthread_t tid;
@@ -61,9 +62,13 @@ httpserv* http_init_server(int port, int backlog) {
     
     server->addr.sin_port = htons(port);
     server->portno = port;
-    bind(server->sockfd,
+    int e = bind(server->sockfd,
         (struct sockaddr *) &server->addr,
          sizeof(server->addr));
+    if (e < 0) {
+        printf("%s%s\n", "Bind error: ", strerror(errno));
+        exit(1);
+    }
     return server;
 };
 void* http_listen_thread(void* vargp) {
