@@ -25,6 +25,7 @@ typedef struct {
 
 void* http_handle_client(void* vargp) {
     httpcli* cli = (httpcli*) vargp;
+    printf("%s\n", "Accepted new connection");
     char* cli_req = malloc(512); // TODO: Make SURE this is free'd
     int e; // For read/write return values
     e = read(cli->fd, cli_req, 511);
