@@ -1,0 +1,14 @@
+{  
+   "version": "1.0",
+   "type": "rich",
+   "width": 800,
+   "height": 600,
+   "provider_name": "kahoot.it",
+   "provider_url":"http://ukahoot.it/",
+   "thumbnail_url":"http://ukahoot.it/assets/icon.png",
+   "thumbnail_width": 256,
+   "thumbnail_height": 256,
+   "title":"ukahoot - kahoot improved",
+   "url":"http://ukahoot.it/",
+   "html":"<iframe src=\"http://ukahoot.it/\" sandbox=\"allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts\" width=\"256\" height=\"256\" frameborder=\"0\"></iframe>"
+}
