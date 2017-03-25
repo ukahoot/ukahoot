@@ -30,12 +30,23 @@ void* http_handle_client(void* vargp) {
     e = read(cli->fd, cli_req, 511);
     if (e < 0) {
         // Read error, destroy and close socket
+        printf("%s\n", "Client read error, closing socket.");
         close(cli->fd);
         free(cli);
         free(cli_req);
     } else {
         // Safe to write
-        write(cli->fd, "HTTP/1.1 200 OK\r\n\r\n", 19);
+        e = write(cli->fd, "HTTP/1.1 200 OK\r\ntest\r\n", 23);
+        if (e < 0) {
+            // Write error, destroy and close socket
+            printf("%s\n", "Client write error, closing socket.");
+            close(cli->fd);
+            free(cli);
+            free(cli_req);
+        } else {
+            // Write success
+            close(cli->fd);
+        }
         // TODO: Handle client's request
     }
 }
