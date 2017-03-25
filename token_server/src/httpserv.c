@@ -33,8 +33,8 @@ httpserv* http_init_server(int port) {
     return server;
 };
 void* http_listen_thread(void* vargp) {
-    printf("HTTP server started.\n");
-    // TODO: handle HTTP server creation
+    httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
+    listen(h->sockfd, 5);
 };
 void http_server_listen(httpserv* server) {
     pthread_create(&server->tid, NULL, http_listen_thread, server);
