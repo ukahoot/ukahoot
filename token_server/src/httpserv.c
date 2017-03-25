@@ -25,6 +25,19 @@ typedef struct {
 
 void* http_handle_client(void* vargp) {
     httpcli* cli = (httpcli*) vargp;
+    char* cli_req = malloc(512); // TODO: Make SURE this is free'd
+    int e; // For read/write return values
+    e = read(cli->fd, cli_req, 511);
+    if (e < 0) {
+        // Read error, destroy and close socket
+        close(cli->fd);
+        free(cli);
+        free(cli_req);
+    } else {
+        // Safe to write
+        write(cli->fd, "HTTP/1.1 200 OK\r\n\r\n", 19);
+        // TODO: Handle client's request
+    }
 }
 
 httpserv* http_init_server(int port, int backlog) {
