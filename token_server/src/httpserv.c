@@ -36,7 +36,9 @@ httpserv* http_init_server(int port, int backlog) {
     
     server->addr.sin_port = htons(port);
     server->portno = port;
-    bind(server->sockfd, (struct sockaddr *) &server->addr, sizeof(server->addr));
+    bind(server->sockfd,
+        (struct sockaddr *) &server->addr,
+         sizeof(server->addr));
     return server;
 };
 void* http_listen_thread(void* vargp) {
