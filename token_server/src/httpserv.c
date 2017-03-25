@@ -95,8 +95,12 @@ void* http_listen_thread(void* vargp) {
             pthread_join(cli->tid, NULL);
         }
     }
+    free(h); // Destroy the server after the accept loop is over
 };
 void http_server_listen(httpserv* server) {
     pthread_create(&server->tid, NULL, http_listen_thread, server);
     pthread_join(server->tid, NULL);
 };
+void http_server_stop(httpserv* h) {
+    h->running = 0;
+}
