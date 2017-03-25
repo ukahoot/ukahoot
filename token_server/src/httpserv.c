@@ -12,6 +12,7 @@ typedef struct {
     pthread_t tid;
     int portno;
     int sockfd;
+    int backl;
     struct sockaddr_in addr;
 } httpserv;
 
@@ -21,8 +22,9 @@ typedef struct {
     int fd;
 } httpcli;
 
-httpserv* http_init_server(int port) {
+httpserv* http_init_server(int port, int backlog) {
     httpserv* server = malloc(sizeof(httpserv)); // Create HTTP server structure
+    server->backl = backlog;
     server->sockfd = socket(AF_INET, SOCK_STREAM, 0);
     server->addr.sin_family = AF_INET;
     server->addr.sin_addr.s_addr = INADDR_ANY;
@@ -34,7 +36,7 @@ httpserv* http_init_server(int port) {
 };
 void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
-    listen(h->sockfd, 5);
+    listen(h->sockfd, h->backl);
 };
 void http_server_listen(httpserv* server) {
     pthread_create(&server->tid, NULL, http_listen_thread, server);
