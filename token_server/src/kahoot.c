@@ -51,6 +51,7 @@ char* get_pid_query(char* req) {
                     pid = realloc(pid, pidlen); // Allign the buffer to it's size
                     return pid;
                 } else {
+                    free(pid);
                     return NULL;
                 }
             } else {
