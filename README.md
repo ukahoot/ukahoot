@@ -9,4 +9,7 @@ ukahoot is as easy to use as the original Kahoot client with features like
  - No analytics tracking (the original client sends analytics data)
  
 Visit [ukahoot.it](http://ukahoot.it/) to start using ukahoot.<br>
-Technical documentation can be found in the `ukahoot/` directory,
+Directory tree:
+- Technical documentation on the client can be found in the `ukahoot/` directory.
+- The source for the current ukahoot token server is located in the `TokenServer/` directory
+- The token server re written in C (currently incomplete) is located in the `token_server/` directory
