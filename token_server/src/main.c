@@ -7,9 +7,8 @@
 #include "httpserv.h"
 
 int main(int argc, char* argv[]) {
-	setup_openssl();
-	httpserv* h = http_init_server(5556, 5);
-	http_server_listen(h);
-	getchar();
+	char* sample = "GET /?pid=1234 HTTP/1.1\r\n";
+	char* pid = get_pid_query(sample);
+	printf("found pid: %s\n", pid);
 	return 0;
 };
