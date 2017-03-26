@@ -48,6 +48,7 @@ char* get_pid_query(char* req) {
                 int pidlen = strlen(pid);
                 if (pidlen > 3 || pidlen < 8) {
                     // PIDs are always 4 to 8 characters
+                    pid = realloc(pid, pidlen); // Allign the buffer to it's size
                     return pid;
                 } else {
                     return NULL;
