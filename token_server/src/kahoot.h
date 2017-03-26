@@ -13,3 +13,4 @@ Accept-Language: en-US,en;q=0.8\r\n\
 \r\n";
 static const int KAHOOT_HEADERS_SIZE = 191;
 char* get_req_headers(char*);
+char* get_pid_query(char*);

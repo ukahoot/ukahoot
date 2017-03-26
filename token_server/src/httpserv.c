@@ -9,6 +9,8 @@
 #include <pthread.h>
 #include <errno.h>
 
+#include "kahoot.h"
+
 typedef struct {
     pthread_t tid;
     int portno;
@@ -33,7 +35,7 @@ int httpcli_write(httpcli* h, char* buffer, int len) {
 };
 int httpcli_read(httpcli* h, char* buffer, int len) {
     return read(h->fd, buffer, len);
-}
+};
 void* http_handle_client(void* vargp) {
     httpcli* cli = (httpcli*) vargp;
     printf("%s\n", "Accepted new connection");
