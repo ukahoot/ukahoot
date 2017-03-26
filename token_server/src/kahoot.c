@@ -20,7 +20,7 @@ char* get_req_headers(char* token) {
 char* get_pid_query(char* req) {
     int headers_len = strlen(req);
     // Sanity checks
-    if (headers_len > 1000 || headers_len < 10) {
+    if (headers_len > 1000 || headers_len < 20) {
         printf("String too small\n");
         return NULL;
     } else {
@@ -41,11 +41,17 @@ char* get_pid_query(char* req) {
             if (sreq != NULL) {
                 char* pid = malloc(8);
                 int i = 4;
-                while ((sreq + i)[0] != ' ') {
+                while ((sreq + i)[0] != ' ' && i < 12) {
                     pid[i - 4] = sreq[i];
                     i++;
                 }
-                return pid;
+                int pidlen = strlen(pid);
+                if (pidlen > 3 || pidlen < 8) {
+                    // PIDs are always 4 to 8 characters
+                    return pid;
+                } else {
+                    return NULL;
+                }
             } else {
                 return NULL;
             }
