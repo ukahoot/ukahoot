@@ -6,9 +6,12 @@
 #include "kahoot.h"
 #include "httpserv.h"
 
+#define PORT 5556
+#define BACKLOG 5
+
 int main(int argc, char* argv[]) {
-	char* sample = "GET /?pid= HTTP/1.1\r\n";
-	char* pid = get_pid_query(sample);
-	printf("found pid: %s\n", pid);
-	return 0;
+	httpserv* h = http_init_server(PORT, BACKLOG);
+	printf("Press enter to exit\n");
+	http_server_listen(h);
+	getchar();
 };
