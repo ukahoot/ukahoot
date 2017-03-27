@@ -88,6 +88,8 @@ char* request_kahoot_token(req* request, char* PID) {
     // Free resources
     free(headers);
     free(chunk);
+    // Shutdown request
+    request_close(request);
 
     if (e == 0 || e == -1)
         return NULL;
