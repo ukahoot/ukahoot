@@ -10,8 +10,8 @@
 #define BACKLOG 5
 
 int main(int argc, char* argv[]) {
-	httpserv* h = http_init_server(PORT, BACKLOG);
-	printf("Press enter to exit\n");
-	http_server_listen(h);
-	getchar();
+	setup_openssl();
+	req* r = init_request();
+	char* res = request_kahoot_token(r, "4979813");
+	printf("%s\n", res);
 };
