@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 	setup_openssl();
 	printf("Starting HTTP server\n");
 	httpserv* h = http_init_server(PORT, BACKLOG);
-	printf("Listening HTTP server on %d with backlog %d",
+	printf("Listening HTTP server on %d with backlog %d\n",
 	PORT, BACKLOG);
 	http_server_listen(h);
 	printf("Press enter to exit\n");

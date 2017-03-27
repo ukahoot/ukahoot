@@ -87,7 +87,7 @@ httpserv* http_init_server(int port, int backlog) {
 };
 void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
-    printf("Listening on port %d", h->portno);
+    printf("Listening on port %d\n", h->portno);
     listen(h->sockfd, h->backl);
     while (h->running) {
         httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd
