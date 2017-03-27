@@ -38,7 +38,6 @@ int httpcli_read(httpcli* h, char* buffer, int len) {
 };
 void* http_handle_client(void* vargp) {
     httpcli* cli = (httpcli*) vargp;
-    printf("%s\n", "Accepted new connection");
     char* cli_req = malloc(512); // TODO: Make SURE this is free'd
     int e; // For read/write return values
     e = read(cli->fd, cli_req, 511);
@@ -51,22 +50,18 @@ void* http_handle_client(void* vargp) {
         free(cli_req);
     } else {
         // Safe to write
-        e = write(cli->fd, "HTTP/1.1 200 OK\r\n\r\ntest", 23);
-        if (e < 0) {
-            // Write error, destroy and close socket
-            printf("%s%s%s\n",
-            "Client write error: ",
-            strerror(errno), ". Closing socket.");
+        char* pid = get_pid_query(cli_req);
+        if (pid == NULL) {
+            // Invalid request
+            printf("%s\n", "Rejected invalid request");
+            e = httpcli_write(cli, RES_FAIL, RES_FAIL_LEN);
             close(cli->fd);
             free(cli);
             free(cli_req);
         } else {
-            // Write success
-            close(cli->fd);
-            free(cli);
-            free(cli_req);
+            // Valid request
+            // TODO: handle valid requests
         }
-        // TODO: Handle client's request
     }
 };
 
