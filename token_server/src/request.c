@@ -72,26 +72,46 @@ void request_free(req* request) {
 char* request_kahoot_token(req* request, char* PID) {
     char* headers = get_req_headers(PID);
     char* res = malloc(2048); // Buffer the response will be written to
-    char* chunk = malloc(512); // Buffer that holds the response chunks
 
     request_connect(request);
     int e = request_write_str(request, headers);
-    int siz = 0;
+    if (e < 0) {
+        // Unsuccessful write
+        free(headers);
+        free(res);
+        return NULL;
+    }
+    char* chunk = malloc(512); // Buffer that holds the response chunks
     e = request_read(request, chunk, 512);
+    if (e < 0) {
+        // Unsuccessful read
+        free(headers);
+        free(res);
+        free(chunk);
+        return NULL;
+    }
     strcat(res, chunk); // Initial headers
     e = 256;
-
-    while(e == 256) {
-        e = request_read(request, chunk, 256);
-        strncat(res, chunk, e);
-    };
-    // Free resources
-    free(headers);
-    free(chunk);
-    // Shutdown request
-    request_close(request);
-
-    if (e == 0 || e == -1)
+    if (strstr(res, "Not Found")) {
+        // The request is not chunked and should be shut down
+        request_close(request);
+        free(res);
+        free(headers);
+        free(chunk);
         return NULL;
-    return res;
+    } else {
+        while(e == 256) {
+            e = request_read(request, chunk, 256);
+            strncat(res, chunk, e);
+        };
+        // Free resources
+        free(headers);
+        free(chunk);
+        // Shutdown request
+        request_close(request);
+
+        if (e < 0)
+            return NULL;
+        return res;
+    }
 };
