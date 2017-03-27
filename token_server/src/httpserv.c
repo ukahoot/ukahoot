@@ -10,6 +10,7 @@
 #include <errno.h>
 
 #include "kahoot.h"
+#include "request.h"
 
 typedef struct {
     pthread_t tid;
@@ -60,7 +61,13 @@ void* http_handle_client(void* vargp) {
             free(cli_req);
         } else {
             // Valid request
-            // TODO: handle valid requests
+            req* cli_req = init_reqest(); // TODO: make sure this memory is properly handled with request_free
+            char* token_res = request_kahoot_token(req, pid); // TODO: make sure this memory is free'd
+            if (token_res) {
+                // TODO: handle valid token requests
+            } else {
+                // TODO: handle invalid token requests
+            }
         }
     }
 };
