@@ -102,7 +102,12 @@ char* request_kahoot_token(req* request, char* PID) {
     } else {
         while(e == 256) {
             e = request_read(request, chunk, 256);
-            strncat(res, chunk, e);
+            if (e < 0) {
+                // Unsuccessful read
+                break;
+            } else {
+                strncat(res, chunk, e);
+            }
         };
         // Free resources
         free(headers);
