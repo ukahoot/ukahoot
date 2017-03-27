@@ -75,6 +75,7 @@ httpserv* http_init_server(int port, int backlog) {
     
     server->addr.sin_port = htons(port);
     server->portno = port;
+    printf("Attempting to bind server\n");
     int e = bind(server->sockfd,
         (struct sockaddr *) &server->addr,
          sizeof(server->addr));
@@ -86,6 +87,7 @@ httpserv* http_init_server(int port, int backlog) {
 };
 void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
+    printf("Listening on port %d", h->portno);
     listen(h->sockfd, h->backl);
     while (h->running) {
         httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd
