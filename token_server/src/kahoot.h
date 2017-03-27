@@ -18,6 +18,9 @@ Content-Length: 166\r\n\
 \r\n"
 #define RES_SUCCESS_HEADERS_LEN 166
 
+#define RES_FAIL_REQUEST "{\"error\": \"true\",\
+\"responseCode\": \"404\"}"
+
 static const char* KAHOOT_TOKEN_GET = "GET /reserve/session/";
 static int KAHOOT_GET_LEN = 22;
 static const char* KAHOOT_TOKEN_HEADERS = " HTTP/1.1\r\n\
