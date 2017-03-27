@@ -25,8 +25,7 @@ void setup_openssl(void) {
 };
 void unload_ctx(void) {
     SSL_CTX_free(ssl_context);
-}
-
+};
 req* init_request(void) {
     req* request;
     request = malloc(sizeof(req)); // Allocate a request on the heap

@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "request.h"
-#include "kahoot.h"
 #include "httpserv.h"
+#include "request.h"
 
 #define PORT 5556
 #define BACKLOG 5
