@@ -106,6 +106,7 @@ char* request_kahoot_token(req* request, char* PID) {
                 // Unsuccessful read
                 break;
             } else {
+                // Successful read
                 strncat(res, chunk, e);
             }
         };
@@ -115,8 +116,11 @@ char* request_kahoot_token(req* request, char* PID) {
         // Shutdown request
         request_close(request);
 
-        if (e < 0)
+        if (e < 0) {
+            free(res);
             return NULL;
-        return res;
+        } else {
+            return res;
+        }
     }
 };
