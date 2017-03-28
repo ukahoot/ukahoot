@@ -61,6 +61,7 @@ int request_read(req* request, char* buffer, int len) {
     return e;
 };
 void request_close(req* request) {
+    SSL_clear(request->conn);
     SSL_shutdown(request->conn);
     close(request->sockfd);
 };
