@@ -55,7 +55,8 @@ void* http_handle_client(void* vargp) {
         if (pid == NULL) {
             // Invalid request
             printf("%s\n", "Rejected invalid request");
-            e = httpcli_write(cli, RES_403_FAIL, RES_403_FAIL_LEN);
+            e = httpcli_write(cli, RES_403_FAIL,
+                            RES_403_FAIL_LEN);
             close(cli->fd);
             free(cli);
             free(cli_req);
@@ -66,7 +67,13 @@ void* http_handle_client(void* vargp) {
             if (token_res) {
                 // TODO: handle valid token requests
             } else {
-                // TODO: handle invalid token requests
+                // Invalid request, end with fail response
+                e = httpcli_write(cli, RES_FAIL_REQUEST,
+                                RES_FAIL_LEN);
+                close(cli->fd);
+                free(cli);
+                free(cli_req);
+                request_free(cli_req);
             }
         }
     }
