@@ -61,5 +61,14 @@ char* get_pid_query(char* req) {
     }
 };
 char* get_header_token(char* response) {
-    //
+    char* t_header = strstr(response, KAHOOT_SESSION_HEADER);
+    if (t_header == NULL) {
+        return NULL;
+    } else {
+        t_header = t_header + SESSION_HEADER_LEN;
+        char* token = malloc(129); // Return value
+        memcpy(token, t_header, 128);
+        token[128] = '\0';
+        return token;
+    }
 };

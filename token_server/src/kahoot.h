@@ -31,6 +31,9 @@ Content-Length: 39\r\n\
 \"responseCode\": \"404\"}"
 #define RES_FAIL_LEN 205
 
+#define KAHOOT_SESSION_HEADER "x-kahoot-session-token:"
+#define SESSION_HEADER_LEN 24 // One character larger than the header because of the space between the header and value
+
 static const char* KAHOOT_TOKEN_GET = "GET /reserve/session/";
 static int KAHOOT_GET_LEN = 22;
 static const char* KAHOOT_TOKEN_HEADERS = " HTTP/1.1\r\n\
