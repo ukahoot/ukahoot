@@ -48,7 +48,7 @@ char* get_pid_query(char* req) {
                 int pidlen = strlen(pid);
                 if (pidlen > 3 || pidlen < 8) {
                     // PIDs are always 4 to 8 characters
-                    pid = realloc(pid, pidlen); // Allign the buffer to it's size
+                    pid = realloc(pid, pidlen); // Align the buffer to it's size
                     return pid;
                 } else {
                     free(pid);
@@ -79,11 +79,14 @@ char* get_response_body(char* response) {
         return NULL;
     } else {
         char* res_body = malloc(MAX_BODY_SIZE);
+        memset(res_body, 0, MAX_BODY_SIZE);
         int i = 0;
-        while ((res_start + i)[0] != '\n' && i < MAX_BODY_SIZE) {
-            res_body[i] = res_start[i];
+        while ((res_start + i)[0] != '\r'&&
+                i < MAX_BODY_SIZE) {
+            (res_body + i)[0] = (res_start + i)[0];
             ++i;
         }
+        res_body = realloc(res_body, strlen(res_body) + 1); // Align buffer to string size
         return res_body;
     }
 };
@@ -100,10 +103,9 @@ char* get_json_response(char* token_h, char* res_body) {
     int o = 0;
     while ((res_body + i)[0] != '\0') {
         if ((res_body + i)[0] == '\"') {
-            //(tmp_body
-            (tmp_body + o)[0] = '\\';
+            (tmp_body + o)[0] = '\\'; // Append the '\' character
             ++o;
-            (tmp_body + o)[0] = '"';
+            (tmp_body + o)[0] = '"'; // Append a quote
         } else {
             memcpy(tmp_body + o, (res_body + i), 1);
         }

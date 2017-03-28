@@ -27,7 +27,6 @@ int main(int argc, char* argv[]) {
 	if (!htoken) return 1;
 	char* res_body = get_response_body(HEADERS);
 	if (!res_body) return 1;
-	char* json = get_json_response(htoken, res_body);
-	printf("%s\n", json);
+	else printf("%s\n", res_body);
 	return 0;
 };
