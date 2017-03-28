@@ -72,7 +72,6 @@ void* http_handle_client(void* vargp) {
                                 RES_FAIL_LEN);
                 close(cli->fd);
                 free(cli);
-                free(cli_req);
                 request_free(cli_req);
             }
         }
