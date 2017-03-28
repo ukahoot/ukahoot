@@ -10,12 +10,8 @@
 
 int main(int argc, char* argv[]) {
 	setup_openssl();
-	printf("Starting HTTP server\n");
-	httpserv* h = http_init_server(PORT, BACKLOG);
-	printf("Listening HTTP server on %d with backlog %d\n",
-	PORT, BACKLOG);
-	http_server_listen(h);
-	printf("Press enter to exit\n");
-	getchar();
+	req* r = init_request();
+	char* res = request_kahoot_token(r, "6573712");
+	printf("%s\n", res);
 	return 0;
 };

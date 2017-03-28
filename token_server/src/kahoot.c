@@ -60,3 +60,6 @@ char* get_pid_query(char* req) {
         }
     }
 };
+char* get_header_token(char* response) {
+    //
+};
