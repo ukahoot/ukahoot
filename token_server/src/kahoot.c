@@ -72,3 +72,6 @@ char* get_header_token(char* response) {
         return token;
     }
 };
+char* get_response_body(char* response) {
+    //
+}
