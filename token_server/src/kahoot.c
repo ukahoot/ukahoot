@@ -68,10 +68,22 @@ char* get_header_token(char* response) {
         t_header = t_header + SESSION_HEADER_LEN;
         char* token = malloc(129); // Return value
         memcpy(token, t_header, 128);
-        token[128] = '\0';
+        token[128] = '\0'; // Make sure a null byte is present
         return token;
     }
 };
 char* get_response_body(char* response) {
-    //
+    char* res_start = strstr(response, KAHOOT_RES_START);
+    if (res_start == NULL) {
+        // Substring couldn't be found for some reason
+        return NULL;
+    } else {
+        char* res_body = malloc(MAX_BODY_SIZE);
+        int i = 0;
+        while ((res_start + i)[0] != '\r' && i < MAX_BODY_SIZE) {
+            res_body[i] = res_start[i];
+            ++i;
+        }
+        return res_body;
+    }
 }

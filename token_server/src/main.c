@@ -26,5 +26,9 @@ int main(int argc, char* argv[]) {
 	char* htoken = get_header_token(HEADERS);
 	if (htoken) printf("found token %s\n", htoken);
 	else printf("not found\n");
+	free(htoken);
+	char* res_body = get_response_body(HEADERS);
+	if (res_body) printf("found res_body %s\n", res_body);
+	else printf("not found\n");
 	return 0;
 };

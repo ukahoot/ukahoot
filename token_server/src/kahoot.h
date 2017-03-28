@@ -33,6 +33,10 @@ Content-Length: 39\r\n\
 
 #define KAHOOT_SESSION_HEADER "x-kahoot-session-token:"
 #define SESSION_HEADER_LEN 24 // One character larger than the header because of the space between the header and value
+#define MAX_BODY_SIZE 500 // Roughly the largest length of a Kahoot token response
+
+#define KAHOOT_RES_START "{\"twoFactorAuth\":"
+#define KAHOOT_RES_START_LEN 17
 
 static const char* KAHOOT_TOKEN_GET = "GET /reserve/session/";
 static int KAHOOT_GET_LEN = 22;
