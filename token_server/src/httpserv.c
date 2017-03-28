@@ -62,9 +62,9 @@ void* http_handle_client(void* vargp) {
             free(cli_req);
         } else {
             // Valid request
-            req* cli_req = init_request(); // TODO: make sure this memory is properly handled with request_free
             char* token_res = request_kahoot_token(cli_req, pid); // TODO: make sure this memory is free'd
             if (token_res) {
+                req* cli_req = init_request(); // TODO: make sure this memory is properly handled with request_free
                 // TODO: handle valid token requests
             } else {
                 // Invalid request, end with fail response
@@ -73,7 +73,6 @@ void* http_handle_client(void* vargp) {
                 close(cli->fd);
                 free(cli);
                 free(cli_req);
-                request_free(cli_req);
             }
         }
     }
