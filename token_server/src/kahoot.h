@@ -3,13 +3,13 @@
 #define KAHOOT_SSL_PORT 443
 #define KAHOOT_HOST_URI "kahoot.it"
 
-#define RES_FAIL "HTTP/1.1 403 FORBIDDEN\r\n\
+#define RES_403_FAIL "HTTP/1.1 403 FORBIDDEN\r\n\
 Access-Control-Allow-Origin: *\r\n\
 Content-Type: application/json\r\n\
 Server: ukahoot_token_server\r\n\
 Keep-Alive: timeout=15,max=100\r\n\
 \r\n"
-#define RES_FAIL_LEN 152
+#define RES_403_FAIL_LEN 152
 
 #define RES_SUCCESS_HEADERS "HTTP/1.1 200 OK\r\n\
 Access-Control-Allow-Origin: *\r\n\
@@ -20,8 +20,16 @@ Content-Length: 166\r\n\
 \r\n"
 #define RES_SUCCESS_HEADERS_LEN 166
 
-#define RES_FAIL_REQUEST "{\"error\": \"true\",\
+#define RES_FAIL_REQUEST "HTTP/1.1 200 OK\r\n\
+Access-Control-Allow-Origin: *\r\n\
+Content-Type: application/json\r\n\
+Server: ukahoot_token_server\r\n\
+Keep-Alive: timeout=15,max=100\r\n\
+Content-Length: 39\r\n\
+\r\n\
+{\"error\": \"true\",\
 \"responseCode\": \"404\"}"
+#define RES_FAIL_LEN 205
 
 static const char* KAHOOT_TOKEN_GET = "GET /reserve/session/";
 static int KAHOOT_GET_LEN = 22;
