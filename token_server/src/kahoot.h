@@ -14,7 +14,7 @@ Keep-Alive: timeout=15,max=100\r\n\
 #define RES_SUCCESS_HEADERS "HTTP/1.1 200 OK\r\n\
 Access-Control-Allow-Origin: *\r\n\
 Content-Type: application/json\r\n\
-Server: ukahoot_token_server\r\n\
+Server: ukahoot-token-server\r\n\
 Keep-Alive: timeout=15,max=100\r\n\
 Content-Length: 166\r\n\
 \r\n"
@@ -23,7 +23,7 @@ Content-Length: 166\r\n\
 #define RES_FAIL_REQUEST "HTTP/1.1 200 OK\r\n\
 Access-Control-Allow-Origin: *\r\n\
 Content-Type: application/json\r\n\
-Server: ukahoot_token_server\r\n\
+Server: ukahoot-token-server\r\n\
 Keep-Alive: timeout=15,max=100\r\n\
 Content-Length: 39\r\n\
 \r\n\
