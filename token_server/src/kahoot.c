@@ -86,4 +86,14 @@ char* get_response_body(char* response) {
         }
         return res_body;
     }
+};
+char* get_json_response(char* token_h, char* res_body) {
+    char* json_res = malloc(1024);
+    strcpy(json_res, "{\"tokenHeader\":\"");
+    strcat(json_res, token_h);
+    strcat(json_res, "\",\"responseBody\":");
+    strcat(json_res, res_body);
+    strcat(json_res, "\"}");
+    json_res = realloc(json_res, strlen(json_res) + 1); // Allign the memory block to the string size
+    return json_res;
 }

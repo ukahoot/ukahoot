@@ -24,11 +24,8 @@ x-kahoot-session-token: UhMIEhNAWF8LCgRTUSdNKwx+LWBRW39dfjoTTmwAcXBwCDdZDV1qfXcJ
 int main(int argc, char* argv[]) {
 	setup_openssl();
 	char* htoken = get_header_token(HEADERS);
-	if (htoken) printf("found token %s\n", htoken);
-	else printf("not found\n");
-	free(htoken);
+	if (!htoken) return 1;
 	char* res_body = get_response_body(HEADERS);
-	if (res_body) printf("found res_body %s\n", res_body);
-	else printf("not found\n");
+	if (!res_body) return 1;
 	return 0;
 };

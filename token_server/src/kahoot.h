@@ -54,3 +54,4 @@ char* get_req_headers(char*);
 char* get_pid_query(char*);
 char* get_header_token(char*);
 char* get_response_body(char*);
+char* get_json_response(char*, char*);
