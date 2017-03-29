@@ -117,4 +117,17 @@ char* get_json_response(char* token_h, char* res_body) {
     strcat(json_res, "\"}");
     json_res = realloc(json_res, strlen(json_res) + 1); // Allign the memory block to the string size
     return json_res;
+};
+char* __get_http_response(char* json_res) {
+    char* res = malloc(1024);
+    char* json_len = malloc(20);
+    sprintf(json_len, "%d", strlen(json_res)); // Format response length to string
+    // Create response string
+    strcpy(res, RES_JSON_HEADERS); // Copy success headers into buffer
+    strcat(res, json_len);
+    free(json_len); // No longer needed
+    strcat(res, "\r\n\r\n");
+    strcat(res, json_res);
+    free(json_res);
+    return res;
 }

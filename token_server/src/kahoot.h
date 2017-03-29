@@ -16,9 +16,15 @@ Access-Control-Allow-Origin: *\r\n\
 Content-Type: application/json\r\n\
 Server: ukahoot-token-server\r\n\
 Keep-Alive: timeout=15,max=100\r\n\
-Content-Length: 166\r\n\
 \r\n"
 #define RES_SUCCESS_HEADERS_LEN 166
+
+#define RES_JSON_HEADERS "HTTP/1.1 200 OK\r\n\
+Access-Control-Allow-Origin: *\r\n\
+Content-Type: application/json\r\n\
+Server: ukahoot-token-server\r\n\
+Keep-Alive: timeout=15,max=100\r\n\
+Content-Length: " // Purposely unfinished so more can be appended
 
 #define RES_FAIL_REQUEST "HTTP/1.1 200 OK\r\n\
 Access-Control-Allow-Origin: *\r\n\
@@ -55,3 +61,6 @@ char* get_pid_query(char*);
 char* get_header_token(char*);
 char* get_response_body(char*);
 char* get_json_response(char*, char*);
+// For creating a full HTTP response with headers
+char* __get_http_response(char*);
+char* get_http_response(char*, char*);
