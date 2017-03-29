@@ -21,7 +21,8 @@ char* get_pid_query(char* req) {
     int headers_len = strlen(req);
     // Sanity checks
     if (headers_len > 1000 || headers_len < 40) {
-        printf("String too small\n");
+        log_all("String is out of bounds");
+        printf("%d\n", headers_len);
         return NULL;
     } else {
         if (req[0] != 'G' || // Check for GET request
