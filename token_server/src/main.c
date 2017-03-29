@@ -23,10 +23,8 @@ x-kahoot-session-token: UhMIEhNAWF8LCgRTUSdNKwx+LWBRW39dfjoTTmwAcXBwCDdZDV1qfXcJ
 
 int main(int argc, char* argv[]) {
 	setup_openssl();
-	char* htoken = get_header_token(HEADERS);
-	if (!htoken) return 1;
-	char* res_body = get_response_body(HEADERS);
-	if (!res_body) return 1;
-	else printf("%s\n", res_body);
-	return 0;
+	httpserv* h = http_init_server(PORT, BACKLOG);
+	http_server_listen(h);
+	printf("press any key to terminate");
+	getchar();
 };

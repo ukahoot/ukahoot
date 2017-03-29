@@ -65,7 +65,34 @@ void* http_handle_client(void* vargp) {
             req* cli_req = init_request(); // TODO: make sure this memory is properly handled with request_free
             char* token_res = request_kahoot_token(cli_req, pid); // TODO: make sure this memory is free'd
             if (token_res) {
-                // TODO: handle valid token requests
+                char* header_token = get_header_token(token_res);
+                char* body = get_response_body(token_res);
+                if (header_token != NULL &&
+                    body != NULL) {
+                        char* response = get_json_response(header_token, body);
+                        /*
+                        e = httpcli_write(cli, response, strlen(response));
+                        if (e) {
+                            // TODO: Log client write error
+                        }
+                        // Free all resources
+                        free(response);
+                        free(header_token);
+                        free(body);
+                        close(cli->fd);
+                        free(cli);
+                        request_free(cli_req);
+                        */
+                    } else {
+                        // There was some issue parsing the response
+                        free(header_token);
+                        free(body); // Free parsed strings
+                        e = httpcli_write(cli, RES_FAIL_REQUEST,
+                                RES_FAIL_LEN);
+                        close(cli->fd);
+                        free(cli);
+                        request_free(cli_req);
+                    }
             } else {
                 // Invalid request, end with fail response
                 e = httpcli_write(cli, RES_FAIL_REQUEST,
