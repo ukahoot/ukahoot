@@ -9,7 +9,7 @@
 
 #define PORT 5556
 #define BACKLOG 5
-#define HEADERS "HTTP/1.1 200 OK\r\n\
+#define SAMPLE_HEADERS "HTTP/1.1 200 OK\r\n\
 Server: openresty/1.11.2.2\r\n\
 Date: Tue, 28 Mar 2017 14:55:03 GMT\r\n\
 Content-Type: application/json\r\n\

@@ -9,6 +9,7 @@
 static int logger_mode = 0;
 void set_logger_mode(int);
 void log_info(const char*);
+void log_infod(const char*, int);
 void log_warn(const char*);
 void log_debug(const char*);
 void log_all(const char*);

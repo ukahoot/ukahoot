@@ -74,6 +74,8 @@ void* http_handle_client(void* vargp) {
                         e = httpcli_write(cli, response, strlen(response));
                         if (e) {
                             log_error("Couldn't write response to socket, closing connection");
+                        } else {
+                            log_all("Wrote successfull response to client");
                         }
                         // Free all resources
                         free(response);
@@ -84,7 +86,7 @@ void* http_handle_client(void* vargp) {
                         request_free(cli_req);
                     } else {
                         // There was some issue parsing the response
-                        log_error("The response from Kahoot couldn't be processed, closing connection");
+                        log_error("The API response couldn't be parsed, closing connection");
                         free(header_token);
                         free(body); // Free parsed strings
                         e = httpcli_write(cli, RES_FAIL_REQUEST,
@@ -121,14 +123,14 @@ httpserv* http_init_server(int port, int backlog) {
         (struct sockaddr *) &server->addr,
          sizeof(server->addr));
     if (e < 0) {
-        printf("%s%s\n", "Bind error: ", strerror(errno));
+        log_fatal("Couldn't bind socket. Make sure the port is unused.");
         exit(1);
     }
     return server;
 };
 void* http_listen_thread(void* vargp) {
     httpserv* h = (httpserv*)vargp; // Cast the argument to an httpserv
-    printf("Listening on port %d\n", h->portno);
+    log_infod("HTTP server listening on port ", h->portno);
     listen(h->sockfd, h->backl);
     while (h->running) {
         httpcli* cli = malloc(sizeof(httpcli)); // TODO: Make SURE this is free'd

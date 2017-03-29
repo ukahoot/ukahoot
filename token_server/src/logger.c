@@ -16,6 +16,11 @@ void log_info(const char* msg) {
         printf(CLR_GRN "[INFO]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
     }
 };
+void log_infod(const char* msg, int i_) {
+    if (logger_mode >= LOG_MODE_INFO) {
+        printf(CLR_GRN "[INFO]" CLR_RESET CLR_WHT " %s%d" CLR_RESET "\n", msg, i_);
+    }
+};
 void log_warn(const char* msg) {
     if (logger_mode >= LOG_MODE_WARN) {
         printf(CLR_YEL "[WARN]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
