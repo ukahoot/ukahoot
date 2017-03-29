@@ -69,8 +69,7 @@ void* http_handle_client(void* vargp) {
                 char* body = get_response_body(token_res);
                 if (header_token != NULL &&
                     body != NULL) {
-                        char* response = get_json_response(header_token, body);
-                        /*
+                        char* response = get_http_response(header_token, body);
                         e = httpcli_write(cli, response, strlen(response));
                         if (e) {
                             // TODO: Log client write error
@@ -82,7 +81,6 @@ void* http_handle_client(void* vargp) {
                         close(cli->fd);
                         free(cli);
                         request_free(cli_req);
-                        */
                     } else {
                         // There was some issue parsing the response
                         free(header_token);
