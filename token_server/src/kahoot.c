@@ -121,7 +121,7 @@ char* get_json_response(char* token_h, char* res_body) {
 char* __get_http_response(char* json_res) {
     char* res = malloc(1024);
     char* json_len = malloc(20);
-    sprintf(json_len, "%d", strlen(json_res)); // Format response length to string
+    sprintf(json_len, "%zu", strlen(json_res)); // Format response length to string
     // Create response string
     strcpy(res, RES_JSON_HEADERS); // Copy success headers into buffer
     strcat(res, json_len);
@@ -130,4 +130,8 @@ char* __get_http_response(char* json_res) {
     strcat(res, json_res);
     free(json_res);
     return res;
+};
+char* get_http_response(char* token_header, char* res_body) {
+    char* json = get_json_response(token_header, res_body);
+    return __get_http_response(json);
 }
