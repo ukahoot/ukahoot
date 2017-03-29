@@ -1,3 +1,5 @@
+#pragma once
+
 #define LOG_MODE_INFO   0 // Default
 #define LOG_MODE_WARN   1
 #define LOG_MODE_DEBUG  2
@@ -9,3 +11,4 @@ void log_info(const char*);
 void log_warn(const char*);
 void log_debug(const char*);
 void log_all(const char*);
+void log_error(const char*);

@@ -12,7 +12,25 @@ void set_logger_mode(int mode) {
     }
 };
 void log_info(const char* msg) {
-    if (logger_mode >= 0) {
-        printf(CLR_GRN "[INFO]" CLR_RESET " %s\n", msg);
+    if (logger_mode >= LOG_MODE_INFO) {
+        printf(CLR_GRN "[INFO]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
     }
 };
+void log_warn(const char* msg) {
+    if (logger_mode >= LOG_MODE_WARN) {
+        printf(CLR_YEL "[WARN]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
+    }
+};
+void log_debug(const char* msg) {
+    if (logger_mode >= LOG_MODE_DEBUG) {
+        printf(CLR_CYN "[WARN]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
+    }
+};
+void log_all(const char* msg) {
+    if (logger_mode >= LOG_MODE_ALL) {
+        printf(CLR_MAG "[ALL]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
+    }
+};
+void log_error(const char* msg) {
+    printf(CLR_RED "[ALL]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
+}

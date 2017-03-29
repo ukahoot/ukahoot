@@ -5,6 +5,7 @@
 #include "httpserv.h"
 #include "request.h"
 #include "kahoot.h"
+#include "logger.h"
 
 #define PORT 5556
 #define BACKLOG 5
