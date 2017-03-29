@@ -33,4 +33,7 @@ void log_all(const char* msg) {
 };
 void log_error(const char* msg) {
     printf(CLR_RED "[ALL]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
+};
+void log_fatal(const char* msg) {
+    printf(CLR_RED "[FATAL]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
 }

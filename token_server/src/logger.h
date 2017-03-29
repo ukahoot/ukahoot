@@ -13,3 +13,4 @@ void log_warn(const char*);
 void log_debug(const char*);
 void log_all(const char*);
 void log_error(const char*);
+void log_fatal(const char*);
