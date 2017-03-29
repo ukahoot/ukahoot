@@ -81,7 +81,8 @@ char* get_response_body(char* response) {
         char* res_body = malloc(MAX_BODY_SIZE);
         memset(res_body, 0, MAX_BODY_SIZE);
         int i = 0;
-        while ((res_start + i)[0] != '\r'&&
+        while ((res_start + i)[0] != '\r' &&
+                (res_start + i)[0] != '\n' &&
                 i < MAX_BODY_SIZE) {
             (res_body + i)[0] = (res_start + i)[0];
             ++i;
