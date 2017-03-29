@@ -11,6 +11,7 @@
 
 #include "request.h"
 #include "kahoot.h"
+#include "logger.h"
 
 typedef struct {
     pthread_t tid;
@@ -38,14 +39,14 @@ int httpcli_read(httpcli* h, char* buffer, int len) {
     return read(h->fd, buffer, len);
 };
 void* http_handle_client(void* vargp) {
+    log_all("Accepted new client");
     httpcli* cli = (httpcli*) vargp;
     char* cli_req = malloc(512); // TODO: Make SURE this is free'd
     int e; // For read/write return values
     e = read(cli->fd, cli_req, 511);
     if (e < 0) {
         // Read error, destroy and close socket
-        printf("%s%s%s\n", "Client read error: ",
-                strerror(errno), ". Closing socket.");
+        log_error("Failed to read from a client, closing connection.");
         close(cli->fd);
         free(cli);
         free(cli_req);
@@ -54,7 +55,7 @@ void* http_handle_client(void* vargp) {
         char* pid = get_pid_query(cli_req);
         if (pid == NULL) {
             // Invalid request
-            printf("%s\n", "Rejected invalid request");
+            log_error("Rejected invalid request");
             e = httpcli_write(cli, RES_403_FAIL,
                             RES_403_FAIL_LEN);
             close(cli->fd);
@@ -72,7 +73,7 @@ void* http_handle_client(void* vargp) {
                         char* response = get_http_response(header_token, body);
                         e = httpcli_write(cli, response, strlen(response));
                         if (e) {
-                            // TODO: Log client write error
+                            log_error("Couldn't write response to socket, closing connection");
                         }
                         // Free all resources
                         free(response);
@@ -83,6 +84,7 @@ void* http_handle_client(void* vargp) {
                         request_free(cli_req);
                     } else {
                         // There was some issue parsing the response
+                        log_error("The response from Kahoot couldn't be processed, closing connection");
                         free(header_token);
                         free(body); // Free parsed strings
                         e = httpcli_write(cli, RES_FAIL_REQUEST,
@@ -93,6 +95,7 @@ void* http_handle_client(void* vargp) {
                     }
             } else {
                 // Invalid request, end with fail response
+                log_warn("Rejected invalid request");
                 e = httpcli_write(cli, RES_FAIL_REQUEST,
                                 RES_FAIL_LEN);
                 close(cli->fd);
@@ -113,7 +116,7 @@ httpserv* http_init_server(int port, int backlog) {
     
     server->addr.sin_port = htons(port);
     server->portno = port;
-    printf("Attempting to bind server\n");
+    log_debug("Attempting to bind server socket");
     int e = bind(server->sockfd,
         (struct sockaddr *) &server->addr,
          sizeof(server->addr));
@@ -135,7 +138,7 @@ void* http_listen_thread(void* vargp) {
                         &cli->len);
         if (cli->fd < 0) {
             // Error accepting the socket
-            printf("%s%s\n", "Client accept error: ", strerror(errno));
+            log_error("Failed to accept incoming socket");
             free(cli);
         } else {
             // Socket accepted successfully
