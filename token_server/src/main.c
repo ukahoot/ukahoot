@@ -30,6 +30,26 @@ int main(int argc, char** argv) {
 		if (strcmp("--help", argv[i]) == 0) {
 			printf(USAGE);
 			exit(0);
+		} else if (strcmp("-p", argv[i]) == 0) {
+			listen_port = atoi(argv[i + 1]);
+			if (listen_port == NULL) {
+				log_fatal("Invalid port number");
+				exit(0);
+			}
+		} else if(strcmp("-b", argv[i]) == 0) {
+			backlog = atoi(argv[i + 1]);
+			if (backlog == NULL) {
+				log_fatal("Invalid backlog number!");
+				exit(0);
+			}
+		} else if(strcmp("-l", argv[i]) == 0) {
+			log_level = atoi(argv[i + 1]);
+			if (log_level == NULL || log_level > LOG_MODE_ALL || log_level < LOG_MODE_NONE) {
+				log_fatal("Invalid log level");
+				exit(0);
+			} else {
+				set_logger_mode(log_level);
+			}
 		}
 		++i;
 	};
