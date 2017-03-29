@@ -44,6 +44,8 @@ Content-Length: 39\r\n\
 #define KAHOOT_RES_START "{\"twoFactorAuth\":"
 #define KAHOOT_RES_START_LEN 17
 
+#define OFFSET_LOG " console.log(\"Offset derived as:\", offset);"
+
 static const char* KAHOOT_TOKEN_GET = "GET /reserve/session/";
 static int KAHOOT_GET_LEN = 22;
 static const char* KAHOOT_TOKEN_HEADERS = " HTTP/1.1\r\n\
