@@ -6,6 +6,17 @@
 #define LOG_MODE_ALL    3
 #define LOG_MODE_NONE   -1 // Only logs errors
 
+#define USAGE "Usage: ./tokenserver [args]\n\
+-h / --help : Show this message \n\
+-p [Port number] Listen the HTTP server on the specified port\n\
+-b [Backlog] The amount of backlog allowed on the HTTP server (default 5)\n\
+-l [Log level] Set the log level, which can be one of the following:\n\
+0 - Info (default)\n\
+1 - Warn\n\
+2 - Debug\n\
+3 - All\n\
+-1 - None\n"
+
 static int logger_mode = 0;
 void set_logger_mode(int);
 void log_info(const char*);
