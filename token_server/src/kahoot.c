@@ -102,7 +102,8 @@ char* get_json_response(char* token_h, char* res_body) {
     int i = 0;
     int o = 0;
     while ((res_body + i)[0] != '\0') {
-        if ((res_body + i)[0] == '\"') {
+        if ((res_body + i)[0] == '\"' &&
+        (res_body + (i - 1))[0] != '\\') {
             (tmp_body + o)[0] = '\\'; // Append the '\' character
             ++o;
             (tmp_body + o)[0] = '"'; // Append a quote
