@@ -20,13 +20,14 @@ char* get_req_headers(char* token) {
 char* get_pid_query(char* req) {
     int headers_len = strlen(req);
     // Sanity checks
-    if (headers_len > 1000 || headers_len < 20) {
+    if (headers_len > 1000 || headers_len < 40) {
         printf("String too small\n");
         return NULL;
     } else {
         if (req[0] != 'G' || // Check for GET request
             req[1] != 'E' ||
             req[2] != 'T') {
+                log_all("String contains no GET specification");
                 return NULL;
             }
         else if (!strcmp(&req[5], "?") ||
@@ -34,6 +35,7 @@ char* get_pid_query(char* req) {
             !strcmp(&req[7], "i") ||
             !strcmp(&req[8], "d") ||
             !strcmp(&req[9], "=")) {
+                log_all("String contains no PID query");
                 return NULL;
         } else {
             // The request is probably valid, look for the PID
@@ -55,6 +57,7 @@ char* get_pid_query(char* req) {
                     return NULL;
                 }
             } else {
+                log_all("Could not locate substring in request");
                 return NULL;
             }
         }
