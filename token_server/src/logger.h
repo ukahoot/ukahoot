@@ -4,7 +4,7 @@
 #define LOG_MODE_WARN   1
 #define LOG_MODE_DEBUG  2
 #define LOG_MODE_ALL    3
-#define LOG_MODE_NONE   -1 // Only logs errors
+#define LOG_MODE_NONE  -1 // Only logs errors
 
 #define USAGE "Usage: ./tokenserver [args]\n\
 -h / --help : Show this message \n\

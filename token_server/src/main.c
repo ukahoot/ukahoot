@@ -53,9 +53,24 @@ int main(int argc, char** argv) {
 		}
 		++i;
 	};
+	switch (logger_mode) {
+		case LOG_MODE_INFO:
+			log_info("Log mode set to info");
+			break;
+		case LOG_MODE_WARN:
+			log_info("Log mode set to warn");
+			break;
+		case LOG_MODE_DEBUG:
+			log_info("Log mode set to debug");
+			break;
+		case LOG_MODE_ALL:
+			log_info("Log mode set to ALL");
+			break;
+	}
 	setup_openssl();
+	log_infod("Attempting to bind server socket to port ", listen_port);
 	httpserv* h = http_init_server(listen_port, backlog);
+	log_infod("Starting HTTP server with backlog ", backlog);
 	http_server_listen(h);
-	printf("press any key to terminate");
 	getchar();
 };
