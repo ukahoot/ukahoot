@@ -1,4 +1,4 @@
-OUT_FILE = out # Binary file name
+OUT_FILE = tokenserver # Binary file name
 SRC_DIR = src # Source code directory
 
 CC = gcc
