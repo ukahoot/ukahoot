@@ -8,7 +8,7 @@ void set_logger_mode(int mode) {
         logger_mode = mode;
     } else {
         printf("Not setting invalid logger mode, defaulting to LOG_MODE_INFO");
-        logger_mode = 0;
+        logger_mode = LOG_MODE_INFO;
     }
 };
 void log_info(const char* msg) {
@@ -32,7 +32,7 @@ void log_debug(const char* msg) {
     }
 };
 void log_all(const char* msg) {
-    if (logger_mode >= LOG_MODE_ALL) {
+    if (logger_mode > LOG_MODE_ALL) {
         printf(CLR_MAG "[ALL]" CLR_RESET CLR_WHT " %s" CLR_RESET "\n", msg);
     }
 };
