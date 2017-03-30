@@ -27,7 +27,8 @@ static int log_level = NULL;
 int main(int argc, char** argv) {
 	size_t i = 1;
 	while (i < argc) {
-		if (strcmp("--help", argv[i]) == 0) {
+		if (strcmp("--help", argv[i]) == 0 ||
+			strcmp("-h", argv[i]) == 0) {
 			printf(USAGE);
 			exit(0);
 		} else if (strcmp("-p", argv[i]) == 0) {
