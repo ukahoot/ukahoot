@@ -23,7 +23,7 @@ x-kahoot-session-token: UHtLQmNBCVFxBABsWQlZPm09UhcrW3d1ZFhddDAiDWZKDlsEUwJ0Xy52
 
 static int listen_port = 80;
 static int backlog = 5;
-static int log_level = NULL;
+static int log_level = 0;
 
 int main(int argc, char** argv) {
 	size_t i = 1;
@@ -34,19 +34,19 @@ int main(int argc, char** argv) {
 			exit(0);
 		} else if (strcmp("-p", argv[i]) == 0) {
 			listen_port = atoi(argv[i + 1]);
-			if (listen_port == NULL) {
+			if (listen_port == 0) {
 				log_fatal("Invalid port number");
 				exit(0);
 			}
 		} else if(strcmp("-b", argv[i]) == 0) {
 			backlog = atoi(argv[i + 1]);
-			if (backlog == NULL) {
+			if (backlog == 0) {
 				log_fatal("Invalid backlog number!");
 				exit(0);
 			}
 		} else if(strcmp("-l", argv[i]) == 0) {
 			log_level = atoi(argv[i + 1]);
-			if (log_level == NULL || log_level > LOG_MODE_ALL || log_level < LOG_MODE_NONE) {
+			if (log_level == 0 || log_level > LOG_MODE_ALL || log_level < LOG_MODE_NONE) {
 				log_fatal("Invalid log level");
 				exit(0);
 			} else {
