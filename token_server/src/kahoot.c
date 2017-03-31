@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include "kahoot.h"
+#include "logger.h"
 
 char* get_req_headers(char* token) {
     int token_len = strlen(token);
